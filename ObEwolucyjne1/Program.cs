@@ -9,39 +9,69 @@ namespace ObEwolucyjne1
         const double DIVIDER = COUNTVALUESTOMAP / VALUESRANGE;
         const int POPULATIONSIZE = 20;
         const int POPULATIONCOUNTLIMIT = 1000;
-        const double MUTATIONPROBABILITY = 0.20;
+        const double MUTATIONPROBABILITY = 0.10;
         static Random cube = new Random();
-        static uint Heaven1,Heaven2 = 0;
+        static uint Heaven1, Heaven2 = 0;
         static double HeavenScore1, HeavenScore2 = -2;
+        const int NUMBEROFEVOLUTIONTRIALS = 2;
 
         static void Main(string[] args)
         {
+            uint[,] evolutionStatistics = new uint[NUMBEROFEVOLUTIONTRIALS, 2];
 
+            uint[] populationHeaven = GetNewFittedPopulation();
+            Console.WriteLine($"Heaven1 : {Fenotype(Heaven1)} with score {ScoreFunction(Fenotype(Heaven1))}");
+            Console.WriteLine($"Heaven2 : {Fenotype(Heaven2)} with score {ScoreFunction(Fenotype(Heaven2))}");
+            Console.ReadKey();
+        }
+
+        private static uint[] GetNewRandomPopulation()
+        {
             uint[] genotypes = new uint[POPULATIONSIZE];
-            double[] genotypeScore = new double[POPULATIONSIZE];
-            int population = 0;
-
             for (int i = 0; i < POPULATIONSIZE; i++)
             {
                 genotypes[i] = (uint)cube.Next(0, Int32.MaxValue);
             }
+            return genotypes;
+        }
+        private static uint[] GetNewFittedPopulation()
+        {
+            uint[] newRandomPopulation = GetNewRandomPopulation();
+            uint[] evolvedPopulation = EvolvePopulation(newRandomPopulation);
+            //uint[] twoBestIndividuals = GetTwoBestOfPopulation(evolvedPopulation);
+            return evolvedPopulation;
+        }
+
+        //private static uint[] GetTwoBestOfPopulation(uint[] evolvedPopulation)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        private static uint[] EvolvePopulation(uint[] genotypes)
+        {
+            int population = 0;
+            double[] genotypeScore = new double[POPULATIONSIZE];
 
             while (population <= POPULATIONCOUNTLIMIT)
             {
-                double maxScore = -2;
-                double secondMaxScore = -2;
+                double maxScore = HeavenScore1;
+                double secondMaxScore = HeavenScore2;
                 int maxScoreIndex = 0;
-                int secondScoreIndex = 0;
                 for (int i = 0; i < genotypes.Length; i++)
                 {
-                    genotypeScore[i] = ScoreFuntion(Fenotype(genotypes[i]));
-                    if (HeavenScore1 < genotypeScore[i])
+                    genotypeScore[i] = ScoreFunction(Fenotype(genotypes[i]));
+                    if (maxScore < genotypeScore[i])
                     {
-                        HeavenScore2 = HeavenScore1;
-                        Heaven2 = Heaven1;
-                        HeavenScore1 = genotypeScore[i];
                         maxScore = genotypeScore[i];
-                        Heaven1 = genotypes[i];
+                        maxScoreIndex = i;
+                        if (HeavenScore1 < maxScore)
+                        {
+
+                            HeavenScore2 = HeavenScore1;
+                            Heaven2 = Heaven1;
+                            HeavenScore1 = genotypeScore[i];
+                            Heaven1 = genotypes[i];
+                        }
                     }
                 }
                 Console.WriteLine($"Population {population}, Max score {maxScore}, fenotype : {Fenotype(genotypes[maxScoreIndex])}");
@@ -61,11 +91,8 @@ namespace ObEwolucyjne1
                 population++;
                 genotypes = newGenotypes;
             }
-            Console.WriteLine($"Heaven1 : {Fenotype(Heaven1)} with score {HeavenScore1}");
-            Console.WriteLine($"Heaven1 : {Fenotype(Heaven2)} with score {HeavenScore2}");
-            Console.ReadKey();
+            return genotypes;
         }
-
         static uint GetRandomChild(uint mum, uint dad)
         {
             var separationPos = cube.Next(1, 32);
@@ -102,13 +129,13 @@ namespace ObEwolucyjne1
             }
 
         }
-        static double ScoreFuntion(double x)
+        static double ScoreFunction(double x)
         {
             return x * Math.Sin(x) * Math.Sin(10 * x);
         }
         static double Fenotype(uint g)
         {
-            return -2 + g /DIVIDER;
+            return -2 + g / DIVIDER;
         }
     }
 }
