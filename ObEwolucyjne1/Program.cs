@@ -5,7 +5,7 @@ namespace ObEwolucyjne1
     public class Program
     {
         const int POPULATIONSIZE = 20;
-        const int POPULATIONCOUNTLIMIT = 1000;
+        const int POPULATIONCOUNTLIMIT = 2000;
         const double MUTATIONPROBABILITY = 0.10;
         const double VALUESRANGE = 2 - (-2);
         const int NUMBEROFEVOLUTIONTRIALS = 100;
@@ -36,7 +36,6 @@ namespace ObEwolucyjne1
                 //Console.WriteLine($"Trial {i} Heaven2 : {Fenotype(Heaven2)} with score {ScoreFunction(Fenotype(Heaven2))}");
             }
 
-            //Console.WriteLine("W tym tygodniu pracę dokończę w zadaniu domowym po uzupełnieniu notatek :) ");
             Console.WriteLine($"Mean : {ScoreFunction(Fenotype(heavens1.Sum() / POPULATIONSIZE))}, Median : {Fenotype(heavens1[NUMBEROFEVOLUTIONTRIALS / 2])} and score : {ScoreFunction(Fenotype(heavens1[NUMBEROFEVOLUTIONTRIALS / 2]))}");
             Console.ReadKey();
         }

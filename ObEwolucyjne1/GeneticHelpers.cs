@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ObEwolucyjne1
+﻿namespace ObEwolucyjne1
 {
-    public static class GenetiHelpers
+    public static class GeneticHelpers
     {
         public static uint Sum(this uint[] arrayOfStuff)
         {
