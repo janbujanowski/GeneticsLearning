@@ -8,7 +8,7 @@ namespace ObEwolucyjne1
         const int POPULATIONCOUNTLIMIT = 1000;
         const double MUTATIONPROBABILITY = 0.10;
         const double VALUESRANGE = 2 - (-2);
-        const int NUMBEROFEVOLUTIONTRIALS = 10;
+        const int NUMBEROFEVOLUTIONTRIALS = 100;
 
         const uint COUNTVALUESTOMAP = UInt32.MaxValue;
         const double DIVIDER = COUNTVALUESTOMAP / VALUESRANGE;
@@ -33,10 +33,10 @@ namespace ObEwolucyjne1
                 heavens1[i] = Heaven1;
                 heavens2[i] = Heaven2;
                 Console.WriteLine($"Trial {i} Heaven1 : {Fenotype(Heaven1)} with score {ScoreFunction(Fenotype(Heaven1))}");
-                Console.WriteLine($"Trial {i} Heaven2 : {Fenotype(Heaven2)} with score {ScoreFunction(Fenotype(Heaven2))}");
+                //Console.WriteLine($"Trial {i} Heaven2 : {Fenotype(Heaven2)} with score {ScoreFunction(Fenotype(Heaven2))}");
             }
 
-
+            //Console.WriteLine("W tym tygodniu pracę dokończę w zadaniu domowym po uzupełnieniu notatek :) ");
             Console.WriteLine($"Mean : {ScoreFunction(Fenotype(heavens1.Sum() / POPULATIONSIZE))}, Median : {Fenotype(heavens1[NUMBEROFEVOLUTIONTRIALS / 2])} and score : {ScoreFunction(Fenotype(heavens1[NUMBEROFEVOLUTIONTRIALS / 2]))}");
             Console.ReadKey();
         }
@@ -80,11 +80,17 @@ namespace ObEwolucyjne1
             }
             return genotypes;
         }
-
-        //private static uint[] GetTwoBestOfPopulation(uint[] evolvedPopulation)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private static uint[] GetNewNormalizedPopulation()
+        {
+            uint[] genotypes = new uint[POPULATIONSIZE];
+            uint start = 0;
+            for (int i = 0; i < POPULATIONSIZE; i++)
+            {
+                genotypes[i] = start;
+                start += UInt32.MaxValue / POPULATIONSIZE - 1;
+            }
+            return genotypes;
+        }
 
         private static uint[] EvolvePopulation(uint[] genotypes)
         {
@@ -117,12 +123,8 @@ namespace ObEwolucyjne1
         {
             var separationPos = CUBE.Next(1, 32);
             var geneX = mum & (UInt32.MaxValue << separationPos);
-            //PrintBinary(geneX);
             var geneY = dad & (UInt32.MaxValue >> (32 - separationPos));
-            //PrintBinary(geneY);
-            //PrintBinary(geneX ^ geneY);
-            //Console.WriteLine("------");
-            return geneX ^ geneY;
+            return geneY | geneX;
         }
         static uint Mutate(uint a)
         {
