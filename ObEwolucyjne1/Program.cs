@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ObEwolucyjne1
 {
@@ -7,11 +8,10 @@ namespace ObEwolucyjne1
         const int POPULATIONSIZE = 20;
         const int POPULATIONCOUNTLIMIT = 2000;
         const double MUTATIONPROBABILITY = 0.10;
-        const double VALUESRANGE = 2 - (-2);
+
         const int NUMBEROFEVOLUTIONTRIALS = 100;
 
-        const uint COUNTVALUESTOMAP = UInt32.MaxValue;
-        const double DIVIDER = COUNTVALUESTOMAP / VALUESRANGE;
+
         static Random CUBE = new Random();
 
         static uint Heaven1, Heaven2 = 0;
@@ -19,15 +19,22 @@ namespace ObEwolucyjne1
 
         static void Main(string[] args)
         {
+
             uint[,] evolutionStatistics = new uint[NUMBEROFEVOLUTIONTRIALS, 2];
 
             var heavens1 = new uint[NUMBEROFEVOLUTIONTRIALS];
             var heavens2 = new uint[NUMBEROFEVOLUTIONTRIALS];
+            List<Individual> heavensOne, heavensTwo = new List<Individual>();
+
 
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
-                uint[] newRandomPopulation = GetNewRandomPopulation();
-                uint[] evolvedPopulation = EvolvePopulation(newRandomPopulation);
+                Individual[] newRandomPopulation = GetNewRandomPopulation();
+                Population pop = new Population()
+                {
+                    genotypes = newRandomPopulation
+                };
+                Population evolvedPopulation = GetEvolvedPopulation(pop);
                 uint[] populationBestScores = GetTwoBestGenotypes(evolvedPopulation);
 
                 heavens1[i] = Heaven1;
@@ -70,14 +77,20 @@ namespace ObEwolucyjne1
             }
             return scores;
         }
-        private static uint[] GetNewRandomPopulation()
+        private static Individual[] GetNewRandomPopulation()
         {
+            Individual[] population = new Individual[POPULATIONSIZE];
+
             uint[] genotypes = new uint[POPULATIONSIZE];
             for (int i = 0; i < POPULATIONSIZE; i++)
             {
-                genotypes[i] = (uint)CUBE.Next(0, Int32.MaxValue);
+                population[i] = new Individual()
+                {
+                    genotype = (uint)CUBE.Next(0, Int32.MaxValue)
+                };
+                //genotypes[i] = 
             }
-            return genotypes;
+            return population;
         }
         private static uint[] GetNewNormalizedPopulation()
         {
@@ -91,18 +104,18 @@ namespace ObEwolucyjne1
             return genotypes;
         }
 
-        private static uint[] EvolvePopulation(uint[] genotypes)
+        private static Population GetEvolvedPopulation(Population population)
         {
-            int population = 0;
-            var genotypeScore = ScorePopulation(genotypes);
-            var heavens = GetTwoBestGenotypes(genotypes);
+            int populationCount = 0;
+            //var genotypeScore = ScorePopulation(population);
+            //var heavens = GetTwoBestGenotypes(population);
             Heaven1 = heavens[0];
             Heaven2 = heavens[1];
-            while (population <= POPULATIONCOUNTLIMIT)
+            while (populationCount <= POPULATIONCOUNTLIMIT)
             {
-                uint mum, dad;
-                mum = genotypes[GetNewParent(POPULATIONSIZE, genotypeScore)];
-                dad = genotypes[GetNewParent(POPULATIONSIZE, genotypeScore)];
+                Individual mum, dad;
+                mum = population.GetRandomParent();
+                dad = population.GetRandomParent();
                 var newGenotypes = new uint[POPULATIONSIZE];
                 for (int i = 0; i < POPULATIONSIZE; i++)
                 {
@@ -113,10 +126,10 @@ namespace ObEwolucyjne1
                     }
                     newGenotypes[i] = child;
                 }
-                population++;
-                genotypes = newGenotypes;
+                populationCount++;
+                population = newGenotypes;
             }
-            return genotypes;
+            return population;
         }
         static uint GetRandomChild(uint mum, uint dad)
         {
@@ -148,7 +161,6 @@ namespace ObEwolucyjne1
             {
                 return y;
             }
-
         }
         static double ScoreFunction(double x)
         {
@@ -156,7 +168,7 @@ namespace ObEwolucyjne1
         }
         static double Fenotype(uint g)
         {
-            return -2 + g / DIVIDER;
+            return -2 + g / Environment.DIVIDER;
         }
     }
 }
