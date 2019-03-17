@@ -11,7 +11,7 @@ namespace EvoCore
         {
             get
             {
-                return new Individual();
+                return genotypes.OrderByDescending(x => x.SurvivalScore).First();
             }
         }
         public Individual BestSecond;
@@ -30,23 +30,29 @@ namespace EvoCore
 
         public static Individual GetRandomParent(this Population population)
         {
-            var x = GeneticEnvironment.CUBE.Next(0, population.genotypes.Length);
-            var y = GeneticEnvironment.CUBE.Next(0, population.genotypes.Length);
-            if (population.genotypes[x].SurvivalScore >= population.genotypes[y].SurvivalScore)
+            List<Individual> competitors = new List<Individual>();
+            int TOURNAMENTSIZE = 3;
+            for (int i = 0; i < TOURNAMENTSIZE; i++)
             {
-                return population.genotypes[x];
+                competitors.Add(population.genotypes[GeneticEnvironment.CUBE.Next(0, population.genotypes.Length)]);
             }
-            else
-            {
-                return population.genotypes[y];
-            }
+            return competitors.OrderByDescending(x => x.SurvivalScore).First();
+
+            //var y = GeneticEnvironment.CUBE.Next(0, population.genotypes.Length);
+            //if (population.genotypes[x].SurvivalScore >= population.genotypes[y].SurvivalScore)
+            //{
+            //    return population.genotypes[x];
+            //}
+            //else
+            //{
+            //    return population.genotypes[y];
+            //}
         }
 
     }
     public class Individual
     {
         public uint genotype;
-
         public double Fenotype
         {
             get
@@ -54,7 +60,6 @@ namespace EvoCore
                 return -2 + genotype / GeneticEnvironment.DIVIDER;
             }
         }
-
         public double SurvivalScore
         {
             get
@@ -71,7 +76,7 @@ namespace EvoCore
     {
         const int POPULATIONSIZE = 20;
         const int POPULATIONCOUNTLIMIT = 1000;
-        const double MUTATIONPROBABILITY = 0.20;
+        const double MUTATIONPROBABILITY = 0.15;
 
         const int NUMBEROFEVOLUTIONTRIALS = 1;
 
@@ -82,16 +87,15 @@ namespace EvoCore
 
         static void Main(string[] args)
         {
-
             uint[,] evolutionStatistics = new uint[NUMBEROFEVOLUTIONTRIALS, 2];
 
             var heavens1 = new uint[NUMBEROFEVOLUTIONTRIALS];
             var heavens2 = new uint[NUMBEROFEVOLUTIONTRIALS];
-            List<Individual> heavensOne, heavensTwo = new List<Individual>();
+            List<Individual> heavensOne = new List<Individual>();
 
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
-                Individual[] newRandomPopulation = GetNewNormalizedPopulation();
+                Individual[] newRandomPopulation = GetNewRandomPopulation();
                 Population pop = new Population()
                 {
                     genotypes = newRandomPopulation
@@ -100,36 +104,42 @@ namespace EvoCore
                 while (populationCount < POPULATIONCOUNTLIMIT)
                 {
                     pop = GetEvolvedPopulation(pop);
-                    Individual[] populationBestScores = GetTwoBestGenotypes(pop.genotypes);
-                    Console.WriteLine($"Population {populationCount} : heaven1 : {populationBestScores[0]}");
+                    //Individual[] populationBestScores = GetTheBest(pop.genotypes);
+                    Console.WriteLine($"Population {populationCount} : heaven1 : {pop.BestOne}");
+                    if (heavensOne.Where(x => x.SurvivalScore > pop.BestOne.SurvivalScore).Count() == 0)
+                    {
+                        heavensOne.Add(pop.BestOne);
+                    }
                     populationCount++;
                 }
                 //Console.WriteLine($"Trial {i} Heaven2 : {Fenotype(Heaven2)} with score {ScoreFunction(Fenotype(Heaven2))}");
             }
 
-            Console.WriteLine($"Mean : {ScoreFunction(Fenotype(heavens1.Sum() / POPULATIONSIZE))}, Median : {Fenotype(heavens1[NUMBEROFEVOLUTIONTRIALS / 2])} and score : {ScoreFunction(Fenotype(heavens1[NUMBEROFEVOLUTIONTRIALS / 2]))}");
+            Console.WriteLine($"Mean : {heavensOne.Select(x => x.Fenotype).Sum() / heavensOne.Count}, Median : {heavensOne[heavensOne.Count / 2]} ");
             Console.ReadKey();
         }
         //static uint Heaven1, Heaven2 = 0;
         //static double HeavenScore1, HeavenScore2 = -2;
 
-        private static Individual[] GetTwoBestGenotypes(Individual[] genotypes)
+        private static Individual[] GetTheBest(Individual[] genotypes)
         {
             double maxScore = -2;
-            double secondMaxScore = -2;
+            //double secondMaxScore = -2;
             int maxScoreIndex = 0;
-            int maxScoreIndex2 = 0;
+            Individual best = new Individual() { genotype = 0 };
+            //int maxScoreIndex2 = 0;
             for (int i = 0; i < genotypes.Length; i++)
             {
                 if (maxScore < genotypes[i].SurvivalScore)
                 {
-                    secondMaxScore = maxScore;
-                    maxScoreIndex2 = maxScoreIndex;
+                    //secondMaxScore = maxScore;
+                    //maxScoreIndex2 = maxScoreIndex;
                     maxScore = genotypes[i].SurvivalScore;
-                    maxScoreIndex = i;
+                    best = genotypes[i];
+
                 }
             }
-            return new Individual[2] { genotypes[maxScoreIndex], genotypes[maxScoreIndex2] };
+            return new Individual[1] { best };
         }
         private static Individual[] GetNewRandomPopulation()
         {
@@ -179,10 +189,11 @@ namespace EvoCore
         }
         static Individual GetRandomChild(uint mum, uint dad)
         {
-            var separationPos = CUBE.Next(1, 32);
-            var geneX = mum & (UInt32.MaxValue << separationPos);
-            var geneY = dad & (UInt32.MaxValue >> (32 - separationPos));
-            return new Individual() { genotype = geneY | geneX };
+            var separationPos = GeneticEnvironment.CUBE.Next(1, 32);
+            var mask = UInt32.MaxValue << separationPos;
+            //var geneX = mum & (UInt32.MaxValue << separationPos);
+            //var geneY = dad & (UInt32.MaxValue >> (32 - separationPos));
+            return new Individual() { genotype = (mask & mum) | (dad & ~mask) };
         }
         static Individual Mutate(uint a)
         {
