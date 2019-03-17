@@ -1,8 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace ObEwolucyjne1
+namespace EvoCore
 {
+    public struct Population
+    {
+        public Individual[] genotypes;
+        public Individual BestOne
+        {
+            get
+            {
+                return new Individual();
+            }
+        }
+        public Individual BestSecond;
+    }
+    public static class GeneticHelpers
+    {
+        public static uint Sum(this uint[] arrayOfStuff)
+        {
+            uint sum = 0;
+            foreach (var item in arrayOfStuff)
+            {
+                sum += item;
+            }
+            return sum;
+        }
+
+        public static Individual GetRandomParent(this Population population)
+        {
+            var x = GeneticEnvironment.CUBE.Next(0, population.genotypes.Length);
+            var y = GeneticEnvironment.CUBE.Next(0, population.genotypes.Length);
+            if (population.genotypes[x].SurvivalScore >= population.genotypes[y].SurvivalScore)
+            {
+                return population.genotypes[x];
+            }
+            else
+            {
+                return population.genotypes[y];
+            }
+        }
+
+    }
+    public class Individual
+    {
+        public uint genotype;
+
+        public double Fenotype
+        {
+            get
+            {
+                return -2 + genotype / GeneticEnvironment.DIVIDER;
+            }
+        }
+
+        public double SurvivalScore
+        {
+            get
+            {
+                return GeneticEnvironment.SurvivalFunction(Fenotype);
+            }
+        }
+        public override string ToString()
+        {
+            return $"Fenotype : {Fenotype} with score : {SurvivalScore}";
+        }
+    }
     public class Program
     {
         const int POPULATIONSIZE = 20;
@@ -76,7 +140,7 @@ namespace ObEwolucyjne1
             {
                 population[i] = new Individual()
                 {
-                    genotype = (uint)Environment.CUBE.Next(0, Int32.MaxValue)
+                    genotype = (uint)GeneticEnvironment.CUBE.Next(0, Int32.MaxValue)
                 };
                 //genotypes[i] = 
             }
@@ -150,7 +214,8 @@ namespace ObEwolucyjne1
         }
         static double Fenotype(uint g)
         {
-            return -2 + g / Environment.DIVIDER;
+            return -2 + g / GeneticEnvironment.DIVIDER;
         }
     }
 }
+

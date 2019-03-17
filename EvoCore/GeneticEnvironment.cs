@@ -1,7 +1,10 @@
 ﻿using System;
-namespace ObEwolucyjne1
+using System.Collections.Generic;
+using System.Text;
+
+namespace EvoCore
 {
-    public static class Environment
+    public static class GeneticEnvironment
     {
         public const uint COUNTVALUESTOMAP = UInt32.MaxValue;
         public const double DIVIDER = COUNTVALUESTOMAP / VALUESRANGE;
