@@ -19,5 +19,9 @@
                 return Environment.SurvivalFunction(Fenotype);
             }
         }
+        public override string ToString()
+        {
+            return $"Fenotype : {Fenotype} with score : {SurvivalScore}";
+        }
     }
 }
