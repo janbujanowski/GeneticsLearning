@@ -47,7 +47,7 @@ namespace EvoCore
         {
             get
             {
-                return -2 + genotype /GeneticEnvironment.DIVIDER;
+                return -2 + genotype / GeneticEnvironment.DIVIDER;
             }
         }
         public double SurvivalScore
@@ -79,10 +79,12 @@ namespace EvoCore
 
         const int NUMBEROFEVOLUTIONTRIALS = 100;
 
+        const int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 300;
+
         static void Main(string[] args)
         {
-            for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
-            {
+            //for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
+            //{
                 List<Individual> heavensOne = new List<Individual>();
                 Individual[] newRandomPopulation = GetNewRandomPopulation();
                 Population pop = new Population()
@@ -90,18 +92,39 @@ namespace EvoCore
                     genotypes = newRandomPopulation
                 };
                 var populationCount = 0;
-                while (populationCount < POPULATIONCOUNTLIMIT)
+                bool stillImproving = true;
+                int NoNimprovementCounter = 0;
+                while (NoNimprovementCounter <= 300)
                 {
                     pop = GetEvolvedPopulation(pop);
                     //Console.WriteLine($"Population {populationCount} : heaven1 : {pop.BestOne}");
                     if (heavensOne.Where(x => x.SurvivalScore >= pop.BestOne.SurvivalScore).Count() == 0)
                     {
                         heavensOne.Add(pop.BestOne);
+                        NoNimprovementCounter = 0;
+                    }
+                    else
+                    {
+                        NoNimprovementCounter++;
                     }
                     populationCount++;
+                    Console.WriteLine($"Trial : {populationCount} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()}");
                 }
-                Console.WriteLine($"Trial : {i} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()}");
-            }
+
+                #region PopulationCountCriteria
+                //while (populationCount < POPULATIONCOUNTLIMIT)
+                //{
+                //    pop = GetEvolvedPopulation(pop);
+                //    //Console.WriteLine($"Population {populationCount} : heaven1 : {pop.BestOne}");
+                //    if (heavensOne.Where(x => x.SurvivalScore >= pop.BestOne.SurvivalScore).Count() == 0)
+                //    {
+                //        heavensOne.Add(pop.BestOne);
+                //    }
+                //    populationCount++;
+                //}
+                //Console.WriteLine($"Trial : {i} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()}");
+                #endregion
+            //}
             Console.ReadKey();
         }
         private static Individual[] GetNewRandomPopulation()
@@ -128,15 +151,15 @@ namespace EvoCore
             {
                 //do
                 //{
-                    var child = GetRandomChild(mum, dad);
-                    for (int j = 0; j < 4; j++)//without x >4 times mutation gets stuck in local maximum
+                var child = GetRandomChild(mum, dad);
+                for (int j = 0; j < 4; j++)//without x >4 times mutation gets stuck in local maximum
+                {
+                    if (GeneticEnvironment.CUBE.NextDouble() < MUTATIONPROBABILITY)
                     {
-                        if (GeneticEnvironment.CUBE.NextDouble() < MUTATIONPROBABILITY)
-                        {
-                            child = Mutate(child.genotype);
-                        }
+                        child = Mutate(child.genotype);
                     }
-                    newGenotypes[i] = child;
+                }
+                newGenotypes[i] = child;
                 //} while (newGenotypes[i].LethallyMutated);
             }
 
