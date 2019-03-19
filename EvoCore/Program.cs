@@ -134,58 +134,73 @@ namespace EvoCore
         const int POPULATIONSIZE = 20;
         const int POPULATIONCOUNTLIMIT = 1000;
         const double MUTATIONPROBABILITY = 0.15;
-        const int NUMBEROFEVOLUTIONTRIALS = 100;
+        const int NUMBEROFEVOLUTIONTRIALS = 10;
         const int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 300;
 
         static void Main(string[] args)
         {
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
-                List<Individual> heavensOne = new List<Individual>();
+                Dictionary<Individual, int> heavensOne = new Dictionary<Individual, int>();
                 Individual[] newRandomPopulation = GetNewRandomPopulation();
                 Population pop = new Population()
                 {
                     genotypes = newRandomPopulation
                 };
-                heavensOne.Add(newRandomPopulation[0]);//for easier heavens adding criteria
 
-                var populationCount = 0;
-                bool stillImproving = true;
-                int NoNimprovementCounter = 0;
                 int maxIterationsWithoutImprovement = 300;
-                while (NoNimprovementCounter <= maxIterationsWithoutImprovement)
-                {
-                    pop = GetNextGeneration(pop, SelectionMethods.RankedRoulette);
-                    if (heavensOne[heavensOne.Count - 1].SurvivalScore < pop.BestOne.SurvivalScore)
-                    {
-                        heavensOne.Add(pop.BestOne);
-                        NoNimprovementCounter = 0;
-                    }
-                    else
-                    {
-                        NoNimprovementCounter++;
-                    }
-                    populationCount++;
-                    //Console.WriteLine($"Trial : {populationCount} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()}");
-                }
-                Console.WriteLine($"Trail {i} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()} after { populationCount - maxIterationsWithoutImprovement} population");
-                #region PopulationCountCriteria
-                while (populationCount < POPULATIONCOUNTLIMIT)
-                {
-                    pop = GetNextGeneration(pop, SelectionMethods.Tournament);
-                    //Console.WriteLine($"Population {populationCount} : heaven1 : {pop.BestOne}");
-                    if (heavensOne.Where(x => x.SurvivalScore >= pop.BestOne.SurvivalScore).Count() == 0)
-                    {
-                        heavensOne.Add(pop.BestOne);
-                    }
-                    populationCount++;
-                }
-                Console.WriteLine($"Trial : {i} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()}");
-                #endregion
+                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop, maxIterationsWithoutImprovement, SelectionMethods.RankedRoulette);
+                Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
+                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop, maxIterationsWithoutImprovement, SelectionMethods.Roulette);
+                Console.WriteLine($"Roulette {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
+                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop, maxIterationsWithoutImprovement, SelectionMethods.Tournament);
+                Console.WriteLine($"Tournament {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
+                //heavensOne = EvolvePopulationCriteriaMaxPopulationCount(pop, POPULATIONCOUNTLIMIT, SelectionMethods.RankedRoulette);
+                //Console.WriteLine($"Trial : {i} Best: {heavensOne.Last().Key}");
             }
 
             Console.ReadKey();
         }
+
+        private static Dictionary<Individual, int> EvolvePopulationCriteriaMaxPopulationCount(Population pop, int pOPULATIONCOUNTLIMIT, SelectionMethods selectionMethod)
+        {
+            Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
+            var populationCount = 0;
+            while (populationCount < POPULATIONCOUNTLIMIT)
+            {
+                pop = GetNextGeneration(pop, selectionMethod);
+                if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
+                {
+                    heavenPopulationDict.Add(pop.BestOne, populationCount);
+                }
+                populationCount++;
+            }
+            return heavenPopulationDict;
+        }
+
+        private static Dictionary<Individual, int> EvolvePopulationCriteriaUntilLackOfImprovment(Population pop, int maxIterationsWithoutImprovement, SelectionMethods selectionMethod)
+        {
+            Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
+            var populationCount = 0;
+            int NoNimprovementCounter = 0;
+            while (NoNimprovementCounter <= maxIterationsWithoutImprovement)
+            {
+                pop = GetNextGeneration(pop, selectionMethod);
+                if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
+                {
+                    heavenPopulationDict.Add(pop.BestOne, populationCount);
+                    NoNimprovementCounter = 0;
+                }
+                else
+                {
+                    NoNimprovementCounter++;
+                }
+                populationCount++;
+                //Console.WriteLine($"Trial : {populationCount} Best:{heavensOne.OrderByDescending(x => x.SurvivalScore).First()}");
+            }
+            return heavenPopulationDict;
+        }
+
         private static Individual[] GetNewRandomPopulation()
         {
             Individual[] population = new Individual[POPULATIONSIZE];

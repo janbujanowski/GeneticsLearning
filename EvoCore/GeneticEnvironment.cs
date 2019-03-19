@@ -12,7 +12,7 @@ namespace EvoCore
 
         public static SelectionMethods defaultSelectionMethod = SelectionMethods.Tournament;
 
-        public const int MUTATIONRETRIALS = 4;
+        public const int MUTATIONRETRIALS = 2;
 
         private static Random _CUBE;
         public static Random CUBE
