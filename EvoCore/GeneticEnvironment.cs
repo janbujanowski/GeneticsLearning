@@ -10,6 +10,10 @@ namespace EvoCore
         public const double VALUESRANGE = 2 - (-2);
         public const double DIVIDER = COUNTVALUESTOMAP / VALUESRANGE;
 
+        public static SelectionMethods defaultSelectionMethod = SelectionMethods.Tournament;
+
+        public const int MUTATIONRETRIALS = 4;
+
         private static Random _CUBE;
         public static Random CUBE
         {
@@ -22,7 +26,6 @@ namespace EvoCore
                 return _CUBE;
             }
         }
-
         public static double SurvivalFunction(double x)
         {
             return x * Math.Sin(x) * Math.Sin(10 * x);
