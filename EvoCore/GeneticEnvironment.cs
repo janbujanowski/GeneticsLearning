@@ -20,7 +20,7 @@ namespace EvoCore
         public int POPULATIONSIZE = 20;
         public int POPULATIONCOUNTLIMIT = 1000;
         public double MUTATIONPROBABILITY = 0.15;
-        public int NUMBEROFEVOLUTIONTRIALS = 10;
+        public int NUMBEROFEVOLUTIONTRIALS = 100;
         public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 500;
         public SelectionMethods defaultSelectionMethod = SelectionMethods.Roulette;
         public int MUTATIONRETRIALS = 4;

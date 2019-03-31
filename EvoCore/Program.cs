@@ -151,6 +151,11 @@ namespace EvoCore
         static void Main(string[] args)
         {
             GeneticEnvironment.INSTANCE.ParseParameters("C:\\geneticConfig.csv");
+
+            Dictionary<int, int> iterationMaxPopulationDictRanked = new Dictionary<int, int>();
+            Dictionary<int, int> iterationMaxPopulationDictRoulette = new Dictionary<int, int>();
+            Dictionary<int, int> iterationMaxPopulationDictTournament = new Dictionary<int, int>();
+
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
                 Dictionary<Individual, int> heavensOne = new Dictionary<Individual, int>();
@@ -160,24 +165,28 @@ namespace EvoCore
                     genotypes = newRandomPopulation
                 };
 
-                int maxIterationsWithoutImprovement = ITERATIONSWITHOUTBETTERSCOREMAXCOUNT;
-                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), maxIterationsWithoutImprovement, SelectionMethods.RankedRoulette);
+                
+                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette);
                 SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\RankedRoulette{i}.csv", heavensOne);
+                iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
-                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), maxIterationsWithoutImprovement, SelectionMethods.Roulette);
+                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
                 SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
+                iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Roulette {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
-                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), maxIterationsWithoutImprovement, SelectionMethods.Tournament);
+                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Tournament);
                 SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Tournament{i}.csv", heavensOne);
+                iterationMaxPopulationDictTournament.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Tournament {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
-
 
                 //heavensOne = EvolvePopulationCriteriaMaxPopulationCount(pop, POPULATIONCOUNTLIMIT, SelectionMethods.RankedRoulette);
                 //Console.WriteLine($"Trial : {i} Best: {heavensOne.Last().Key}");
             }
-
+            Console.WriteLine($"The worst iteration Ranked : {iterationMaxPopulationDictRanked.OrderByDescending(x=> x.Value).First().Key} ");
+            Console.WriteLine($"The worst iteration Roulette : {iterationMaxPopulationDictRoulette.OrderByDescending(x => x.Value).First().Key} ");
+            Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
             Console.ReadKey();
         }
 
