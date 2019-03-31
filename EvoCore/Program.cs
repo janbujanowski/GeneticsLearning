@@ -25,7 +25,7 @@ namespace EvoCore
         public Individual BestSecond;
         public Population GetCopy()
         {
-            Individual[] copiedGenotypes = new Individual[GeneticEnvironment.POPULATIONSIZE];
+            Individual[] copiedGenotypes = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
             for (int i = 0; i < copiedGenotypes.Length; i++)
             {
                 copiedGenotypes[i] = new Individual() { genotype = genotypes[i].genotype };
@@ -113,7 +113,7 @@ namespace EvoCore
                     return population.GetRankedRouletteParent();
                     break;
                 default:
-                    return population.GetParent(GeneticEnvironment.defaultSelectionMethod);
+                    return population.GetParent(GeneticEnvironment.INSTANCE.defaultSelectionMethod);
                     break;
             }
         }
@@ -125,7 +125,7 @@ namespace EvoCore
         {
             get
             {
-                return -2 + genotype / GeneticEnvironment.DIVIDER;
+                return -2 + genotype / GeneticEnvironment.INSTANCE.DIVIDER;
             }
         }
         public double SurvivalScore
@@ -142,14 +142,15 @@ namespace EvoCore
     }
     public class Program
     {
-        const int POPULATIONSIZE = GeneticEnvironment.POPULATIONSIZE;
-        const int POPULATIONCOUNTLIMIT = 1000;
-        const double MUTATIONPROBABILITY = 0.15;
-        const int NUMBEROFEVOLUTIONTRIALS = 10;
-        const int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 300;
+        static readonly int POPULATIONSIZE = GeneticEnvironment.INSTANCE.POPULATIONSIZE;
+        static readonly int POPULATIONCOUNTLIMIT = GeneticEnvironment.INSTANCE.POPULATIONCOUNTLIMIT;
+        static readonly double MUTATIONPROBABILITY = GeneticEnvironment.INSTANCE.MUTATIONPROBABILITY;
+        static readonly int NUMBEROFEVOLUTIONTRIALS = GeneticEnvironment.INSTANCE.NUMBEROFEVOLUTIONTRIALS;
+        static readonly int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = GeneticEnvironment.INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT;
 
         static void Main(string[] args)
         {
+            GeneticEnvironment.INSTANCE.ParseParameters("C:\\geneticConfig.csv");
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
                 Dictionary<Individual, int> heavensOne = new Dictionary<Individual, int>();
@@ -159,7 +160,7 @@ namespace EvoCore
                     genotypes = newRandomPopulation
                 };
 
-                int maxIterationsWithoutImprovement = 500;
+                int maxIterationsWithoutImprovement = ITERATIONSWITHOUTBETTERSCOREMAXCOUNT;
                 heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), maxIterationsWithoutImprovement, SelectionMethods.RankedRoulette);
                 SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\RankedRoulette{i}.csv", heavensOne);
                 Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
@@ -251,7 +252,7 @@ namespace EvoCore
             for (int i = 0; i < POPULATIONSIZE; i++)
             {
                 var child = GetRandomChild(mum, dad);
-                for (int j = 0; j < GeneticEnvironment.MUTATIONRETRIALS; j++)//without x >4 times mutation often gets stuck in local maximums
+                for (int j = 0; j < GeneticEnvironment.INSTANCE.MUTATIONRETRIALS; j++)//without x >4 times mutation often gets stuck in local maximums
                 {
                     if (GeneticEnvironment.CUBE.NextDouble() < MUTATIONPROBABILITY)
                     {
