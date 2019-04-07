@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -105,39 +106,41 @@ namespace EvoCore
             {
                 case SelectionMethods.Tournament:
                     return population.GetTournamentParent();
-                    break;
                 case SelectionMethods.Roulette:
                     return population.GetRouletteParent();
-                    break;
                 case SelectionMethods.RankedRoulette:
                     return population.GetRankedRouletteParent();
-                    break;
                 default:
                     return population.GetParent(GeneticEnvironment.INSTANCE.defaultSelectionMethod);
-                    break;
             }
         }
     }
     public class Individual
     {
-        public uint genotype;
-        public double Fenotype
+        public List<Coords> citiesToVisit = GeneticEnvironment.INSTANCE.ParsedCitiesToVisit;
+        public int[] genotype;
+        public List<Coords> Fenotype
         {
             get
             {
-                return -2 + genotype / GeneticEnvironment.INSTANCE.DIVIDER;
+                List<Coords> result = new List<Coords>();
+                for (int i = 0; i < genotype.Length; i++)
+                {
+                    result.Add(citiesToVisit[genotype[i]]);
+                }
+                return result;
             }
         }
         public double SurvivalScore
         {
             get
             {
-                return GeneticEnvironment.SurvivalFunction(Fenotype);
+                return -GeneticEnvironment.SurvivalFunction(Fenotype);
             }
         }
         public override string ToString()
         {
-            return $"Fenotype : {Fenotype} with score : {SurvivalScore}";
+            return $"Fenotype : [not writeable] with score : {SurvivalScore}";
         }
     }
     public class Program
@@ -151,6 +154,7 @@ namespace EvoCore
         static void Main(string[] args)
         {
             GeneticEnvironment.INSTANCE.ParseParameters("C:\\geneticConfig.csv");
+            GeneticEnvironment.INSTANCE.LoadCities("C:\\REPOS\\Ewolucyjne\\ObEwolucyjne1\\world.tsp");
 
             Dictionary<int, int> iterationMaxPopulationDictRanked = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictRoulette = new Dictionary<int, int>();
@@ -165,28 +169,29 @@ namespace EvoCore
                     genotypes = newRandomPopulation
                 };
 
-                
+
                 heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette);
                 SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\RankedRoulette{i}.csv", heavensOne);
                 iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
-                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
-                SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
-                iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
-                Console.WriteLine($"Roulette {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
+                //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
+                //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
+                //iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
+                //Console.WriteLine($"Roulette {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
-                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Tournament);
-                SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Tournament{i}.csv", heavensOne);
-                iterationMaxPopulationDictTournament.Add(i, heavensOne.Last().Value);
-                Console.WriteLine($"Tournament {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
+                //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Tournament);
+                //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Tournament{i}.csv", heavensOne);
+                //iterationMaxPopulationDictTournament.Add(i, heavensOne.Last().Value);
+                //Console.WriteLine($"Tournament {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
                 //heavensOne = EvolvePopulationCriteriaMaxPopulationCount(pop, POPULATIONCOUNTLIMIT, SelectionMethods.RankedRoulette);
                 //Console.WriteLine($"Trial : {i} Best: {heavensOne.Last().Key}");
             }
-            Console.WriteLine($"The worst iteration Ranked : {iterationMaxPopulationDictRanked.OrderByDescending(x=> x.Value).First().Key} ");
-            Console.WriteLine($"The worst iteration Roulette : {iterationMaxPopulationDictRoulette.OrderByDescending(x => x.Value).First().Key} ");
-            Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
+
+            //Console.WriteLine($"The worst iteration Ranked : {iterationMaxPopulationDictRanked.OrderByDescending(x => x.Value).First().Key} ");
+            //Console.WriteLine($"The worst iteration Roulette : {iterationMaxPopulationDictRoulette.OrderByDescending(x => x.Value).First().Key} ");
+            //Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
             Console.ReadKey();
         }
 
@@ -242,12 +247,11 @@ namespace EvoCore
         {
             Individual[] population = new Individual[POPULATIONSIZE];
 
-            uint[] genotypes = new uint[POPULATIONSIZE];
             for (int i = 0; i < POPULATIONSIZE; i++)
             {
                 population[i] = new Individual()
                 {
-                    genotype = (uint)GeneticEnvironment.CUBE.Next(0, Int32.MaxValue)
+                    genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute
                 };
             }
             return population;
@@ -277,14 +281,28 @@ namespace EvoCore
         }
         static Individual GetRandomChild(Individual mum, Individual dad)
         {
-            var separationPos = GeneticEnvironment.CUBE.Next(1, 32);
-            var mask = UInt32.MaxValue << separationPos;
-            return new Individual() { genotype = (mask & mum.genotype) | (~mask & dad.genotype) };
+            var separationPos = GeneticEnvironment.CUBE.Next(1, mum.genotype.Length);
+            int[] newGenotype = new int[mum.genotype.Length];
+            for (int i = 0; i < separationPos; i++)
+            {
+                newGenotype[i] = mum.genotype[i];
+            }
+            for (int i = separationPos; i < mum.genotype.Length; i++)
+            {
+                newGenotype[i] = dad.genotype[i];
+            }
+            
+            return new Individual() { genotype = newGenotype};
         }
-        static Individual Mutate(uint a)
+        static Individual Mutate(int[] a)
         {
-            uint randomPosition = (uint)Math.Pow(2, GeneticEnvironment.CUBE.Next(0, 32));
-            return new Individual() { genotype = a ^ randomPosition };
+            int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
+            int randomPosition2 = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
+            int temp = a[randomPosition];
+            a[randomPosition] = a[randomPosition2];
+            a[randomPosition2] = temp;
+
+            return new Individual() { genotype = a };
         }
         static void PrintBinary(uint a)
         {

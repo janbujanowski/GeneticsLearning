@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EvoCore
 {
-    
+
     public class GeneticEnvironment
     {
         public uint COUNTVALUESTOMAP = UInt32.MaxValue;
@@ -16,15 +16,26 @@ namespace EvoCore
             {
                 return COUNTVALUESTOMAP / VALUESRANGE;
             }
-        } 
+        }
         public int POPULATIONSIZE = 20;
         public int POPULATIONCOUNTLIMIT = 1000;
         public double MUTATIONPROBABILITY = 0.15;
-        public int NUMBEROFEVOLUTIONTRIALS = 100;
-        public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 500;
+        public int NUMBEROFEVOLUTIONTRIALS = 10;
+        public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 5000;
         public SelectionMethods defaultSelectionMethod = SelectionMethods.Roulette;
         public int MUTATIONRETRIALS = 4;
 
+        public List<Coords> ParsedCitiesToVisit;
+        public int[] GetRandomCitiesRoute
+        {
+            get
+            {
+                genotypeExample.Shuffle();
+                return genotypeExample.ToArray();
+            }
+        }
+
+        private List<int> genotypeExample;
         public void ParseParameters(string filePath)
         {
             try
@@ -36,6 +47,36 @@ namespace EvoCore
                 GeneticEnvironment.INSTANCE.MUTATIONRETRIALS = Int32.Parse(values[2]);//mutationretry
                 GeneticEnvironment.INSTANCE.defaultSelectionMethod = Enum.Parse<SelectionMethods>(values[3]);//enum
                 GeneticEnvironment.INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(values[4]);//interationnonimprove
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Can't read the config file - running with default values. Exception message: {ex.Message}");
+            }
+        }
+        public void LoadCities(string filePath)
+        {
+            this.ParsedCitiesToVisit = new List<Coords>();
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                foreach (var line in lines)
+                {
+                    string[] values = line.Split(' ');
+                    double lattitude = double.Parse(values[1]);
+                    double longitude = double.Parse(values[2]);
+                    ParsedCitiesToVisit.Add(new Coords()
+                    {
+                        X = lattitude,
+                        Y = longitude
+                    });
+
+
+                }
+                genotypeExample = new List<int>();
+                for (int i = 0; i < ParsedCitiesToVisit.Count; i++)
+                {
+                    genotypeExample.Add(i);
+                }
             }
             catch (Exception ex)
             {
@@ -70,9 +111,26 @@ namespace EvoCore
                 return _CUBE;
             }
         }
-        public static double SurvivalFunction(double x)
+        public static double SurvivalFunction(List<Coords> coordsToVisit)
         {
-            return x * Math.Sin(x) * Math.Sin(10 * x);
+            double distance = 0;
+            for (int i = 0; i < coordsToVisit.Count - 2; i++)
+            {
+                distance += DistanceBetweenCoords(coordsToVisit[i], coordsToVisit[i + 1]);
+            }
+            return distance;
         }
+
+        private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
+        {
+            double distancePerOneDegree = 111;//mean distance in km
+            double degreesDistance = Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
+            return degreesDistance * distancePerOneDegree;
+        }
+    }
+
+    public struct Coords
+    {
+        public double X, Y;
     }
 }
