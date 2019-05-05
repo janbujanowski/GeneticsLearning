@@ -159,12 +159,12 @@ namespace EvoCore
 
         static void Main(string[] args)
         {
-            var lol = Array.IndexOf(new int[3] { 0, -1, 0 }, -1);
-            var lol2 = Array.IndexOf(new int[3] { 0, 0, 0 }, -1);
             Console.WriteLine("PMX");
             TestPMX();
             Console.WriteLine("OX");
             TestOX();
+            Console.WriteLine("CX");
+            TestCX();
             GeneticEnvironment.INSTANCE.ParseParameters("geneticConfig.csv");
             GeneticEnvironment.INSTANCE.LoadCities("world.tsp");
 
@@ -181,12 +181,23 @@ namespace EvoCore
                     genotypes = newRandomPopulation
                 };
 
-
                 heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
                 SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\RankedRoulette{i}.csv", heavensOne);
                 iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
+                Individual bestie = new Individual() { genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute };
+                for (int j = 0; j < 50000; j++)
+                {
+                    Individual trial = new Individual() { genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute };
+                    if (trial.SurvivalScore > bestie.SurvivalScore)
+                    {
+                        bestie = trial;
+                    }
+
+                }
+                Console.WriteLine($"simply random 5000 times score : {bestie.SurvivalScore}");
+                
                 //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
                 //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
                 //iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
@@ -230,6 +241,7 @@ namespace EvoCore
             {
                 Console.Write(city + ",");
             }
+            Console.WriteLine();
         }
         private static void TestOX()
         {
@@ -254,6 +266,32 @@ namespace EvoCore
             {
                 Console.Write(city + ",");
             }
+            Console.WriteLine();
+        }
+        private static void TestCX()
+        {
+            var mum = new Individual()
+            {
+
+                genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+            var dad = new Individual()
+            {
+                genotype = new int[9] { 4, 1, 2, 8, 7, 6, 9, 3, 5 }
+            };
+
+            var lol = GetChildCX(mum, dad, 3, 7);
+            var lol2 = GetChildCX(dad, mum, 3, 7);
+            foreach (var city in lol.genotype)
+            {
+                Console.Write(city + ",");
+            }
+            Console.WriteLine();
+            foreach (var city in lol2.genotype)
+            {
+                Console.Write(city + ",");
+            }
+            Console.WriteLine();
         }
 
         private static void SaveHeavensToFile(string v, Dictionary<Individual, int> heavensOne)
@@ -342,46 +380,72 @@ namespace EvoCore
         }
         static Individual GetRandomChild(Individual mum, Individual dad, CrossoverMethods crossover)
         {
-            int[] newGenotype = new int[mum.genotype.Length];
+            Individual child = new Individual();
             switch (crossover)
             {
                 case CrossoverMethods.PMX:
                     var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                    var cut2 = GeneticEnvironment.CUBE.Next(cut1, mum.genotype.Length);
-                    var child = GetChildPMX(mum, dad, cut1, cut2);
+                    var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+                    child = GetChildPMX(mum, dad, cut1, cut2);
                     break;
                 case CrossoverMethods.OX:
                     cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                    cut2 = GeneticEnvironment.CUBE.Next(cut1, mum.genotype.Length);
+                    cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
                     child = GetChildOX(mum, dad, cut1, cut2);
                     break;
                 case CrossoverMethods.CX:
                     cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                    cut2 = GeneticEnvironment.CUBE.Next(cut1, mum.genotype.Length);
+                    cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
                     child = GetChildCX(mum, dad, cut1, cut2);
                     break;
                 default:
                     var separationPos = GeneticEnvironment.CUBE.Next(1, mum.genotype.Length);
-
+                    child.genotype = new int[mum.genotype.Length];
                     for (int i = 0; i < separationPos; i++)
                     {
-                        newGenotype[i] = mum.genotype[i];
+                        child.genotype[i] = mum.genotype[i];
                     }
                     for (int i = separationPos; i < mum.genotype.Length; i++)
                     {
-                        newGenotype[i] = dad.genotype[i];
+                        child.genotype[i] = dad.genotype[i];
                     }
                     break;
             }
 
-            return new Individual() { genotype = newGenotype };
+            return new Individual() { genotype = child.genotype };
         }
 
         private static Individual GetChildCX(Individual mum, Individual dad, int cut1, int cut2)
         {
-            throw new NotImplementedException();
-        }
+            int[] newGenotype = new int[mum.genotype.Length];
+            for (int i = 0; i < newGenotype.Length; i++)
+            {
+                newGenotype[i] = -1;
+            }
+            var mumIterator = 0;
+            var dadIterator = 0;
+            var newIterator = 0;
+            var cycle = false;
+            do
+            {
+                newGenotype[newIterator] = dad.genotype[dadIterator];
+                dadIterator = Array.IndexOf(dad.genotype, mum.genotype[dadIterator]);
+                if (newGenotype[dadIterator] != -1)
+                {
+                    cycle = true;
+                }
+                newIterator = dadIterator;
+            } while (!cycle);
 
+            for (int i = 0; i < newGenotype.Length; i++)
+            {
+                if (newGenotype[i] == -1)
+                {
+                    newGenotype[i] = mum.genotype[i];
+                }
+            }
+            return new Individual() { genotype = newGenotype };
+        }
         private static Individual GetChildOX(Individual mum, Individual dad, int cut1, int cut2)
         {
             int[] newGenotype = new int[mum.genotype.Length];
@@ -404,31 +468,12 @@ namespace EvoCore
                     newIterator++;
                 }
                 dadIterator++;
-                // skopiuj środek
-                // leć od następnego indexu i z drugiego bierz cyferkę
-                // jeśli nie ma jej w genotypie to ustawiaj na indexie i zwiekszaj o 1
-                // jeśli jest to idziesz do nastepnego ale miejsce do ustawienia zostaje
-                // wszystko modulo rozmiar tablicy bo musi leciec do wypełnienia wszystkich indexow cyklicznie
+
             } while (Array.IndexOf(newGenotype, -1) != -1);
-            
+
             return new Individual() { genotype = newGenotype };
         }
-
-        static Individual Mutate(int[] a)
-        {
-            int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-            int randomPosition2 = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-            int temp = a[randomPosition];
-            a[randomPosition] = a[randomPosition2];
-            a[randomPosition2] = temp;
-
-            return new Individual() { genotype = a };
-        }
-        static void PrintBinary(uint a)
-        {
-            Console.WriteLine(Convert.ToString(a, 2).PadLeft(32).Replace(" ", "0"));
-        }
-        static Individual GetChildPMX(Individual mum, Individual dad, int cut1, int cut2)
+        private static Individual GetChildPMX(Individual mum, Individual dad, int cut1, int cut2)
         {
             int[] newGenotype = new int[mum.genotype.Length];
             for (int i = cut1; i < cut2; i++)
@@ -460,6 +505,21 @@ namespace EvoCore
                 }
             }
             return new Individual() { genotype = newGenotype };
+        }
+
+        static Individual Mutate(int[] a)
+        {
+            int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
+            int randomPosition2 = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
+            int temp = a[randomPosition];
+            a[randomPosition] = a[randomPosition2];
+            a[randomPosition2] = temp;
+
+            return new Individual() { genotype = a };
+        }
+        static void PrintBinary(uint a)
+        {
+            Console.WriteLine(Convert.ToString(a, 2).PadLeft(32).Replace(" ", "0"));
         }
     }
 }
