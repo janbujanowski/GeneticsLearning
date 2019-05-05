@@ -172,6 +172,30 @@ namespace EvoCore
             Dictionary<int, int> iterationMaxPopulationDictRoulette = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictTournament = new Dictionary<int, int>();
 
+            //Test zlozonosci obliczeniowej
+            Dictionary<int, long> timeTest = new Dictionary<int, long>();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dlugosc genotypu,Czas operacji z A do B i B do A");
+            for (int i = 2; i < 1000; i++)
+            {
+                var timer = System.Diagnostics.Stopwatch.StartNew();
+                var mum = new Individual()
+                {
+                    genotype = GetRandomGenotype(i)
+                };
+                var dad = new Individual()
+                {
+                    genotype = GetRandomGenotype(i)
+                };
+                var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
+                var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+                var lol = GetChildPMX(mum, dad, cut1, cut2);
+                var lol2 = GetChildPMX(dad, mum, cut1, cut2);
+                sb.AppendLine($"{i}, {timer.ElapsedTicks}");
+
+            }
+
+            File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
                 Dictionary<Individual, int> heavensOne = new Dictionary<Individual, int>();
@@ -197,7 +221,7 @@ namespace EvoCore
 
                 }
                 Console.WriteLine($"simply random 5000 times score : {bestie.SurvivalScore}");
-                
+
                 //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
                 //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
                 //iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
@@ -216,6 +240,16 @@ namespace EvoCore
             //Console.WriteLine($"The worst iteration Roulette : {iterationMaxPopulationDictRoulette.OrderByDescending(x => x.Value).First().Key} ");
             //Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
             Console.ReadKey();
+        }
+        private static int[] GetRandomGenotype(int length)
+        {
+            int[] genotype = new int[length];
+            for (int i = 0; i < length; i++)
+            {
+                genotype[i] = i + 1;
+            }
+            genotype.Shuffle();
+            return genotype;
         }
 
         private static void TestPMX()
@@ -247,7 +281,6 @@ namespace EvoCore
         {
             var mum = new Individual()
             {
-
                 genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
             };
             var dad = new Individual()
