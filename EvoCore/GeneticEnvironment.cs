@@ -59,9 +59,11 @@ namespace EvoCore
             try
             {
                 string[] lines = File.ReadAllLines(filePath);
-                foreach (var line in lines)
+                int start = FindStartingIndex(lines);
+                var end = FindEndIndex(lines);
+                for (int i = start; i < end; i++)
                 {
-                    string[] values = line.Split(' ');
+                    string[] values = lines[i].Split(' ');
                     double lattitude = double.Parse(values[1]);
                     double longitude = double.Parse(values[2]);
                     ParsedCitiesToVisit.Add(new Coords()
@@ -69,8 +71,6 @@ namespace EvoCore
                         X = lattitude,
                         Y = longitude
                     });
-
-
                 }
                 genotypeExample = new List<int>();
                 for (int i = 0; i < ParsedCitiesToVisit.Count; i++)
@@ -80,9 +80,30 @@ namespace EvoCore
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Can't read the config file - running with default values. Exception message: {ex.Message}");
+                Console.WriteLine($"Can't read the cities file - Cannot continue. Exception message: {ex.Message}");
             }
         }
+
+        private int FindEndIndex(string[] lines)
+        {
+            var end = lines.Length - 1;
+            while (!lines[end].Contains("EOF"))
+            {
+                end--;
+            }
+            return end;
+        }
+
+        private int FindStartingIndex(string[] lines)
+        {
+            var i = 0;
+            while (!char.IsDigit(lines[i][0]))
+            {
+                i++;
+            }
+            return i;
+        }
+
         private static GeneticEnvironment _config;
         public static GeneticEnvironment INSTANCE
         {
