@@ -1,4 +1,4 @@
-﻿using EvoCore;
+﻿using AlgorytmEwolucyjny;
 using srodowisko;
 using System;
 using System.Collections.Generic;
@@ -6,8 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-
-namespace EvoCore
+namespace AlgorytmEwolucyjny
 {
     public enum SelectionMethods
     {
@@ -60,7 +59,7 @@ namespace EvoCore
                 GeneticEnvironment.INSTANCE.POPULATIONSIZE = Int32.Parse(values[0]);//popsize
                 GeneticEnvironment.INSTANCE.MUTATIONPROBABILITY = double.Parse(values[1]);//mutationprob
                 GeneticEnvironment.INSTANCE.MUTATIONRETRIALS = Int32.Parse(values[2]);//mutationretry
-                GeneticEnvironment.INSTANCE.defaultSelectionMethod = Enum.Parse<SelectionMethods>(values[3]);//enum
+                GeneticEnvironment.INSTANCE.defaultSelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), values[3]);//enum
                 GeneticEnvironment.INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(values[4]);//interationnonimprove
             }
             catch (Exception ex)
@@ -337,44 +336,16 @@ namespace EvoCore
         static void Main(string[] args)
         {
             Console.WriteLine("===================================SEPARATOR================================================");
-            Console.WriteLine($"New instance, passed parameters {string.Join(',', args)}");
+            Console.WriteLine($"New instance, passed parameters {string.Join(",", args)}");
             Console.WriteLine(DateTime.Now.ToString());
-            Console.WriteLine("PMX");
-            TestPMX();
-            Console.WriteLine("OX");
-            TestOX();
-            Console.WriteLine("CX");
-            TestCX();
+            RunTests();
             GeneticEnvironment.INSTANCE.ParseParameters("geneticConfig.csv");
             GeneticEnvironment.INSTANCE.LoadCities("world.tsp");
             Dictionary<int, int> iterationMaxPopulationDictRanked = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictRoulette = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictTournament = new Dictionary<int, int>();
 
-            //Test zlozonosci obliczeniowej
-            Dictionary<int, long> timeTest = new Dictionary<int, long>();
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Dlugosc genotypu,Czas operacji z A do B i B do A");
-            for (int i = 2; i < 1000; i++)
-            {
-                var timer = System.Diagnostics.Stopwatch.StartNew();
-                var mum = new Individual()
-                {
-                    genotype = GetRandomGenotype(i)
-                };
-                var dad = new Individual()
-                {
-                    genotype = GetRandomGenotype(i)
-                };
-                var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
-                var lol = GetChildPMX(mum, dad, cut1, cut2);
-                var lol2 = GetChildPMX(dad, mum, cut1, cut2);
-                sb.AppendLine($"{i}, {timer.ElapsedTicks}");
-
-            }
-
-            File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
+         
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
                 Dictionary<Individual, int> heavensOne = new Dictionary<Individual, int>();
@@ -420,6 +391,41 @@ namespace EvoCore
             //Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
             Console.ReadKey();
         }
+
+        private static void RunTests()
+        {
+            Console.WriteLine("PMX");
+            TestPMX();
+            Console.WriteLine("OX");
+            TestOX();
+            Console.WriteLine("CX");
+            TestCX();
+            //Test zlozonosci obliczeniowej
+            //Dictionary<int, long> timeTest = new Dictionary<int, long>();
+            //StringBuilder sb = new StringBuilder();
+            //sb.AppendLine("Dlugosc genotypu,Czas operacji z A do B i B do A");
+            //for (int i = 2; i < 1000; i++)
+            //{
+            //    var timer = System.Diagnostics.Stopwatch.StartNew();
+            //    var mum = new Individual()
+            //    {
+            //        genotype = GetRandomGenotype(i)
+            //    };
+            //    var dad = new Individual()
+            //    {
+            //        genotype = GetRandomGenotype(i)
+            //    };
+            //    var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
+            //    var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+            //    var lol = GetChildPMX(mum, dad, cut1, cut2);
+            //    var lol2 = GetChildPMX(dad, mum, cut1, cut2);
+            //    sb.AppendLine($"{i}, {timer.ElapsedTicks}");
+
+            //}
+
+            //File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
+        }
+
         private static int[] GetRandomGenotype(int length)
         {
             int[] genotype = new int[length];
@@ -777,4 +783,3 @@ namespace srodowisko
         }
     }
 }
-
