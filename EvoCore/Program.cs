@@ -336,6 +336,9 @@ namespace EvoCore
 
         static void Main(string[] args)
         {
+            Console.WriteLine("===================================SEPARATOR================================================");
+            Console.WriteLine($"New instance, passed parameters {string.Join(',', args)}");
+            Console.WriteLine(DateTime.Now.ToString());
             Console.WriteLine("PMX");
             TestPMX();
             Console.WriteLine("OX");
@@ -344,7 +347,6 @@ namespace EvoCore
             TestCX();
             GeneticEnvironment.INSTANCE.ParseParameters("geneticConfig.csv");
             GeneticEnvironment.INSTANCE.LoadCities("world.tsp");
-
             Dictionary<int, int> iterationMaxPopulationDictRanked = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictRoulette = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictTournament = new Dictionary<int, int>();
