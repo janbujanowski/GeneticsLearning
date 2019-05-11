@@ -340,7 +340,7 @@ namespace AlgorytmEwolucyjny
                 };
 
                 heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
-                SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\RankedRoulette{i}.csv", heavensOne);
+                SaveHeavensToFile(heavensOne);
                 iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
@@ -480,14 +480,14 @@ namespace AlgorytmEwolucyjny
             genotype.Shuffle();
             return genotype;
         }
-        private static void SaveHeavensToFile(string v, Dictionary<Individual, int> heavensOne)
+        private static void SaveHeavensToFile(Dictionary<Individual, int> heavensOne)
         {
             StringBuilder sb = new StringBuilder();
+            LogInfo("==============Heavens csv===================");
             foreach (var line in heavensOne)
             {
-                sb.AppendLine($"{line.Value},{line.Key.SurvivalScore}");
+                LogInfo($"{line.Value},{line.Key.SurvivalScore}");
             }
-            File.WriteAllText(v, sb.ToString());
         }
         private static Dictionary<Individual, int> EvolvePopulationCriteriaMaxPopulationCount(Population pop, int pOPULATIONCOUNTLIMIT, SelectionMethods selectionMethod, CrossoverMethods crossover)
         {
