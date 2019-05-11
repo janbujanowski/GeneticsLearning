@@ -1,3 +1,6 @@
 .vs/
-bin/
-obj/
+*.exe
+*.cache
+*.pdb
+obj/Debug/*.cs
+obj/Release/*.cs

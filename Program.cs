@@ -2,7 +2,6 @@
 using srodowisko;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,7 +33,7 @@ namespace AlgorytmEwolucyjny
         public int POPULATIONSIZE = 20;
         public int POPULATIONCOUNTLIMIT = 1000;
         public double MUTATIONPROBABILITY = 0.15;
-        public int NUMBEROFEVOLUTIONTRIALS = 0;
+        public int NUMBEROFEVOLUTIONTRIALS = 1;
         public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 5000;
         public SelectionMethods defaultSelectionMethod = SelectionMethods.Roulette;
         public int MUTATIONRETRIALS = 4;
@@ -50,23 +49,7 @@ namespace AlgorytmEwolucyjny
         }
 
         private List<int> genotypeExample;
-        public void ParseParameters(string filePath)
-        {
-            try
-            {
-                string[] file = File.ReadAllLines(filePath);
-                string[] values = file[0].Split(',');
-                GeneticEnvironment.INSTANCE.POPULATIONSIZE = Int32.Parse(values[0]);//popsize
-                GeneticEnvironment.INSTANCE.MUTATIONPROBABILITY = double.Parse(values[1]);//mutationprob
-                GeneticEnvironment.INSTANCE.MUTATIONRETRIALS = Int32.Parse(values[2]);//mutationretry
-                GeneticEnvironment.INSTANCE.defaultSelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), values[3]);//enum
-                GeneticEnvironment.INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(values[4]);//interationnonimprove
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Can't read the config file - running with default values. Exception message: {ex.Message}");
-            }
-        }
+      
         public void LoadCities(string filePath)
         {
             this.ParsedCitiesToVisit = new List<Coords>();
@@ -97,7 +80,6 @@ namespace AlgorytmEwolucyjny
                 Console.WriteLine($"Can't read the cities file - Cannot continue. Exception message: {ex.Message}");
             }
         }
-
         private int FindEndIndex(string[] lines)
         {
             var end = lines.Length - 1;
@@ -107,7 +89,6 @@ namespace AlgorytmEwolucyjny
             }
             return end;
         }
-
         private int FindStartingIndex(string[] lines)
         {
             var i = 0;
@@ -117,7 +98,6 @@ namespace AlgorytmEwolucyjny
             }
             return i;
         }
-
         private static GeneticEnvironment _config;
         public static GeneticEnvironment INSTANCE
         {
@@ -155,12 +135,16 @@ namespace AlgorytmEwolucyjny
             }
             return distance;
         }
-
         private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
         {
             double distancePerOneDegree = 111;//mean distance in km
             double degreesDistance = Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
             return degreesDistance * distancePerOneDegree;
+        }
+
+        internal void ParseParameters(string[] args)
+        {
+            //throw new NotImplementedException();
         }
     }
     public struct Coords
@@ -335,17 +319,17 @@ namespace AlgorytmEwolucyjny
 
         static void Main(string[] args)
         {
-            Console.WriteLine("===================================SEPARATOR================================================");
-            Console.WriteLine($"New instance, passed parameters {string.Join(",", args)}");
-            Console.WriteLine(DateTime.Now.ToString());
+            LogInfo("===================================SEPARATOR================================================");
+            LogInfo($"New instance, passed parameters {string.Join(",", args)}");
+            
             RunTests();
-            GeneticEnvironment.INSTANCE.ParseParameters("geneticConfig.csv");
-            GeneticEnvironment.INSTANCE.LoadCities("world.tsp");
+            GeneticEnvironment.INSTANCE.ParseParameters(args);
+            GeneticEnvironment.INSTANCE.LoadCities("cities.tsp");
             Dictionary<int, int> iterationMaxPopulationDictRanked = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictRoulette = new Dictionary<int, int>();
             Dictionary<int, int> iterationMaxPopulationDictTournament = new Dictionary<int, int>();
 
-         
+
             for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
             {
                 Dictionary<Individual, int> heavensOne = new Dictionary<Individual, int>();
@@ -360,18 +344,7 @@ namespace AlgorytmEwolucyjny
                 iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
                 Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
 
-                Individual bestie = new Individual() { genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute };
-                for (int j = 0; j < 50000; j++)
-                {
-                    Individual trial = new Individual() { genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute };
-                    if (trial.SurvivalScore > bestie.SurvivalScore)
-                    {
-                        bestie = trial;
-                    }
-
-                }
-                Console.WriteLine($"simply random 5000 times score : {bestie.SurvivalScore}");
-
+               
                 //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
                 //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
                 //iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
@@ -392,6 +365,7 @@ namespace AlgorytmEwolucyjny
             Console.ReadKey();
         }
 
+        #region Metody testowe 
         private static void RunTests()
         {
             Console.WriteLine("PMX");
@@ -400,6 +374,11 @@ namespace AlgorytmEwolucyjny
             TestOX();
             Console.WriteLine("CX");
             TestCX();
+            LogInfo("Test losowości");
+            for (int i = 0; i < 1000; i++)
+            {
+                LogInfo($"{GeneticEnvironment.CUBE.Next()},{GeneticEnvironment.CUBE.NextDouble()}");
+            }
             //Test zlozonosci obliczeniowej
             //Dictionary<int, long> timeTest = new Dictionary<int, long>();
             //StringBuilder sb = new StringBuilder();
@@ -425,23 +404,10 @@ namespace AlgorytmEwolucyjny
 
             //File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
         }
-
-        private static int[] GetRandomGenotype(int length)
-        {
-            int[] genotype = new int[length];
-            for (int i = 0; i < length; i++)
-            {
-                genotype[i] = i + 1;
-            }
-            genotype.Shuffle();
-            return genotype;
-        }
-
         private static void TestPMX()
         {
             var mum = new Individual()
             {
-
                 genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
             };
             var dad = new Individual()
@@ -500,18 +466,20 @@ namespace AlgorytmEwolucyjny
 
             var lol = GetChildCX(mum, dad, 3, 7);
             var lol2 = GetChildCX(dad, mum, 3, 7);
-            foreach (var city in lol.genotype)
-            {
-                Console.Write(city + ",");
-            }
-            Console.WriteLine();
-            foreach (var city in lol2.genotype)
-            {
-                Console.Write(city + ",");
-            }
-            Console.WriteLine();
+            LogInfo(string.Join(",", lol.genotype));
+            LogInfo(string.Join(",", lol2.genotype));
         }
-
+        #endregion
+        private static int[] GetRandomGenotype(int length)
+        {
+            int[] genotype = new int[length];
+            for (int i = 0; i < length; i++)
+            {
+                genotype[i] = i + 1;
+            }
+            genotype.Shuffle();
+            return genotype;
+        }
         private static void SaveHeavensToFile(string v, Dictionary<Individual, int> heavensOne)
         {
             StringBuilder sb = new StringBuilder();
@@ -521,7 +489,6 @@ namespace AlgorytmEwolucyjny
             }
             File.WriteAllText(v, sb.ToString());
         }
-
         private static Dictionary<Individual, int> EvolvePopulationCriteriaMaxPopulationCount(Population pop, int pOPULATIONCOUNTLIMIT, SelectionMethods selectionMethod, CrossoverMethods crossover)
         {
             Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
@@ -537,7 +504,6 @@ namespace AlgorytmEwolucyjny
             }
             return heavenPopulationDict;
         }
-
         private static Dictionary<Individual, int> EvolvePopulationCriteriaUntilLackOfImprovment(Population pop, int maxIterationsWithoutImprovement, SelectionMethods selectionMethod, CrossoverMethods crossover)
         {
             Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
@@ -549,6 +515,7 @@ namespace AlgorytmEwolucyjny
                 if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
                 {
                     heavenPopulationDict.Add(pop.BestOne, populationCount);
+                    LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
                     NoNimprovementCounter = 0;
                 }
                 else
@@ -559,7 +526,6 @@ namespace AlgorytmEwolucyjny
             }
             return heavenPopulationDict;
         }
-
         private static Individual[] GetNewRandomPopulation()
         {
             Individual[] population = new Individual[POPULATIONSIZE];
@@ -632,7 +598,6 @@ namespace AlgorytmEwolucyjny
 
             return new Individual() { genotype = child.genotype };
         }
-
         private static Individual GetChildCX(Individual mum, Individual dad, int cut1, int cut2)
         {
             int[] newGenotype = new int[mum.genotype.Length];
@@ -735,9 +700,9 @@ namespace AlgorytmEwolucyjny
 
             return new Individual() { genotype = a };
         }
-        static void PrintBinary(uint a)
+        static void LogInfo(string message)
         {
-            Console.WriteLine(Convert.ToString(a, 2).PadLeft(32).Replace(" ", "0"));
+            Console.WriteLine($"[{DateTime.Now.ToString()}]: {message}");
         }
     }
 }
