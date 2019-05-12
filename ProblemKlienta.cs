@@ -81,7 +81,7 @@ namespace srodowisko
         }
         private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
         {
-            return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
+            return Math.Sqrt(Math.Pow(endCoord.Y - startCoord.Y, 2) + Math.Pow(endCoord.X - startCoord.X, 2));
         }
     }
 }

@@ -112,19 +112,19 @@ namespace AlgorytmEwolucyjny
                 heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0 } };
             }
             var populationCount = 0;
-            LogInfo($"Starting best solution {heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore}");
+            LogInfo($"Początkowy najlepszy osobnik {heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.ToString()}");
             while (DateTime.Now <= dateStop)
             {
                 pop = GetNextGeneration(pop, selectionMethod, crossover, heavenPopulationDict[heavenPopulationDict.Length - 1].Individual);
                 if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * GeneticEnvironment.INSTANCE.ModyfikatorWyniku < GeneticEnvironment.INSTANCE.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
                 {
                     heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount });
-                    LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
+                    LogInfo($"Nowy osobnik {pop.BestOne.ToString()}");
                 }
 
                 populationCount++;
             }
-            LogInfo("Stopping evolution because of reaching dateStop :" + dateStop.ToString());
+            LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
             return heavenPopulationDict;
         }
         private static Individual[] GetNewRandomPopulation()
@@ -443,7 +443,27 @@ namespace AlgorytmEwolucyjny
     }
     public class Individual
     {
-        public Coords[] citiesToVisit = GeneticEnvironment.INSTANCE.ParsedCitiesToVisit;
+        public bool CzyPoprawny
+        {
+            get
+            {
+                bool czy = true;
+                int[] testArray = new int[1] { -1 };
+                for (int i = 0; i < genotype.Length; i++)
+                {
+                    if (!Array.Exists(testArray, x=> x == genotype[i]))
+                    {
+                        testArray = testArray.Add(genotype[i]);
+                    }
+                    else
+                    {
+                        czy = false;
+                        break;
+                    }
+                }
+                return czy;
+            }
+        }
         public int[] genotype;
         public int[] Fenotype
         {
@@ -461,7 +481,7 @@ namespace AlgorytmEwolucyjny
         }
         public override string ToString()
         {
-            return $"Genotype : {genotype.ToString()} with score : {SurvivalScore}";
+            return $"Dlugosc trasy :{SurvivalScore} genotyp {genotype.ToScreen()} Czy poprawny ? : {CzyPoprawny}";
         }
     }
     public class StatsInfo
@@ -525,7 +545,7 @@ namespace AlgorytmEwolucyjny
                     break;
                 }
                 i++;
-                sum += theLastIndividual.SurvivalScore /population.genotypes[i].SurvivalScore;
+                sum += theLastIndividual.SurvivalScore / population.genotypes[i].SurvivalScore;
             }
             if (parent == null)
             {
@@ -572,9 +592,9 @@ namespace AlgorytmEwolucyjny
     }
     public static class GenericExtensions
     {
-        public static string ToString(this int[] array)
+        public static string ToScreen(this int[] array)
         {
-            return "lol";
+            return string.Join(",", array);
         }
         public static void Shuffle<T>(this T[] array)
         {
