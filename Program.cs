@@ -143,9 +143,7 @@ namespace AlgorytmEwolucyjny
         }
         private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
         {
-            double distancePerOneDegree = 111;//mean distance in km
-            double degreesDistance = Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
-            return degreesDistance * distancePerOneDegree;
+            return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
         }
 
         internal void ParseParameters(string[] args)
@@ -367,30 +365,14 @@ namespace AlgorytmEwolucyjny
                     genotypes = newRandomPopulation
                 };
                 
-                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
-                //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
+                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, SelectionMethods.RankedRoulette, CrossoverMethods.CX);
                 SaveHeavensToFile(heavensOne);
                 iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
-                Console.WriteLine($"Ranked {i} Best:{ string.Join(",", heavensOne.Last().Key.genotype)} after { heavensOne.Last().Value} population");
-
-
-                //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
-                //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
-                //iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
-                //Console.WriteLine($"Roulette {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
-
-                //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Tournament);
-                //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Tournament{i}.csv", heavensOne);
-                //iterationMaxPopulationDictTournament.Add(i, heavensOne.Last().Value);
-                //Console.WriteLine($"Tournament {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
-
-                //heavensOne = EvolvePopulationCriteriaMaxPopulationCount(pop, POPULATIONCOUNTLIMIT, SelectionMethods.RankedRoulette);
-                //Console.WriteLine($"Trial : {i} Best: {heavensOne.Last().Key}");
+                LogInfo($"Ranked {i} Best:{ string.Join(",", heavensOne.Last().Key.genotype)} after { heavensOne.Last().Value} population");
             }
 
-            //Console.WriteLine($"The worst iteration Ranked : {iterationMaxPopulationDictRanked.OrderByDescending(x => x.Value).First().Key} ");
-            //Console.WriteLine($"The worst iteration Roulette : {iterationMaxPopulationDictRoulette.OrderByDescending(x => x.Value).First().Key} ");
-            //Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
+            
+            Console.ReadKey();
         }
 
         #region Metody testowe 
@@ -798,9 +780,7 @@ namespace srodowisko
 
         private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
         {
-            double distancePerOneDegree = 111;//mean distance in km
-            double degreesDistance = Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
-            return degreesDistance * distancePerOneDegree;
+            return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
         }
     }
 }
