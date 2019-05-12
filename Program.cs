@@ -5,7 +5,6 @@ namespace AlgorytmEwolucyjny
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
             LogInfo("===================================SEPARATOR================================================");
@@ -13,28 +12,25 @@ namespace AlgorytmEwolucyjny
 
             RunTests();
             GeneticEnvironment.INSTANCE.ParseParameters(args);
-
-            for (int i = 0; i < GeneticEnvironment.INSTANCE.NUMBEROFEVOLUTIONTRIALS; i++)
+            StatsInfo[] heavensOne = new StatsInfo[1];
+            Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
+            LogInfo($"Nr Problemu {GeneticEnvironment.INSTANCE.NrProblemu} Rozmiar tablicy : {newRandomPopulation[0].genotype.Length} " );
+            Population pop = new Population()
             {
-                StatsInfo[] heavensOne = new StatsInfo[1];
-                Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
-                Population pop = new Population()
-                {
-                    genotypes = newRandomPopulation
-                };
+                genotypes = newRandomPopulation
+            };
 
-                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
+            heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
 
-                LogInfo("===================================Heavens csv================================================");
-                foreach (var line in heavensOne)
-                {
-                    LogInfo($"{line.Population},{line.Individual.SurvivalScore}");
-                }
-                LogInfo($"Ranked {i} Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
+            LogInfo("===================================Heavens csv================================================");
+            foreach (var line in heavensOne)
+            {
+                LogInfo($"{line.Population},{line.Individual.SurvivalScore}");
             }
+            LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
+
             Console.ReadKey();
         }
-
         #region Metody testowe 
         private static void RunTests()
         {
@@ -373,10 +369,8 @@ namespace AlgorytmEwolucyjny
                 return _CUBE;
             }
         }
-
         public DateTime StopDate { get; private set; }
         public int NrProblemu { get; internal set; }
-
         public static double SurvivalFunction(int[] sciezka)
         {
             return INSTANCE.ProblemKlienta.Ocena(sciezka);
@@ -385,7 +379,6 @@ namespace AlgorytmEwolucyjny
         {
             return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
         }
-
         internal void ParseParameters(string[] args)
         {
             try
@@ -538,11 +531,11 @@ namespace AlgorytmEwolucyjny
             double maxSumRange = 0;
             for (int j = 0; j < population.genotypes.Length; j++)
             {
-                maxSumRange += theLastIndividual.SurvivalScore / population.genotypes[j].SurvivalScore;
+                maxSumRange += population.genotypes[j].SurvivalScore;
             }
             Individual parent = null;
             var i = 0;
-            var sum = theLastIndividual.SurvivalScore / population.genotypes[i].SurvivalScore;
+            var sum = population.genotypes[i].SurvivalScore;
             var randomScoreValue = GeneticEnvironment.CUBE.NextDouble() * maxSumRange;
             while (parent == null)
             {
@@ -552,7 +545,7 @@ namespace AlgorytmEwolucyjny
                     break;
                 }
                 i++;
-                sum += theLastIndividual.SurvivalScore / population.genotypes[i].SurvivalScore;
+                sum += population.genotypes[i].SurvivalScore;
             }
             if (parent == null)
             {
