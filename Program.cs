@@ -5,311 +5,6 @@ using System.IO;
 
 namespace AlgorytmEwolucyjny
 {
-    public enum SelectionMethods
-    {
-        Tournament,
-        Roulette,
-        RankedRoulette
-    }
-    public enum CrossoverMethods
-    {
-        PMX,
-        OX,
-        CX
-    }
-    public class GeneticEnvironment
-    {
-        public uint COUNTVALUESTOMAP = UInt32.MaxValue;
-        public double VALUESRANGE = 2 - (-2);
-        public double DIVIDER
-        {
-            get
-            {
-                return COUNTVALUESTOMAP / VALUESRANGE;
-            }
-        }
-        public int POPULATIONSIZE = 20;
-        public int POPULATIONCOUNTLIMIT = 1000;
-        public double MUTATIONPROBABILITY = 0.15;
-        public int NUMBEROFEVOLUTIONTRIALS = 1;
-        public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 5000;
-
-        public int[] BestGenotype { get; private set; }
-
-        public SelectionMethods SelectionMethod = SelectionMethods.Roulette;
-        public CrossoverMethods CrossoverMethod = CrossoverMethods.OX;
-        public int MUTATIONRETRIALS = 4;
-
-        public Coords[] ParsedCitiesToVisit;
-        public int[] GetRandomCitiesRoute
-        {
-            get
-            {
-                genotypeExample.Shuffle();
-                return genotypeExample;
-            }
-        }
-
-        private int[] genotypeExample;
-
-        public void LoadCities(string filePath)
-        {
-            try
-            {
-                string[] lines = File.ReadAllLines(filePath);
-                int start = FindStartingIndex(lines);
-                var end = FindEndIndex(lines);
-                INSTANCE.ParsedCitiesToVisit = new Coords[end - start];
-                for (int i = start; i < end; i++)
-                {
-                    string[] values = lines[i].Split(' ');
-                    double lattitude = double.Parse(values[1]);
-                    double longitude = double.Parse(values[2]);
-                    ParsedCitiesToVisit[i - start] = new Coords()
-                    {
-                        X = lattitude,
-                        Y = longitude
-                    };
-                }
-                genotypeExample = new int[ParsedCitiesToVisit.Length];
-                for (int i = 0; i < ParsedCitiesToVisit.Length; i++)
-                {
-                    genotypeExample[i] = i;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Can't read the cities file - Cannot continue. Exception message: {ex.Message}");
-            }
-        }
-        private int FindEndIndex(string[] lines)
-        {
-            var end = lines.Length - 1;
-            while (!lines[end].Contains("EOF"))
-            {
-                end--;
-            }
-            return end;
-        }
-        private int FindStartingIndex(string[] lines)
-        {
-            var i = 0;
-            while (!char.IsDigit(lines[i][0]))
-            {
-                i++;
-            }
-            return i;
-        }
-        private static GeneticEnvironment _config;
-        public static GeneticEnvironment INSTANCE
-        {
-            get
-            {
-                if (_config == null)
-                {
-                    _config = new GeneticEnvironment();
-                }
-                return _config;
-            }
-        }
-        private GeneticEnvironment()
-        {
-
-        }
-        private static Random _CUBE;
-        public static Random CUBE
-        {
-            get
-            {
-                if (_CUBE == null)
-                {
-                    _CUBE = new Random();
-                }
-                return _CUBE;
-            }
-        }
-
-        public DateTime StopDate { get; private set; }
-
-        public static double SurvivalFunction(Coords[] coordsToVisit)
-        {
-            double distance = 0;
-            for (int i = 0; i < coordsToVisit.Length - 2; i++)
-            {
-                distance += DistanceBetweenCoords(coordsToVisit[i], coordsToVisit[i + 1]);
-            }
-            return distance;
-        }
-        private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
-        {
-            return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
-        }
-
-        internal void ParseParameters(string[] args)
-        {
-            try
-            {
-                INSTANCE.StopDate = DateTime.Parse(args[0]);
-                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//popsize
-                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//mutationprob
-                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//mutationretry
-                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//enum
-                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//OXCX
-                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//interationnonimprove
-                if (args.Length > 7)
-                {
-                    var genotypeArray = args[7].Split(',');
-                    INSTANCE.BestGenotype = new int[genotypeArray.Length];
-                    for (int i = 0; i < genotypeArray.Length; i++)
-                    {
-                        INSTANCE.BestGenotype[i] = Int32.Parse(genotypeArray[i]);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error parsing parameters :" + ex.Message);
-            }
-        }
-    }
-    public struct Coords
-    {
-        public double X, Y;
-    }
-
-    public struct Population
-    {
-        public Individual[] genotypes;
-        public Individual BestOne
-        {
-            get
-            {
-                return genotypes.OrderBySurvivalScore()[genotypes.Length - 1];
-            }
-        }
-        public Individual BestSecond;
-        public Population GetCopy()
-        {
-            Individual[] copiedGenotypes = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
-            for (int i = 0; i < copiedGenotypes.Length; i++)
-            {
-                copiedGenotypes[i] = new Individual() { genotype = genotypes[i].genotype };
-            }
-            return new Population { genotypes = this.genotypes };
-        }
-    }
-    public static class GeneticHelpers
-    {
-        public static Individual[] OrderBySurvivalScore(this Individual[] genotypes)
-        {
-            Array.Sort(genotypes, delegate (Individual x, Individual y) { return x.SurvivalScore.CompareTo(y.SurvivalScore); });
-            return genotypes;
-        }
-
-        public static Individual GetTournamentParent(this Population population)
-        {
-            int TOURNAMENTSIZE = 2;
-            Individual[] competitors = new Individual[TOURNAMENTSIZE];
-            for (int i = 0; i < TOURNAMENTSIZE; i++)
-            {
-                competitors = competitors.Add(population.genotypes[GeneticEnvironment.CUBE.Next(0, population.genotypes.Length)]);
-            }
-            return competitors.OrderBySurvivalScore()[competitors.Length - 1];
-        }
-
-        public static Individual GetRouletteParent(this Population population)
-        {
-            var sumArray = population.genotypes.Sum();
-            Individual parent = null;
-            var i = 0;
-            var sum = population.genotypes[i].SurvivalScore;
-            var rankedChosenValue = GeneticEnvironment.CUBE.Next(1, (int)sumArray);
-            while (parent == null)
-            {
-                if (rankedChosenValue <= sum)
-                {
-                    parent = population.genotypes[i];
-                }
-                i++;
-                sum += i;
-            }
-            if (parent == null)
-            {
-                parent = population.genotypes[population.genotypes.Length - 1];
-            }
-            return parent;
-        }
-
-        public static Individual GetRankedRouletteParent(this Population population)
-        {
-            population.genotypes.OrderBySurvivalScore();
-
-            var sumArray = ((population.genotypes.Length - 1) / 2) * population.genotypes.Length;
-            Individual parent = null;
-            var i = 0;
-            var sum = 0;
-            var rankedChosenValue = GeneticEnvironment.CUBE.Next(1, sumArray);
-            while (parent == null)
-            {
-                if (rankedChosenValue <= sum)
-                {
-                    parent = population.genotypes[i];
-                }
-                i++;
-                sum += i;
-            }
-            return parent;
-        }
-
-        public static Individual GetParent(this Population population, SelectionMethods method)
-        {
-            switch (method)
-            {
-                case SelectionMethods.Tournament:
-                    return population.GetTournamentParent();
-                case SelectionMethods.Roulette:
-                    return population.GetRouletteParent();
-                case SelectionMethods.RankedRoulette:
-                    return population.GetRankedRouletteParent();
-                default:
-                    return population.GetParent(GeneticEnvironment.INSTANCE.SelectionMethod);
-            }
-        }
-    }
-    public class StatsInfo
-    {
-        public Individual Individual { get; set; }
-        public int Population { get; set; }
-    }
-    public class Individual
-    {
-        public Coords[] citiesToVisit = GeneticEnvironment.INSTANCE.ParsedCitiesToVisit;
-        public int[] genotype;
-        public Coords[] Fenotype
-        {
-            get
-            {
-                Coords[] result = new Coords[genotype.Length];
-                for (int i = 0; i < genotype.Length; i++)
-                {
-                    result[i] = citiesToVisit[genotype[i]];
-                }
-                return result;
-            }
-        }
-        public double SurvivalScore
-        {
-            get
-            {
-                return -GeneticEnvironment.SurvivalFunction(Fenotype);
-            }
-        }
-        public override string ToString()
-        {
-            return $"Fenotype : [not writeable] with score : {SurvivalScore}";
-        }
-    }
-
     public class Program
     {
         static readonly int POPULATIONSIZE = GeneticEnvironment.INSTANCE.POPULATIONSIZE;
@@ -337,7 +32,7 @@ namespace AlgorytmEwolucyjny
                     genotypes = newRandomPopulation
                 };
 
-                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod,  GeneticEnvironment.INSTANCE.CrossoverMethod);
+                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
 
                 LogInfo("==============Heavens csv===================");
                 foreach (var line in heavensOne)
@@ -363,30 +58,6 @@ namespace AlgorytmEwolucyjny
             {
                 LogInfo($"{GeneticEnvironment.CUBE.Next()},{GeneticEnvironment.CUBE.NextDouble()}");
             }
-            //Test zlozonosci obliczeniowej
-            //Dictionary<int, long> timeTest = new Dictionary<int, long>();
-            //StringBuilder sb = new StringBuilder();
-            //sb.AppendLine("Dlugosc genotypu,Czas operacji z A do B i B do A");
-            //for (int i = 2; i < 1000; i++)
-            //{
-            //    var timer = System.Diagnostics.Stopwatch.StartNew();
-            //    var mum = new Individual()
-            //    {
-            //        genotype = GetRandomGenotype(i)
-            //    };
-            //    var dad = new Individual()
-            //    {
-            //        genotype = GetRandomGenotype(i)
-            //    };
-            //    var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-            //    var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
-            //    var lol = GetChildPMX(mum, dad, cut1, cut2);
-            //    var lol2 = GetChildPMX(dad, mum, cut1, cut2);
-            //    sb.AppendLine($"{i}, {timer.ElapsedTicks}");
-
-            //}
-
-            //File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
         }
         private static void TestPMX()
         {
@@ -463,10 +134,6 @@ namespace AlgorytmEwolucyjny
             }
             genotype.Shuffle();
             return genotype;
-        }
-        private static void SaveHeavensToFile(StatsInfo[] heavensOne)
-        {
-
         }
         //private static Dictionary<Individual, int> EvolvePopulationCriteriaMaxPopulationCount(Population pop, int pOPULATIONCOUNTLIMIT, SelectionMethods selectionMethod, CrossoverMethods crossover)
         //{
@@ -714,7 +381,309 @@ namespace AlgorytmEwolucyjny
             Console.WriteLine($"[{DateTime.Now.ToString()}]: {message}");
         }
     }
-    public static class GenericHelpers
+
+    public class GeneticEnvironment
+    {
+        public uint COUNTVALUESTOMAP = UInt32.MaxValue;
+        public double VALUESRANGE = 2 - (-2);
+        public double DIVIDER
+        {
+            get
+            {
+                return COUNTVALUESTOMAP / VALUESRANGE;
+            }
+        }
+        public int POPULATIONSIZE = 20;
+        public int POPULATIONCOUNTLIMIT = 1000;
+        public double MUTATIONPROBABILITY = 0.15;
+        public int NUMBEROFEVOLUTIONTRIALS = 1;
+        public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 5000;
+
+
+        public int[] BestGenotype { get; private set; }
+        public SelectionMethods SelectionMethod = SelectionMethods.Roulette;
+        public CrossoverMethods CrossoverMethod = CrossoverMethods.OX;
+        public int MUTATIONRETRIALS = 4;
+
+        public Coords[] ParsedCitiesToVisit;
+        public int[] GetRandomCitiesRoute
+        {
+            get
+            {
+                genotypeExample.Shuffle();
+                return genotypeExample;
+            }
+        }
+        private int[] genotypeExample;
+        public void LoadCities(string filePath)
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                int start = FindStartingIndex(lines);
+                var end = FindEndIndex(lines);
+                INSTANCE.ParsedCitiesToVisit = new Coords[end - start];
+                for (int i = start; i < end; i++)
+                {
+                    string[] values = lines[i].Split(' ');
+                    double lattitude = double.Parse(values[1]);
+                    double longitude = double.Parse(values[2]);
+                    ParsedCitiesToVisit[i - start] = new Coords()
+                    {
+                        X = lattitude,
+                        Y = longitude
+                    };
+                }
+                genotypeExample = new int[ParsedCitiesToVisit.Length];
+                for (int i = 0; i < ParsedCitiesToVisit.Length; i++)
+                {
+                    genotypeExample[i] = i;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Can't read the cities file - Cannot continue. Exception message: {ex.Message}");
+            }
+        }
+        private int FindEndIndex(string[] lines)
+        {
+            var end = lines.Length - 1;
+            while (!lines[end].Contains("EOF"))
+            {
+                end--;
+            }
+            return end;
+        }
+        private int FindStartingIndex(string[] lines)
+        {
+            var i = 0;
+            while (!char.IsDigit(lines[i][0]))
+            {
+                i++;
+            }
+            return i;
+        }
+        private static GeneticEnvironment _config;
+        public static GeneticEnvironment INSTANCE
+        {
+            get
+            {
+                if (_config == null)
+                {
+                    _config = new GeneticEnvironment();
+                }
+                return _config;
+            }
+        }
+        private GeneticEnvironment()
+        {
+
+        }
+        private static Random _CUBE;
+        public static Random CUBE
+        {
+            get
+            {
+                if (_CUBE == null)
+                {
+                    _CUBE = new Random();
+                }
+                return _CUBE;
+            }
+        }
+
+        public DateTime StopDate { get; private set; }
+
+        public static double SurvivalFunction(Coords[] coordsToVisit)
+        {
+            double distance = 0;
+            for (int i = 0; i < coordsToVisit.Length - 2; i++)
+            {
+                distance += DistanceBetweenCoords(coordsToVisit[i], coordsToVisit[i + 1]);
+            }
+            return distance;
+        }
+        private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
+        {
+            return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
+        }
+
+        internal void ParseParameters(string[] args)
+        {
+            try
+            {
+                INSTANCE.StopDate = DateTime.Parse(args[0]);
+                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//popsize
+                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//mutationprob
+                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//mutationretry
+                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//enum
+                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//OXCX
+                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//interationnonimprove
+                if (args.Length > 7)
+                {
+                    var genotypeArray = args[7].Split(',');
+                    INSTANCE.BestGenotype = new int[genotypeArray.Length];
+                    for (int i = 0; i < genotypeArray.Length; i++)
+                    {
+                        INSTANCE.BestGenotype[i] = Int32.Parse(genotypeArray[i]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error parsing parameters :" + ex.Message);
+            }
+        }
+    }
+    public struct Population
+    {
+        public Individual[] genotypes;
+        public Individual BestOne
+        {
+            get
+            {
+                return genotypes.OrderBySurvivalScore()[genotypes.Length - 1];
+            }
+        }
+        public Individual BestSecond;
+        public Population GetCopy()
+        {
+            Individual[] copiedGenotypes = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
+            for (int i = 0; i < copiedGenotypes.Length; i++)
+            {
+                copiedGenotypes[i] = new Individual() { genotype = genotypes[i].genotype };
+            }
+            return new Population { genotypes = this.genotypes };
+        }
+    }
+    public class Individual
+    {
+        public Coords[] citiesToVisit = GeneticEnvironment.INSTANCE.ParsedCitiesToVisit;
+        public int[] genotype;
+        public Coords[] Fenotype
+        {
+            get
+            {
+                Coords[] result = new Coords[genotype.Length];
+                for (int i = 0; i < genotype.Length; i++)
+                {
+                    result[i] = citiesToVisit[genotype[i]];
+                }
+                return result;
+            }
+        }
+        public double SurvivalScore
+        {
+            get
+            {
+                return -GeneticEnvironment.SurvivalFunction(Fenotype);
+            }
+        }
+        public override string ToString()
+        {
+            return $"Fenotype : [not writeable] with score : {SurvivalScore}";
+        }
+    }
+    public class StatsInfo
+    {
+        public Individual Individual { get; set; }
+        public int Population { get; set; }
+    }
+    public struct Coords
+    {
+        public double X, Y;
+    }
+    public enum SelectionMethods
+    {
+        Tournament,
+        Roulette,
+        RankedRoulette
+    }
+    public enum CrossoverMethods
+    {
+        PMX,
+        OX,
+        CX
+    }
+    public static class GeneticExtensions
+    {
+        public static Individual[] OrderBySurvivalScore(this Individual[] genotypes)
+        {
+            Array.Sort(genotypes, delegate (Individual x, Individual y) { return x.SurvivalScore.CompareTo(y.SurvivalScore); });
+            return genotypes;
+        }
+
+        public static Individual GetTournamentParent(this Population population)
+        {
+            int TOURNAMENTSIZE = 2;
+            Individual[] competitors = new Individual[TOURNAMENTSIZE];
+            for (int i = 0; i < TOURNAMENTSIZE; i++)
+            {
+                competitors = competitors.Add(population.genotypes[GeneticEnvironment.CUBE.Next(0, population.genotypes.Length)]);
+            }
+            return competitors.OrderBySurvivalScore()[competitors.Length - 1];
+        }
+
+        public static Individual GetRouletteParent(this Population population)
+        {
+            var sumArray = population.genotypes.Sum();
+            Individual parent = null;
+            var i = 0;
+            var sum = population.genotypes[i].SurvivalScore;
+            var rankedChosenValue = GeneticEnvironment.CUBE.Next(1, (int)sumArray);
+            while (parent == null)
+            {
+                if (rankedChosenValue <= sum)
+                {
+                    parent = population.genotypes[i];
+                }
+                i++;
+                sum += i;
+            }
+            if (parent == null)
+            {
+                parent = population.genotypes[population.genotypes.Length - 1];
+            }
+            return parent;
+        }
+
+        public static Individual GetRankedRouletteParent(this Population population)
+        {
+            population.genotypes.OrderBySurvivalScore();
+
+            var sumArray = ((population.genotypes.Length - 1) / 2) * population.genotypes.Length;
+            Individual parent = null;
+            var i = 0;
+            var sum = 0;
+            var rankedChosenValue = GeneticEnvironment.CUBE.Next(1, sumArray);
+            while (parent == null)
+            {
+                if (rankedChosenValue <= sum)
+                {
+                    parent = population.genotypes[i];
+                }
+                i++;
+                sum += i;
+            }
+            return parent;
+        }
+
+        public static Individual GetParent(this Population population, SelectionMethods method)
+        {
+            switch (method)
+            {
+                case SelectionMethods.Tournament:
+                    return population.GetTournamentParent();
+                case SelectionMethods.Roulette:
+                    return population.GetRouletteParent();
+                case SelectionMethods.RankedRoulette:
+                    return population.GetRankedRouletteParent();
+                default:
+                    return population.GetParent(GeneticEnvironment.INSTANCE.SelectionMethod);
+            }
+        }
+    }
+    public static class GenericExtensions
     {
         public static void Shuffle<T>(this T[] array)
         {
