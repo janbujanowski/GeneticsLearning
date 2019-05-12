@@ -36,8 +36,8 @@ namespace AlgorytmEwolucyjny
 
         public int[] BestGenotype { get; private set; }
 
-        public SelectionMethods defaultSelectionMethod = SelectionMethods.Roulette;
-        public CrossoverMethods crossoverMethod;
+        public SelectionMethods SelectionMethod = SelectionMethods.Roulette;
+        public CrossoverMethods CrossoverMethod = CrossoverMethods.OX;
         public int MUTATIONRETRIALS = 4;
 
         public Coords[] ParsedCitiesToVisit;
@@ -153,8 +153,8 @@ namespace AlgorytmEwolucyjny
                 INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//popsize
                 INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//mutationprob
                 INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//mutationretry
-                INSTANCE.defaultSelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//enum
-                INSTANCE.crossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//OXCX
+                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//enum
+                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//OXCX
                 INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//interationnonimprove
                 if (args.Length > 7)
                 {
@@ -176,38 +176,7 @@ namespace AlgorytmEwolucyjny
     {
         public double X, Y;
     }
-    public static class GenericHelpers
-    {
-        public static void Shuffle<T>(this T[] array)
-        {
-            int n = array.Length;
-            while (n > 1)
-            {
-                n--;
-                int k = GeneticEnvironment.CUBE.Next(n + 1);
-                T value = array[k];
-                array[k] = array[n];
-                array[n] = value;
-            }
-        }
-        public static double Sum(this Individual[] arrayOfStuff)
-        {
-            double sum = 0;
-            foreach (var item in arrayOfStuff)
-            {
-                sum += item.SurvivalScore;
-            }
-            return sum;
-        }
-        public static T[] Add<T>(this T[] array, T newItem)
-        {
-            var newLength = array.Length + 1;
-            var newArray = new T[newLength];
-            Array.Copy(array, newArray, array.Length);
-            newArray[array.Length] = newItem;
-            return newArray;
-        }
-    }
+
     public struct Population
     {
         public Individual[] genotypes;
@@ -303,7 +272,7 @@ namespace AlgorytmEwolucyjny
                 case SelectionMethods.RankedRoulette:
                     return population.GetRankedRouletteParent();
                 default:
-                    return population.GetParent(GeneticEnvironment.INSTANCE.defaultSelectionMethod);
+                    return population.GetParent(GeneticEnvironment.INSTANCE.SelectionMethod);
             }
         }
     }
@@ -324,428 +293,461 @@ namespace AlgorytmEwolucyjny
                 for (int i = 0; i < genotype.Length; i++)
                 {
                     result[i] = citiesToVisit[genotype[i]];
-            }
+                }
                 return result;
+            }
         }
-    }
-    public double SurvivalScore
-    {
-        get
+        public double SurvivalScore
         {
-            return -GeneticEnvironment.SurvivalFunction(Fenotype);
-        }
-    }
-    public override string ToString()
-    {
-        return $"Fenotype : [not writeable] with score : {SurvivalScore}";
-    }
-}
-
-public class Program
-{
-    static readonly int POPULATIONSIZE = GeneticEnvironment.INSTANCE.POPULATIONSIZE;
-    static readonly int POPULATIONCOUNTLIMIT = GeneticEnvironment.INSTANCE.POPULATIONCOUNTLIMIT;
-    static readonly double MUTATIONPROBABILITY = GeneticEnvironment.INSTANCE.MUTATIONPROBABILITY;
-    static readonly int NUMBEROFEVOLUTIONTRIALS = GeneticEnvironment.INSTANCE.NUMBEROFEVOLUTIONTRIALS;
-    static readonly int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = GeneticEnvironment.INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT;
-
-    static void Main(string[] args)
-    {
-        LogInfo("===================================SEPARATOR================================================");
-        LogInfo($"New instance, passed parameters {string.Join(",", args)}");
-
-        RunTests();
-        GeneticEnvironment.INSTANCE.ParseParameters(args);
-        GeneticEnvironment.INSTANCE.LoadCities("cities.tsp");
-
-
-        for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
-        {
-            StatsInfo[] heavensOne = new StatsInfo[1];
-            Individual[] newRandomPopulation = GetNewRandomPopulation();
-            Population pop = new Population()
+            get
             {
-                genotypes = newRandomPopulation
+                return -GeneticEnvironment.SurvivalFunction(Fenotype);
+            }
+        }
+        public override string ToString()
+        {
+            return $"Fenotype : [not writeable] with score : {SurvivalScore}";
+        }
+    }
+
+    public class Program
+    {
+        static readonly int POPULATIONSIZE = GeneticEnvironment.INSTANCE.POPULATIONSIZE;
+        static readonly int POPULATIONCOUNTLIMIT = GeneticEnvironment.INSTANCE.POPULATIONCOUNTLIMIT;
+        static readonly double MUTATIONPROBABILITY = GeneticEnvironment.INSTANCE.MUTATIONPROBABILITY;
+        static readonly int NUMBEROFEVOLUTIONTRIALS = GeneticEnvironment.INSTANCE.NUMBEROFEVOLUTIONTRIALS;
+        static readonly int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = GeneticEnvironment.INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT;
+
+        static void Main(string[] args)
+        {
+            LogInfo("===================================SEPARATOR================================================");
+            LogInfo($"New instance, passed parameters {string.Join(",", args)}");
+
+            RunTests();
+            GeneticEnvironment.INSTANCE.ParseParameters(args);
+            GeneticEnvironment.INSTANCE.LoadCities("cities.tsp");
+
+
+            for (int i = 0; i < NUMBEROFEVOLUTIONTRIALS; i++)
+            {
+                StatsInfo[] heavensOne = new StatsInfo[1];
+                Individual[] newRandomPopulation = GetNewRandomPopulation();
+                Population pop = new Population()
+                {
+                    genotypes = newRandomPopulation
+                };
+
+                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod,  GeneticEnvironment.INSTANCE.CrossoverMethod);
+
+                LogInfo("==============Heavens csv===================");
+                foreach (var line in heavensOne)
+                {
+                    LogInfo($"{line.Population},{line.Individual.SurvivalScore}");
+                }
+                LogInfo($"Ranked {i} Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
+            }
+            Console.ReadKey();
+        }
+
+        #region Metody testowe 
+        private static void RunTests()
+        {
+            Console.WriteLine("PMX");
+            TestPMX();
+            Console.WriteLine("OX");
+            TestOX();
+            Console.WriteLine("CX");
+            TestCX();
+            LogInfo("Test losowości");
+            for (int i = 0; i < 1000; i++)
+            {
+                LogInfo($"{GeneticEnvironment.CUBE.Next()},{GeneticEnvironment.CUBE.NextDouble()}");
+            }
+            //Test zlozonosci obliczeniowej
+            //Dictionary<int, long> timeTest = new Dictionary<int, long>();
+            //StringBuilder sb = new StringBuilder();
+            //sb.AppendLine("Dlugosc genotypu,Czas operacji z A do B i B do A");
+            //for (int i = 2; i < 1000; i++)
+            //{
+            //    var timer = System.Diagnostics.Stopwatch.StartNew();
+            //    var mum = new Individual()
+            //    {
+            //        genotype = GetRandomGenotype(i)
+            //    };
+            //    var dad = new Individual()
+            //    {
+            //        genotype = GetRandomGenotype(i)
+            //    };
+            //    var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
+            //    var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+            //    var lol = GetChildPMX(mum, dad, cut1, cut2);
+            //    var lol2 = GetChildPMX(dad, mum, cut1, cut2);
+            //    sb.AppendLine($"{i}, {timer.ElapsedTicks}");
+
+            //}
+
+            //File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
+        }
+        private static void TestPMX()
+        {
+            var mum = new Individual()
+            {
+                genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+            var dad = new Individual()
+            {
+                genotype = new int[9] { 4, 5, 2, 1, 8, 7, 6, 9, 3 }
             };
 
-            heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, SelectionMethods.RankedRoulette, CrossoverMethods.CX);
-            SaveHeavensToFile(heavensOne);
-
-            LogInfo($"Ranked {i} Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
+            var lol = GetChildPMX(mum, dad, 3, 7);
+            var lol2 = GetChildPMX(dad, mum, 3, 7);
+            foreach (var city in lol.genotype)
+            {
+                Console.Write(city + ",");
+            }
+            Console.WriteLine();
+            foreach (var city in lol2.genotype)
+            {
+                Console.Write(city + ",");
+            }
+            Console.WriteLine();
         }
-        Console.ReadKey();
-    }
-
-    #region Metody testowe 
-    private static void RunTests()
-    {
-        Console.WriteLine("PMX");
-        TestPMX();
-        Console.WriteLine("OX");
-        TestOX();
-        Console.WriteLine("CX");
-        TestCX();
-        LogInfo("Test losowości");
-        for (int i = 0; i < 1000; i++)
+        private static void TestOX()
         {
-            LogInfo($"{GeneticEnvironment.CUBE.Next()},{GeneticEnvironment.CUBE.NextDouble()}");
+            var mum = new Individual()
+            {
+                genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+            var dad = new Individual()
+            {
+                genotype = new int[9] { 4, 5, 2, 1, 8, 7, 6, 9, 3 }
+            };
+
+            var lol = GetChildOX(mum, dad, 3, 7);
+            var lol2 = GetChildOX(dad, mum, 3, 7);
+            foreach (var city in lol.genotype)
+            {
+                Console.Write(city + ",");
+            }
+            Console.WriteLine();
+            foreach (var city in lol2.genotype)
+            {
+                Console.Write(city + ",");
+            }
+            Console.WriteLine();
         }
-        //Test zlozonosci obliczeniowej
-        //Dictionary<int, long> timeTest = new Dictionary<int, long>();
-        //StringBuilder sb = new StringBuilder();
-        //sb.AppendLine("Dlugosc genotypu,Czas operacji z A do B i B do A");
-        //for (int i = 2; i < 1000; i++)
+        private static void TestCX()
+        {
+            var mum = new Individual()
+            {
+
+                genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+            var dad = new Individual()
+            {
+                genotype = new int[9] { 4, 1, 2, 8, 7, 6, 9, 3, 5 }
+            };
+
+            var lol = GetChildCX(mum, dad, 3, 7);
+            var lol2 = GetChildCX(dad, mum, 3, 7);
+            LogInfo(string.Join(",", lol.genotype));
+            LogInfo(string.Join(",", lol2.genotype));
+        }
+        #endregion
+        private static int[] GetRandomGenotype(int length)
+        {
+            int[] genotype = new int[length];
+            for (int i = 0; i < length; i++)
+            {
+                genotype[i] = i + 1;
+            }
+            genotype.Shuffle();
+            return genotype;
+        }
+        private static void SaveHeavensToFile(StatsInfo[] heavensOne)
+        {
+
+        }
+        //private static Dictionary<Individual, int> EvolvePopulationCriteriaMaxPopulationCount(Population pop, int pOPULATIONCOUNTLIMIT, SelectionMethods selectionMethod, CrossoverMethods crossover)
         //{
-        //    var timer = System.Diagnostics.Stopwatch.StartNew();
-        //    var mum = new Individual()
+        //    Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
+        //    var populationCount = 0;
+        //    while (populationCount < pOPULATIONCOUNTLIMIT)
         //    {
-        //        genotype = GetRandomGenotype(i)
-        //    };
-        //    var dad = new Individual()
-        //    {
-        //        genotype = GetRandomGenotype(i)
-        //    };
-        //    var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-        //    var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
-        //    var lol = GetChildPMX(mum, dad, cut1, cut2);
-        //    var lol2 = GetChildPMX(dad, mum, cut1, cut2);
-        //    sb.AppendLine($"{i}, {timer.ElapsedTicks}");
-
+        //        pop = GetNextGeneration(pop, selectionMethod, crossover);
+        //        if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
+        //        {
+        //            heavenPopulationDict.Add(pop.BestOne, populationCount);
+        //        }
+        //        populationCount++;
+        //    }
+        //    return heavenPopulationDict;
         //}
-
-        //File.WriteAllText("KrzyzowaniePMXCzasPracy.csv", sb.ToString());
-    }
-    private static void TestPMX()
-    {
-        var mum = new Individual()
+        //private static Dictionary<Individual, int> EvolvePopulationCriteriaUntilLackOfImprovment(Population pop, int maxIterationsWithoutImprovement, SelectionMethods selectionMethod, CrossoverMethods crossover)
+        //{
+        //    Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
+        //    var populationCount = 0;
+        //    int NoNimprovementCounter = 0;
+        //    while (NoNimprovementCounter <= maxIterationsWithoutImprovement)
+        //    {
+        //        pop = GetNextGeneration(pop, selectionMethod, crossover);
+        //        if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
+        //        {
+        //            heavenPopulationDict.Add(pop.BestOne, populationCount);
+        //            LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
+        //            NoNimprovementCounter = 0;
+        //        }
+        //        else
+        //        {
+        //            NoNimprovementCounter++;
+        //        }
+        //        populationCount++;
+        //    }
+        //    return heavenPopulationDict;
+        //}
+        private static StatsInfo[] EvolvePopulationCriteriaUntilDateStop(Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
         {
-            genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-        };
-        var dad = new Individual()
-        {
-            genotype = new int[9] { 4, 5, 2, 1, 8, 7, 6, 9, 3 }
-        };
-
-        var lol = GetChildPMX(mum, dad, 3, 7);
-        var lol2 = GetChildPMX(dad, mum, 3, 7);
-        foreach (var city in lol.genotype)
-        {
-            Console.Write(city + ",");
-        }
-        Console.WriteLine();
-        foreach (var city in lol2.genotype)
-        {
-            Console.Write(city + ",");
-        }
-        Console.WriteLine();
-    }
-    private static void TestOX()
-    {
-        var mum = new Individual()
-        {
-            genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-        };
-        var dad = new Individual()
-        {
-            genotype = new int[9] { 4, 5, 2, 1, 8, 7, 6, 9, 3 }
-        };
-
-        var lol = GetChildOX(mum, dad, 3, 7);
-        var lol2 = GetChildOX(dad, mum, 3, 7);
-        foreach (var city in lol.genotype)
-        {
-            Console.Write(city + ",");
-        }
-        Console.WriteLine();
-        foreach (var city in lol2.genotype)
-        {
-            Console.Write(city + ",");
-        }
-        Console.WriteLine();
-    }
-    private static void TestCX()
-    {
-        var mum = new Individual()
-        {
-
-            genotype = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-        };
-        var dad = new Individual()
-        {
-            genotype = new int[9] { 4, 1, 2, 8, 7, 6, 9, 3, 5 }
-        };
-
-        var lol = GetChildCX(mum, dad, 3, 7);
-        var lol2 = GetChildCX(dad, mum, 3, 7);
-        LogInfo(string.Join(",", lol.genotype));
-        LogInfo(string.Join(",", lol2.genotype));
-    }
-    #endregion
-    private static int[] GetRandomGenotype(int length)
-    {
-        int[] genotype = new int[length];
-        for (int i = 0; i < length; i++)
-        {
-            genotype[i] = i + 1;
-        }
-        genotype.Shuffle();
-        return genotype;
-    }
-    private static void SaveHeavensToFile(StatsInfo[] heavensOne)
-    {
-        LogInfo("==============Heavens csv===================");
-        foreach (var line in heavensOne)
-        {
-            LogInfo($"{line.Population},{line.Individual.SurvivalScore}");
-        }
-    }
-    //private static Dictionary<Individual, int> EvolvePopulationCriteriaMaxPopulationCount(Population pop, int pOPULATIONCOUNTLIMIT, SelectionMethods selectionMethod, CrossoverMethods crossover)
-    //{
-    //    Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
-    //    var populationCount = 0;
-    //    while (populationCount < pOPULATIONCOUNTLIMIT)
-    //    {
-    //        pop = GetNextGeneration(pop, selectionMethod, crossover);
-    //        if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
-    //        {
-    //            heavenPopulationDict.Add(pop.BestOne, populationCount);
-    //        }
-    //        populationCount++;
-    //    }
-    //    return heavenPopulationDict;
-    //}
-    //private static Dictionary<Individual, int> EvolvePopulationCriteriaUntilLackOfImprovment(Population pop, int maxIterationsWithoutImprovement, SelectionMethods selectionMethod, CrossoverMethods crossover)
-    //{
-    //    Dictionary<Individual, int> heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
-    //    var populationCount = 0;
-    //    int NoNimprovementCounter = 0;
-    //    while (NoNimprovementCounter <= maxIterationsWithoutImprovement)
-    //    {
-    //        pop = GetNextGeneration(pop, selectionMethod, crossover);
-    //        if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
-    //        {
-    //            heavenPopulationDict.Add(pop.BestOne, populationCount);
-    //            LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
-    //            NoNimprovementCounter = 0;
-    //        }
-    //        else
-    //        {
-    //            NoNimprovementCounter++;
-    //        }
-    //        populationCount++;
-    //    }
-    //    return heavenPopulationDict;
-    //}
-    private static StatsInfo[] EvolvePopulationCriteriaUntilDateStop(Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
-    {
-        StatsInfo[] heavenPopulationDict;
-        if (GeneticEnvironment.INSTANCE.BestGenotype != null)
-        {
-            heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, Population = 0 } };
-        }
-        else
-        {
-            heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0 } };
-        }
-        var populationCount = 0;
-        int NoNimprovementCounter = 0;
-        while (DateTime.Now <= dateStop)
-        {
-            pop = GetNextGeneration(pop, selectionMethod, crossover);
-            if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore < pop.BestOne.SurvivalScore)
+            StatsInfo[] heavenPopulationDict;
+            if (GeneticEnvironment.INSTANCE.BestGenotype != null)
             {
-                heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount });
-                LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
-                NoNimprovementCounter = 0;
+                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, Population = 0 } };
+            }
+            else
+            {
+                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0 } };
+            }
+            var populationCount = 0;
+            int NoNimprovementCounter = 0;
+            while (DateTime.Now <= dateStop)
+            {
+                pop = GetNextGeneration(pop, selectionMethod, crossover);
+                if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore < pop.BestOne.SurvivalScore)
+                {
+                    heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount });
+                    LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
+                    NoNimprovementCounter = 0;
+                }
+
+                populationCount++;
+            }
+            LogInfo("Stopping evolution because of reaching dateStop :" + dateStop.ToString());
+            return heavenPopulationDict;
+        }
+        private static Individual[] GetNewRandomPopulation()
+        {
+            Individual[] population = new Individual[POPULATIONSIZE];
+
+            for (int i = 0; i < POPULATIONSIZE; i++)
+            {
+                population[i] = new Individual()
+                {
+                    genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute
+                };
+            }
+            return population;
+        }
+        private static Population GetNextGeneration(Population population, SelectionMethods method, CrossoverMethods crossover)
+        {
+            Individual mum, dad;
+            mum = population.GetParent(method);
+            dad = population.GetParent(method);
+            var newGenotypes = new Individual[POPULATIONSIZE];
+            for (int i = 0; i < POPULATIONSIZE; i++)
+            {
+                var child = GetRandomChild(mum, dad, crossover);
+                for (int j = 0; j < GeneticEnvironment.INSTANCE.MUTATIONRETRIALS; j++)//without x >4 times mutation often gets stuck in local maximums
+                {
+                    if (GeneticEnvironment.CUBE.NextDouble() < MUTATIONPROBABILITY)
+                    {
+                        child = Mutate(child.genotype);
+                    }
+                }
+                newGenotypes[i] = child;
             }
 
-            populationCount++;
-        }
-        LogInfo("Stopping evolution because of reaching dateStop :" + dateStop.ToString());
-        return heavenPopulationDict;
-    }
-    private static Individual[] GetNewRandomPopulation()
-    {
-        Individual[] population = new Individual[POPULATIONSIZE];
+            population.genotypes = newGenotypes;
 
-        for (int i = 0; i < POPULATIONSIZE; i++)
-        {
-            population[i] = new Individual()
-            {
-                genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute
-            };
+            return population;
         }
-        return population;
-    }
-    private static Population GetNextGeneration(Population population, SelectionMethods method, CrossoverMethods crossover)
-    {
-        Individual mum, dad;
-        mum = population.GetParent(method);
-        dad = population.GetParent(method);
-        var newGenotypes = new Individual[POPULATIONSIZE];
-        for (int i = 0; i < POPULATIONSIZE; i++)
+        static Individual GetRandomChild(Individual mum, Individual dad, CrossoverMethods crossover)
         {
-            var child = GetRandomChild(mum, dad, crossover);
-            for (int j = 0; j < GeneticEnvironment.INSTANCE.MUTATIONRETRIALS; j++)//without x >4 times mutation often gets stuck in local maximums
+            Individual child = new Individual();
+            switch (crossover)
             {
-                if (GeneticEnvironment.CUBE.NextDouble() < MUTATIONPROBABILITY)
+                case CrossoverMethods.PMX:
+                    var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
+                    var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+                    child = GetChildPMX(mum, dad, cut1, cut2);
+                    break;
+                case CrossoverMethods.OX:
+                    cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
+                    cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+                    child = GetChildOX(mum, dad, cut1, cut2);
+                    break;
+                case CrossoverMethods.CX:
+                    cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
+                    cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
+                    child = GetChildCX(mum, dad, cut1, cut2);
+                    break;
+                default:
+                    var separationPos = GeneticEnvironment.CUBE.Next(1, mum.genotype.Length);
+                    child.genotype = new int[mum.genotype.Length];
+                    for (int i = 0; i < separationPos; i++)
+                    {
+                        child.genotype[i] = mum.genotype[i];
+                    }
+                    for (int i = separationPos; i < mum.genotype.Length; i++)
+                    {
+                        child.genotype[i] = dad.genotype[i];
+                    }
+                    break;
+            }
+
+            return new Individual() { genotype = child.genotype };
+        }
+        private static Individual GetChildCX(Individual mum, Individual dad, int cut1, int cut2)
+        {
+            int[] newGenotype = new int[mum.genotype.Length];
+            for (int i = 0; i < newGenotype.Length; i++)
+            {
+                newGenotype[i] = -1;
+            }
+            var mumIterator = 0;
+            var dadIterator = 0;
+            var newIterator = 0;
+            var cycle = false;
+            do
+            {
+                newGenotype[newIterator] = dad.genotype[dadIterator];
+                dadIterator = Array.IndexOf(dad.genotype, mum.genotype[dadIterator]);
+                if (newGenotype[dadIterator] != -1)
                 {
-                    child = Mutate(child.genotype);
+                    cycle = true;
+                }
+                newIterator = dadIterator;
+            } while (!cycle);
+
+            for (int i = 0; i < newGenotype.Length; i++)
+            {
+                if (newGenotype[i] == -1)
+                {
+                    newGenotype[i] = mum.genotype[i];
                 }
             }
-            newGenotypes[i] = child;
+            return new Individual() { genotype = newGenotype };
         }
-
-        population.genotypes = newGenotypes;
-
-        return population;
-    }
-    static Individual GetRandomChild(Individual mum, Individual dad, CrossoverMethods crossover)
-    {
-        Individual child = new Individual();
-        switch (crossover)
+        private static Individual GetChildOX(Individual mum, Individual dad, int cut1, int cut2)
         {
-            case CrossoverMethods.PMX:
-                var cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                var cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
-                child = GetChildPMX(mum, dad, cut1, cut2);
-                break;
-            case CrossoverMethods.OX:
-                cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
-                child = GetChildOX(mum, dad, cut1, cut2);
-                break;
-            case CrossoverMethods.CX:
-                cut1 = GeneticEnvironment.CUBE.Next(0, mum.genotype.Length / 2);
-                cut2 = GeneticEnvironment.CUBE.Next(cut1 + 1, mum.genotype.Length);
-                child = GetChildCX(mum, dad, cut1, cut2);
-                break;
-            default:
-                var separationPos = GeneticEnvironment.CUBE.Next(1, mum.genotype.Length);
-                child.genotype = new int[mum.genotype.Length];
-                for (int i = 0; i < separationPos; i++)
-                {
-                    child.genotype[i] = mum.genotype[i];
-                }
-                for (int i = separationPos; i < mum.genotype.Length; i++)
-                {
-                    child.genotype[i] = dad.genotype[i];
-                }
-                break;
-        }
-
-        return new Individual() { genotype = child.genotype };
-    }
-    private static Individual GetChildCX(Individual mum, Individual dad, int cut1, int cut2)
-    {
-        int[] newGenotype = new int[mum.genotype.Length];
-        for (int i = 0; i < newGenotype.Length; i++)
-        {
-            newGenotype[i] = -1;
-        }
-        var mumIterator = 0;
-        var dadIterator = 0;
-        var newIterator = 0;
-        var cycle = false;
-        do
-        {
-            newGenotype[newIterator] = dad.genotype[dadIterator];
-            dadIterator = Array.IndexOf(dad.genotype, mum.genotype[dadIterator]);
-            if (newGenotype[dadIterator] != -1)
+            int[] newGenotype = new int[mum.genotype.Length];
+            for (int i = 0; i < newGenotype.Length; i++)
             {
-                cycle = true;
+                newGenotype[i] = -1;
             }
-            newIterator = dadIterator;
-        } while (!cycle);
-
-        for (int i = 0; i < newGenotype.Length; i++)
-        {
-            if (newGenotype[i] == -1)
+            for (int i = cut1; i < cut2; i++)
             {
                 newGenotype[i] = mum.genotype[i];
             }
-        }
-        return new Individual() { genotype = newGenotype };
-    }
-    private static Individual GetChildOX(Individual mum, Individual dad, int cut1, int cut2)
-    {
-        int[] newGenotype = new int[mum.genotype.Length];
-        for (int i = 0; i < newGenotype.Length; i++)
-        {
-            newGenotype[i] = -1;
-        }
-        for (int i = cut1; i < cut2; i++)
-        {
-            newGenotype[i] = mum.genotype[i];
-        }
-        var newIterator = cut2;
-        var dadIterator = Array.IndexOf(dad.genotype, mum.genotype[cut2 - 1]);
-        do
-        {
-            var valueToCheck = dad.genotype[dadIterator % dad.genotype.Length];
-            if (Array.IndexOf(newGenotype, valueToCheck) == -1)
+            var newIterator = cut2;
+            var dadIterator = Array.IndexOf(dad.genotype, mum.genotype[cut2 - 1]);
+            do
             {
-                newGenotype[newIterator % newGenotype.Length] = valueToCheck;
-                newIterator++;
-            }
-            dadIterator++;
+                var valueToCheck = dad.genotype[dadIterator % dad.genotype.Length];
+                if (Array.IndexOf(newGenotype, valueToCheck) == -1)
+                {
+                    newGenotype[newIterator % newGenotype.Length] = valueToCheck;
+                    newIterator++;
+                }
+                dadIterator++;
 
-        } while (Array.IndexOf(newGenotype, -1) != -1);
+            } while (Array.IndexOf(newGenotype, -1) != -1);
 
-        return new Individual() { genotype = newGenotype };
-    }
-    private static Individual GetChildPMX(Individual mum, Individual dad, int cut1, int cut2)
-    {
-        int[] newGenotype = new int[mum.genotype.Length];
-        for (int i = cut1; i < cut2; i++)
-        {
-            newGenotype[i] = mum.genotype[i];
+            return new Individual() { genotype = newGenotype };
         }
-        for (int i = 0; i < cut1; i++)
+        private static Individual GetChildPMX(Individual mum, Individual dad, int cut1, int cut2)
         {
-            var contains = Array.Find(dad.genotype, x => x == dad.genotype[i]);
-            if (contains == -1)
+            int[] newGenotype = new int[mum.genotype.Length];
+            for (int i = cut1; i < cut2; i++)
             {
-                newGenotype[i] = dad.genotype[i];
+                newGenotype[i] = mum.genotype[i];
             }
-            else
+            for (int i = 0; i < cut1; i++)
             {
-                var newIndexInDad = Array.IndexOf(mum.genotype, dad.genotype[i]);
-                newGenotype[i] = dad.genotype[newIndexInDad];
+                var contains = Array.Find(dad.genotype, x => x == dad.genotype[i]);
+                if (contains == -1)
+                {
+                    newGenotype[i] = dad.genotype[i];
+                }
+                else
+                {
+                    var newIndexInDad = Array.IndexOf(mum.genotype, dad.genotype[i]);
+                    newGenotype[i] = dad.genotype[newIndexInDad];
+                }
             }
+            for (int i = cut2; i < mum.genotype.Length; i++)
+            {
+                var contains = Array.Find(dad.genotype, x => x == dad.genotype[i]);
+                if (contains == -1)
+                {
+                    newGenotype[i] = dad.genotype[i];
+                }
+                else
+                {
+                    var newIndexInDad = Array.IndexOf(mum.genotype, dad.genotype[i]);
+                    newGenotype[i] = dad.genotype[newIndexInDad];
+                }
+            }
+            return new Individual() { genotype = newGenotype };
         }
-        for (int i = cut2; i < mum.genotype.Length; i++)
-        {
-            var contains = Array.Find(dad.genotype, x => x == dad.genotype[i]);
-            if (contains == -1)
-            {
-                newGenotype[i] = dad.genotype[i];
-            }
-            else
-            {
-                var newIndexInDad = Array.IndexOf(mum.genotype, dad.genotype[i]);
-                newGenotype[i] = dad.genotype[newIndexInDad];
-            }
-        }
-        return new Individual() { genotype = newGenotype };
-    }
 
-    static Individual Mutate(int[] a)
-    {
-        int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-        int randomPosition2 = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-        int temp = a[randomPosition];
-        a[randomPosition] = a[randomPosition2];
-        a[randomPosition2] = temp;
+        static Individual Mutate(int[] a)
+        {
+            int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
+            int randomPosition2 = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
+            int temp = a[randomPosition];
+            a[randomPosition] = a[randomPosition2];
+            a[randomPosition2] = temp;
 
-        return new Individual() { genotype = a };
+            return new Individual() { genotype = a };
+        }
+        static void LogInfo(string message)
+        {
+            Console.WriteLine($"[{DateTime.Now.ToString()}]: {message}");
+        }
     }
-    static void LogInfo(string message)
+    public static class GenericHelpers
     {
-        Console.WriteLine($"[{DateTime.Now.ToString()}]: {message}");
+        public static void Shuffle<T>(this T[] array)
+        {
+            int n = array.Length;
+            while (n > 1)
+            {
+                n--;
+                int k = GeneticEnvironment.CUBE.Next(n + 1);
+                T value = array[k];
+                array[k] = array[n];
+                array[n] = value;
+            }
+        }
+        public static double Sum(this Individual[] arrayOfStuff)
+        {
+            double sum = 0;
+            foreach (var item in arrayOfStuff)
+            {
+                sum += item.SurvivalScore;
+            }
+            return sum;
+        }
+        public static T[] Add<T>(this T[] array, T newItem)
+        {
+            var newLength = array.Length + 1;
+            var newArray = new T[newLength];
+            Array.Copy(array, newArray, array.Length);
+            newArray[array.Length] = newItem;
+            return newArray;
+        }
     }
 }
-}
+
 namespace srodowisko
 {
     public class ProblemKlienta
