@@ -17,7 +17,7 @@ namespace AlgorytmEwolucyjny
             for (int i = 0; i < GeneticEnvironment.INSTANCE.NUMBEROFEVOLUTIONTRIALS; i++)
             {
                 StatsInfo[] heavensOne = new StatsInfo[1];
-                Individual[] newRandomPopulation = GetNewRandomPopulation();
+                Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
                 Population pop = new Population()
                 {
                     genotypes = newRandomPopulation
@@ -119,7 +119,7 @@ namespace AlgorytmEwolucyjny
                 if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * GeneticEnvironment.INSTANCE.ModyfikatorWyniku < GeneticEnvironment.INSTANCE.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
                 {
                     heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount });
-                    LogInfo($"Nowy osobnik {pop.BestOne.ToString()}");
+                    LogInfo($"Populacja {populationCount} Nowy osobnik {pop.BestOne.ToString()}");
                 }
 
                 populationCount++;
@@ -127,7 +127,7 @@ namespace AlgorytmEwolucyjny
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
             return heavenPopulationDict;
         }
-        private static Individual[] GetNewRandomPopulation()
+        private static Individual[] GetNewRandomPopulation(int nrProblemu)
         {
             Individual[] population = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
 
@@ -135,7 +135,7 @@ namespace AlgorytmEwolucyjny
             {
                 population[i] = new Individual()
                 {
-                    genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute
+                    genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute(nrProblemu)
                 };
             }
             return population;
@@ -333,18 +333,17 @@ namespace AlgorytmEwolucyjny
         public int MUTATIONRETRIALS = 4;
         ProblemKlienta ProblemKlienta;
         public Coords[] ParsedCitiesToVisit;
-        public int[] GetRandomCitiesRoute
+        public int[] GetRandomCitiesRoute(int nrProblemu)
         {
-            get
+
+            int[] genotype = new int[ProblemKlienta.Rozmiar(nrProblemu)];
+            for (int i = 0; i < ProblemKlienta.Rozmiar(nrProblemu); i++)
             {
-                int[] genotype = new int[ProblemKlienta.Rozmiar()];
-                for (int i = 0; i < ProblemKlienta.Rozmiar(); i++)
-                {
-                    genotype[i] = i;
-                }
-                genotype.Shuffle();
-                return genotype;
+                genotype[i] = i;
             }
+            genotype.Shuffle();
+            return genotype;
+
         }
         private static GeneticEnvironment _config;
         public static GeneticEnvironment INSTANCE
@@ -376,6 +375,7 @@ namespace AlgorytmEwolucyjny
         }
 
         public DateTime StopDate { get; private set; }
+        public int NrProblemu { get; internal set; }
 
         public static double SurvivalFunction(int[] sciezka)
         {
@@ -390,17 +390,24 @@ namespace AlgorytmEwolucyjny
         {
             try
             {
-                INSTANCE.StopDate = DateTime.Parse(args[0]);
-                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//popsize
-                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//mutationprob
-                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//mutationretry
-                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//enum
-                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//OXCX
-                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//interationnonimprove
+                INSTANCE.StopDate = DateTime.Parse(args[0]);//Data stopu
+                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//Rozmiar Populacji
+                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//Prawdopodobienstwo mutacji
+                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//Ilosc prob mutacji
+                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//Rodzaj selekcji
+                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//Rodzaj krzyzowania
+                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//Ilosc iteracji bez poprawy
                 INSTANCE.ModyfikatorWyniku = double.Parse(args[7]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
-                if (args.Length > 8)
+                INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
+
+                var dataStopuOdMinut = DateTime.Now.AddMinutes(double.Parse(args[9]));
+                if (dataStopuOdMinut < StopDate)
                 {
-                    var genotypeArray = args[8].Split(',');
+                    INSTANCE.StopDate = dataStopuOdMinut;
+                }
+                if (args.Length > 10)
+                {
+                    var genotypeArray = args[10].Split(',');
                     INSTANCE.BestGenotype = new int[genotypeArray.Length];
                     for (int i = 0; i < genotypeArray.Length; i++)
                     {
@@ -451,7 +458,7 @@ namespace AlgorytmEwolucyjny
                 int[] testArray = new int[1] { -1 };
                 for (int i = 0; i < genotype.Length; i++)
                 {
-                    if (!Array.Exists(testArray, x=> x == genotype[i]))
+                    if (!Array.Exists(testArray, x => x == genotype[i]))
                     {
                         testArray = testArray.Add(genotype[i]);
                     }
