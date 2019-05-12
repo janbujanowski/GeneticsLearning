@@ -35,6 +35,9 @@ namespace AlgorytmEwolucyjny
         public double MUTATIONPROBABILITY = 0.15;
         public int NUMBEROFEVOLUTIONTRIALS = 1;
         public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 5000;
+
+        public int[] BestGenotype { get; private set; }
+
         public SelectionMethods defaultSelectionMethod = SelectionMethods.Roulette;
         public int MUTATIONRETRIALS = 4;
 
@@ -49,7 +52,7 @@ namespace AlgorytmEwolucyjny
         }
 
         private List<int> genotypeExample;
-      
+
         public void LoadCities(string filePath)
         {
             this.ParsedCitiesToVisit = new List<Coords>();
@@ -126,6 +129,9 @@ namespace AlgorytmEwolucyjny
                 return _CUBE;
             }
         }
+
+        public DateTime StopDate { get; private set; }
+
         public static double SurvivalFunction(List<Coords> coordsToVisit)
         {
             double distance = 0;
@@ -144,7 +150,29 @@ namespace AlgorytmEwolucyjny
 
         internal void ParseParameters(string[] args)
         {
-            //throw new NotImplementedException();
+            try
+            {
+                INSTANCE.StopDate = DateTime.Parse(args[0]);
+                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//popsize
+                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//mutationprob
+                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//mutationretry
+                INSTANCE.defaultSelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//enum
+                //OXCX
+                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//interationnonimprove
+                if (args.Length > 7)
+                {
+                    var genotypeArray = args[7].Split(',');
+                    INSTANCE.BestGenotype = new int[genotypeArray.Length];
+                    for (int i = 0; i < genotypeArray.Length; i++)
+                    {
+                        INSTANCE.BestGenotype[i] = Int32.Parse(genotypeArray[i]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error parsing parameters :" + ex.Message);
+            }
         }
     }
     public struct Coords
@@ -321,7 +349,7 @@ namespace AlgorytmEwolucyjny
         {
             LogInfo("===================================SEPARATOR================================================");
             LogInfo($"New instance, passed parameters {string.Join(",", args)}");
-            
+
             RunTests();
             GeneticEnvironment.INSTANCE.ParseParameters(args);
             GeneticEnvironment.INSTANCE.LoadCities("cities.tsp");
@@ -338,13 +366,14 @@ namespace AlgorytmEwolucyjny
                 {
                     genotypes = newRandomPopulation
                 };
-
-                heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
+                
+                heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
+                //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.RankedRoulette, CrossoverMethods.OX);
                 SaveHeavensToFile(heavensOne);
                 iterationMaxPopulationDictRanked.Add(i, heavensOne.Last().Value);
-                Console.WriteLine($"Ranked {i} Best:{heavensOne.Last().Key} after { heavensOne.Last().Value} population");
+                Console.WriteLine($"Ranked {i} Best:{ string.Join(",", heavensOne.Last().Key.genotype)} after { heavensOne.Last().Value} population");
 
-               
+
                 //heavensOne = EvolvePopulationCriteriaUntilLackOfImprovment(pop.GetCopy(), ITERATIONSWITHOUTBETTERSCOREMAXCOUNT, SelectionMethods.Roulette);
                 //SaveHeavensToFile($"C:\\REPOS\\Ewolucyjne\\Roulette{i}.csv", heavensOne);
                 //iterationMaxPopulationDictRoulette.Add(i, heavensOne.Last().Value);
@@ -362,7 +391,6 @@ namespace AlgorytmEwolucyjny
             //Console.WriteLine($"The worst iteration Ranked : {iterationMaxPopulationDictRanked.OrderByDescending(x => x.Value).First().Key} ");
             //Console.WriteLine($"The worst iteration Roulette : {iterationMaxPopulationDictRoulette.OrderByDescending(x => x.Value).First().Key} ");
             //Console.WriteLine($"The worst iteration Tournamet : {iterationMaxPopulationDictTournament.OrderByDescending(x => x.Value).First().Key} ");
-            Console.ReadKey();
         }
 
         #region Metody testowe 
@@ -524,6 +552,34 @@ namespace AlgorytmEwolucyjny
                 }
                 populationCount++;
             }
+            return heavenPopulationDict;
+        }
+        private static Dictionary<Individual, int> EvolvePopulationCriteriaUntilDateStop(Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
+        {
+            Dictionary<Individual, int> heavenPopulationDict;
+            if (GeneticEnvironment.INSTANCE.BestGenotype != null)
+            {
+                heavenPopulationDict = new Dictionary<Individual, int>() { { new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, 0 } };
+            }
+            else
+            {
+                heavenPopulationDict = new Dictionary<Individual, int>() { { pop.BestOne, 0 } };
+            }
+            var populationCount = 0;
+            int NoNimprovementCounter = 0;
+            while (DateTime.Now <= dateStop)
+            {
+                pop = GetNextGeneration(pop, selectionMethod, crossover);
+                if (heavenPopulationDict.ElementAt(heavenPopulationDict.Count - 1).Key.SurvivalScore < pop.BestOne.SurvivalScore)
+                {
+                    heavenPopulationDict.Add(pop.BestOne, populationCount);
+                    LogInfo($"Found new solution with score {pop.BestOne.SurvivalScore}");
+                    NoNimprovementCounter = 0;
+                }
+
+                populationCount++;
+            }
+            LogInfo("Stopping evolution because of reaching dateStop :" + dateStop.ToString());
             return heavenPopulationDict;
         }
         private static Individual[] GetNewRandomPopulation()
