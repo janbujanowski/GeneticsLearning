@@ -109,6 +109,12 @@ namespace ParserLoga
                 sb.AppendLine();
             }
             File.WriteAllText(Path.Combine(workingDir, $"{filename}.csv"), sb.ToString(), Encoding.UTF8);
+
+            for (int m = 0; m < j; m++)
+            {
+                File.Delete(Path.Combine(workingDir, $"{filename}_{m}.csv"));
+                File.Delete(Path.Combine(workingDir, $"{filename}_{m}.txt"));
+            }
         }
     }
 }
