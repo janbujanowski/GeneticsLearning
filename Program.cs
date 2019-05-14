@@ -14,7 +14,7 @@ namespace AlgorytmEwolucyjny
             GeneticEnvironment.INSTANCE.ParseParameters(args);
             StatsInfo[] heavensOne = new StatsInfo[1];
             Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
-            LogInfo($"Nr Problemu {GeneticEnvironment.INSTANCE.NrProblemu} Rozmiar tablicy : {newRandomPopulation[0].genotype.Length} " );
+            LogInfo($"Nr Problemu {GeneticEnvironment.INSTANCE.NrProblemu} Rozmiar tablicy : {newRandomPopulation[0].genotype.Length} ");
             Population pop = new Population()
             {
                 genotypes = newRandomPopulation
@@ -28,8 +28,6 @@ namespace AlgorytmEwolucyjny
                 LogInfo($"{line.Population},{line.Individual.SurvivalScore}");
             }
             LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
-
-            Console.ReadKey();
         }
         #region Metody testowe 
         private static void RunTests()
@@ -383,23 +381,52 @@ namespace AlgorytmEwolucyjny
         {
             try
             {
+                Console.Write($"Parsowanie daty stopu : {args[0]}");
                 INSTANCE.StopDate = DateTime.Parse(args[0]);//Data stopu
-                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//Rozmiar Populacji
-                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//Prawdopodobienstwo mutacji
-                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//Ilosc prob mutacji
-                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//Rodzaj selekcji
-                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//Rodzaj krzyzowania
-                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//Ilosc iteracji bez poprawy
-                INSTANCE.ModyfikatorWyniku = double.Parse(args[7]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
-                INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
+                Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
 
+                Console.Write($"Parsowanie rozmiaru populacji (int) : {args[1]}");
+                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//Rozmiar Populacji
+                Console.WriteLine($" Sparsowano : {INSTANCE.POPULATIONSIZE.ToString()}");
+
+                Console.Write($"Parsowanie prawdopodobieństwo mutacji (double) : {args[2]}");
+                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//Prawdopodobienstwo mutacji
+                Console.WriteLine($" Sparsowano : {INSTANCE.MUTATIONPROBABILITY.ToString()}");
+
+                Console.Write($"Parsowanie ilosc prob mutacji (int) : {args[3]}");
+                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//Ilosc prob mutacji
+                Console.WriteLine($" Sparsowano : {INSTANCE.MUTATIONRETRIALS.ToString()}");
+
+                Console.Write($"Parsowanie selekcji (enum) : {args[4]}");
+                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//Rodzaj selekcji
+                Console.WriteLine($" Sparsowano : {INSTANCE.SelectionMethod.ToString()}");
+
+                Console.Write($"Parsowanie krzyzowania (enum) : {args[5]}");
+                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//Rodzaj krzyzowania
+                Console.WriteLine($" Sparsowano : {INSTANCE.CrossoverMethod.ToString()}");
+
+                Console.Write($"Parsowanie iteracji (int) : {args[6]}");
+                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//Ilosc iteracji bez poprawy
+                Console.WriteLine($" Sparsowano : {INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT.ToString()}");
+
+                Console.Write($"Parsowanie modyfikatora (double) : {args[7]}");
+                INSTANCE.ModyfikatorWyniku = double.Parse(args[7]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
+                Console.WriteLine($" Sparsowano : {INSTANCE.ModyfikatorWyniku.ToString()}");
+
+                Console.Write($"Parsowanie numeru zbioru (int) : {args[8]}");
+                INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
+                Console.WriteLine($" Sparsowano : {INSTANCE.NrProblemu.ToString()}");
+
+                Console.Write($"Parsowanie czasu do stopu (double) : {args[9]}");
                 var dataStopuOdMinut = DateTime.Now.AddMinutes(double.Parse(args[9]));
                 if (dataStopuOdMinut < StopDate)
                 {
                     INSTANCE.StopDate = dataStopuOdMinut;
+                    Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
                 }
                 if (args.Length > 10)
                 {
+                    Console.Write($"Parsowanie osobnika : {args[10]}");
                     var genotypeArray = args[10].Split(',');
                     INSTANCE.BestGenotype = new int[genotypeArray.Length];
                     for (int i = 0; i < genotypeArray.Length; i++)
@@ -531,11 +558,11 @@ namespace AlgorytmEwolucyjny
             double maxSumRange = 0;
             for (int j = 0; j < population.genotypes.Length; j++)
             {
-                maxSumRange += population.genotypes[j].SurvivalScore;
+                maxSumRange += theLastIndividual.SurvivalScore / population.genotypes[j].SurvivalScore;
             }
             Individual parent = null;
             var i = 0;
-            var sum = population.genotypes[i].SurvivalScore;
+            var sum = theLastIndividual.SurvivalScore / population.genotypes[i].SurvivalScore;
             var randomScoreValue = GeneticEnvironment.CUBE.NextDouble() * maxSumRange;
             while (parent == null)
             {
@@ -545,7 +572,7 @@ namespace AlgorytmEwolucyjny
                     break;
                 }
                 i++;
-                sum += population.genotypes[i].SurvivalScore;
+                sum += theLastIndividual.SurvivalScore / population.genotypes[i].SurvivalScore;
             }
             if (parent == null)
             {
