@@ -4,3 +4,5 @@
 *.pdb
 obj/Debug/*.cs
 obj/Release/*.cs
+ParserLoga/obj/
+ParserLoga/bin/
