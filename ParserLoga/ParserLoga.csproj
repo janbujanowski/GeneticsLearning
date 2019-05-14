@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlgorytmEwolucyjny.csproj">
+      <Project>{8258B4D8-346E-4AB4-BB48-87DC54832459}</Project>
+      <Name>AlgorytmEwolucyjny</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

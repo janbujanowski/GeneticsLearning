@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgorytmEwolucyjny;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,9 +16,21 @@ namespace ParserLoga
             //var workingDir = "C:\\Users\\janbu\\OneDrive\\Studia\\Rok V sem III\\EksperymentGenetyczny\\Logi1";
             var workingDir = "C:\\Logi1";
             var lines = File.ReadAllLines(Path.Combine(workingDir, filename + ".txt"));
-
+            lines = lines.Add("SEPARATOR");
             StringBuilder sb = new StringBuilder();
             StringBuilder sbCsv = new StringBuilder();
+            StringBuilder sbCsvNajlepsi = new StringBuilder();
+            StringBuilder sbCsvPorownanie = new StringBuilder();
+
+            string popsize = "Rozmiar";
+            string pmutacji = "P. mutacji";
+            string lprob = "Ilosc prób";
+            string krzyzowanie = "Krzyżowanie ";
+            string zbior = "zbior";
+            string czas = "czaspracy";
+            string nrpopulacji = "nr populacji";
+            string wynik = "Wynik ";
+            sbCsvPorownanie.AppendLine($"{popsize},{pmutacji},{lprob},{krzyzowanie},{zbior},{czas},{nrpopulacji},{wynik}");
             var i = 5;
             var j = 0;
             while (i < lines.Count())
@@ -32,12 +45,25 @@ namespace ParserLoga
                 if (lines[i].Contains("New instance"))
                 {
                     var paramki = lines[i].Split(',');
-                    sbCsv.AppendLine($"Rozmiar populacji,{paramki[2]}");
-                    sbCsv.AppendLine($"Prawdopodobieństwo mutacji,{paramki[3]}.{paramki[4]}");
-                    sbCsv.AppendLine($"Ilosc prób mutacji,{paramki[5]}");
-                    sbCsv.AppendLine($"Krzyżowanie,{paramki[7]}");
-                    sbCsv.AppendLine($"Zbiór,{paramki[10]}");
-                    sbCsv.AppendLine($"Czas pracy w minutach,{paramki[11]}");
+                    sbCsv.AppendLine($"{popsize},{paramki[2]}");
+                    sbCsv.AppendLine($"{pmutacji},{paramki[3]}.{paramki[4]}");
+                    sbCsv.AppendLine($"{lprob},{paramki[5]}");
+                    sbCsv.AppendLine($"{krzyzowanie},{paramki[7]}");
+                    sbCsv.AppendLine($"{zbior},{paramki[10]}");
+                    sbCsv.AppendLine($"{czas},{paramki[11]}");
+                    sbCsv.AppendLine($"{nrpopulacji},{wynik}");
+
+                    sbCsvNajlepsi.AppendLine($"{popsize},{paramki[2]}");
+                    sbCsvNajlepsi.AppendLine($"{pmutacji},{paramki[3]}.{paramki[4]}");
+                    sbCsvNajlepsi.AppendLine($"{lprob},{paramki[5]}");
+                    sbCsvNajlepsi.AppendLine($"{krzyzowanie},{paramki[7]}");
+                    sbCsvNajlepsi.AppendLine($"{zbior},{paramki[10]}");
+                    sbCsvNajlepsi.AppendLine($"{czas},{paramki[11]}");
+                    sbCsvNajlepsi.AppendLine($"{nrpopulacji},{wynik}");
+
+                    
+                    sbCsvPorownanie.Append($"{paramki[2]},{paramki[3]}.{paramki[4]},{paramki[5]},{paramki[7]},{paramki[10]},{paramki[11]},");
+
                 }
                 if (lines[i].Contains("Heavens csv"))
                 {
@@ -48,12 +74,18 @@ namespace ParserLoga
                         sbCsv.AppendLine($"{line[0]},{line[1]}.{line[2]}");
                         i++;
                     }
+                    var najlepszy = lines[i - 1].Split(' ')[2].Split(',');
+                    sbCsvPorownanie.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]}");
+                    sbCsvNajlepsi.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]}");
+                    sbCsvNajlepsi.AppendLine("Genotyp:," + lines[i].Split(':')[4]);
                     sb.AppendLine(lines[i]);
-                    File.WriteAllText(Path.Combine(workingDir, $"{filename}_{j}.csv"), sbCsv.ToString(),Encoding.UTF8);
+                    File.WriteAllText(Path.Combine(workingDir, $"{filename}_{j}.csv"), sbCsv.ToString(), Encoding.UTF8);
                     sbCsv.Clear();
                 }
                 i++;
             }
+            File.WriteAllText(Path.Combine(workingDir, $"{filename}_najlepsi.csv"), sbCsvNajlepsi.ToString(), Encoding.UTF8);
+            File.WriteAllText(Path.Combine(workingDir, $"{filename}_porownanie.csv"), sbCsvPorownanie.ToString(), Encoding.UTF8);
             List<string[]> linesOfFiles = new List<string[]>();
             for (int m = 0; m < j; m++)
             {
@@ -67,7 +99,7 @@ namespace ParserLoga
                 {
                     if (csvLines.Length > m)
                     {
-                        sb.Append(csvLines[m] +",");
+                        sb.Append(csvLines[m] + ",");
                     }
                     else
                     {
