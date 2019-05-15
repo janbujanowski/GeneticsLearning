@@ -26,11 +26,11 @@ namespace srodowisko
                 result[i] = ParsedCitiesToVisit[sciezka[i]];
             }
             double distance = 0;
-            for (int i = 0; i < result.Length-1; i++)
+            for (int i = result.Length-1; i > 0; i--)
             {
-                distance += DistanceBetweenCoords(result[i], result[i + 1]);
+                distance += DistanceBetweenCoords(result[i], result[i - 1]);
             }
-            distance += DistanceBetweenCoords(result[result.Length - 1], result[0]);
+            distance += DistanceBetweenCoords(result[0], result[result.Length-1]);
             return distance;
         }
         public void LoadCities(string filePath)
@@ -82,8 +82,8 @@ namespace srodowisko
         }
         private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
         {
-            return Math.Sqrt(Math.Pow(endCoord.X - startCoord.X, 2) + Math.Pow(endCoord.Y - startCoord.Y, 2));
-            return Math.Sqrt(Math.Pow(endCoord.Y - startCoord.Y, 2) + Math.Pow(endCoord.X - startCoord.X, 2));
+            return Math.Sqrt(Math.Abs(Math.Pow(endCoord.Y - startCoord.Y, 2) + Math.Pow(endCoord.X - startCoord.X, 2)));
+            return Math.Sqrt(Math.Abs(startCoord.X - endCoord.X) + Math.Abs(startCoord.Y - endCoord.Y));
         }
     }
 }
