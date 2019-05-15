@@ -99,6 +99,7 @@ namespace AlgorytmEwolucyjny
             StatsInfo[] heavenPopulationDict;
             if (GeneticEnvironment.INSTANCE.BestGenotype != null)
             {
+                LogInfo("DLUGOSC KAKAO " + GeneticEnvironment.INSTANCE.BestGenotype.Length);
                 heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, Population = 0 } };
             }
             else
