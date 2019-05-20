@@ -10,7 +10,8 @@ namespace AlgorytmEwolucyjny
             LogInfo("===================================SEPARATOR================================================");
             LogInfo($"New instance, passed parameters {string.Join(",", args)}");
 
-            RunTests();
+            //RunTests();
+            GeneticEnvironment.INSTANCE.StartDate = DateTime.Now;
             GeneticEnvironment.INSTANCE.ParseParameters(args);
             StatsInfo[] heavensOne = new StatsInfo[1];
             Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
@@ -25,8 +26,9 @@ namespace AlgorytmEwolucyjny
             LogInfo("===================================Heavens csv================================================");
             foreach (var line in heavensOne)
             {
-                LogInfo($"{line.Population},{line.Individual.SurvivalScore}");
+                LogInfo($"{line.Population},{line.Individual.SurvivalScore},{line.Date}");
             }
+
             LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
         }
         #region Metody testowe 
@@ -99,12 +101,11 @@ namespace AlgorytmEwolucyjny
             StatsInfo[] heavenPopulationDict;
             if (GeneticEnvironment.INSTANCE.BestGenotype != null)
             {
-                LogInfo("DLUGOSC KAKAO " + GeneticEnvironment.INSTANCE.BestGenotype.Length);
-                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, Population = 0 } };
+                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, Population = 0, Date = DateTime.Now } };
             }
             else
             {
-                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0 } };
+                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0, Date = DateTime.Now } };
             }
             var populationCount = 0;
             LogInfo($"Początkowy najlepszy osobnik {heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.ToString()}");
@@ -113,13 +114,14 @@ namespace AlgorytmEwolucyjny
                 pop = GetNextGeneration(pop, selectionMethod, crossover, heavenPopulationDict[heavenPopulationDict.Length - 1].Individual);
                 if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * GeneticEnvironment.INSTANCE.ModyfikatorWyniku < GeneticEnvironment.INSTANCE.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
                 {
-                    heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount });
+                    heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount, Date = DateTime.Now });
                     LogInfo($"Populacja {populationCount} Nowy osobnik {pop.BestOne.ToString()}");
                 }
 
                 populationCount++;
             }
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
+            LogInfo($"Czas pracy w minutach : {(GeneticEnvironment.INSTANCE.StopDate - GeneticEnvironment.INSTANCE.StartDate).TotalMinutes}");
             return heavenPopulationDict;
         }
         private static Individual[] GetNewRandomPopulation(int nrProblemu)
@@ -201,7 +203,6 @@ namespace AlgorytmEwolucyjny
             {
                 newGenotype[i] = -1;
             }
-            var mumIterator = 0;
             var dadIterator = 0;
             var newIterator = 0;
             var cycle = false;
@@ -300,7 +301,7 @@ namespace AlgorytmEwolucyjny
         }
         static void LogInfo(string message)
         {
-            Console.WriteLine($"[{DateTime.Now.ToString()}]: {message}");
+            Console.WriteLine($"[{DateTime.Now.ToString()}]| {message}");
         }
     }
 
@@ -308,13 +309,6 @@ namespace AlgorytmEwolucyjny
     {
         public uint COUNTVALUESTOMAP = UInt32.MaxValue;
         public double VALUESRANGE = 2 - (-2);
-        public double DIVIDER
-        {
-            get
-            {
-                return COUNTVALUESTOMAP / VALUESRANGE;
-            }
-        }
         public int POPULATIONSIZE = 20;
         public int POPULATIONCOUNTLIMIT = 1000;
         public double MUTATIONPROBABILITY = 0.15;
@@ -370,14 +364,13 @@ namespace AlgorytmEwolucyjny
         }
         public DateTime StopDate { get; private set; }
         public int NrProblemu { get; internal set; }
+        public DateTime StartDate { get; internal set; }
+
         public static double SurvivalFunction(int[] sciezka)
         {
             return INSTANCE.ProblemKlienta.Ocena(sciezka);
         }
-        private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
-        {
-            return Math.Sqrt(Math.Pow(Math.Abs(endCoord.Y - startCoord.Y), 2) + Math.Pow(Math.Abs(endCoord.X - startCoord.X), 2));
-        }
+
         internal void ParseParameters(string[] args)
         {
             try
@@ -385,6 +378,9 @@ namespace AlgorytmEwolucyjny
                 Console.Write($"Parsowanie daty stopu : {args[0]}");
                 INSTANCE.StopDate = DateTime.Parse(args[0]);//Data stopu
                 Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
+                Console.WriteLine($"DATA STARTU |{INSTANCE.StopDate.ToString()}|");
+                Console.WriteLine($"DATA ZAKONCZENA |{INSTANCE.StopDate.ToString()}|");
+
 
                 Console.Write($"Parsowanie rozmiaru populacji (int) : {args[1]}");
                 INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//Rozmiar Populacji
@@ -509,13 +505,14 @@ namespace AlgorytmEwolucyjny
         }
         public override string ToString()
         {
-            return $"Dlugosc trasy :{SurvivalScore} genotyp {genotype.ToScreen()} Czy poprawny ? : {CzyPoprawny}";
+            return $"Dlugosc trasy :{SurvivalScore} poprawny : {CzyPoprawny}";
         }
     }
     public class StatsInfo
     {
         public Individual Individual { get; set; }
         public int Population { get; set; }
+        public DateTime Date { get; set; }
     }
     public struct Coords
     {

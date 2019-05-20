@@ -12,9 +12,10 @@ namespace ParserLoga
     {
         static void Main(string[] args)
         {
-            var filename = "JanBujanowski_log";
-            //var workingDir = "C:\\Users\\janbu\\OneDrive\\Studia\\Rok V sem III\\EksperymentGenetyczny\\Logi1";
-            var workingDir = "C:\\Logi1";
+            
+            var filename = "JanBujanowski_a_log";
+            var workingDir = "C:\\Users\\janbu\\OneDrive\\Studia\\Rok V sem III\\EksperymentGenetyczny\\Iteracja2";
+            //var workingDir = "C:\\Logi1";
             var lines = File.ReadAllLines(Path.Combine(workingDir, filename + ".txt"));
             lines = lines.Add("SEPARATOR");
             StringBuilder sb = new StringBuilder();
@@ -31,7 +32,7 @@ namespace ParserLoga
             string nrpopulacji = "nr populacji";
             string wynik = "Wynik ";
             sbCsvPorownanie.AppendLine($"{popsize},{pmutacji},{lprob},{krzyzowanie},{zbior},{czas},{nrpopulacji},{wynik}");
-            var i = 5;
+            var i = 1;
             var j = 0;
             while (i < lines.Count())
             {
@@ -61,9 +62,7 @@ namespace ParserLoga
                     sbCsvNajlepsi.AppendLine($"{czas},{paramki[11]}");
                     sbCsvNajlepsi.AppendLine($"{nrpopulacji},{wynik}");
 
-                    
                     sbCsvPorownanie.Append($"{paramki[2]},{paramki[3]}.{paramki[4]},{paramki[5]},{paramki[7]},{paramki[10]},{paramki[11]},");
-
                 }
                 if (lines[i].Contains("Heavens csv"))
                 {
