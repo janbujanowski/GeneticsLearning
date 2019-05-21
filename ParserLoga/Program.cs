@@ -12,9 +12,11 @@ namespace ParserLoga
     {
         static void Main(string[] args)
         {
-            
-            var filename = "JanBujanowski_a_log";
-            var workingDir = "C:\\Users\\janbu\\OneDrive\\Studia\\Rok V sem III\\EksperymentGenetyczny\\Iteracja2";
+            var iteracja = 4;
+            var tryb = "b";
+            bool nowyKod = true;
+            var filename = $"JanBujanowski_{tryb}_log";
+            var workingDir = $"C:\\Users\\janbu\\OneDrive\\Studia\\Rok V sem III\\EksperymentGenetyczny\\Iteracja{iteracja}";
             //var workingDir = "C:\\Logi1";
             var lines = File.ReadAllLines(Path.Combine(workingDir, filename + ".txt"));
             lines = lines.Add("SEPARATOR");
@@ -25,12 +27,12 @@ namespace ParserLoga
 
             string popsize = "Rozmiar";
             string pmutacji = "P. mutacji";
-            string lprob = "Ilosc prób";
-            string krzyzowanie = "Krzyżowanie ";
-            string zbior = "zbior";
-            string czas = "czaspracy";
-            string nrpopulacji = "nr populacji";
-            string wynik = "Wynik ";
+            string lprob = "Ilość prób";
+            string krzyzowanie = "Op.";
+            string zbior = "Zbiór";
+            string czas = "T[m]";
+            string nrpopulacji = "Generacja";
+            string wynik = "Wynik";
             sbCsvPorownanie.AppendLine($"{popsize},{pmutacji},{lprob},{krzyzowanie},{zbior},{czas},{nrpopulacji},{wynik}");
             var i = 1;
             var j = 0;
@@ -70,30 +72,39 @@ namespace ParserLoga
                     while (!lines[i].Contains("Best:"))
                     {
                         var line = lines[i].Split(' ')[2].Split(',');
-                        sbCsv.AppendLine($"{line[0]},{line[1]}.{line[2]}");
+                        if (nowyKod)
+                        {
+                            sbCsv.AppendLine($"{line[0]},{line[1]}.{line[2]},{line[3]} {lines[i].Split(' ')[3]}");
+                        }
+                        else
+                        {
+                            sbCsv.AppendLine($"{line[0]},{line[1]}.{line[2]}");
+                        }
+
                         i++;
                     }
                     var najlepszy = lines[i - 1].Split(' ')[2].Split(',');
                     sbCsvPorownanie.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]}");
                     sbCsvNajlepsi.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]}");
-                    sbCsvNajlepsi.AppendLine("Genotyp:," + lines[i].Split(':')[4]);
+                    sbCsvNajlepsi.AppendLine("Genotyp:," + lines[i].Split(':')[3]);
                     sb.AppendLine(lines[i]);
-                    File.WriteAllText(Path.Combine(workingDir, $"{filename}_{j}.csv"), sbCsv.ToString(), Encoding.UTF8);
+                    File.WriteAllText(Path.Combine(workingDir, $"{filename}_{j}temp.csv"), sbCsv.ToString(), Encoding.UTF8);
                     sbCsv.Clear();
                 }
                 i++;
             }
-            File.WriteAllText(Path.Combine(workingDir, $"{filename}_najlepsi.csv"), sbCsvNajlepsi.ToString(), Encoding.UTF8);
-            File.WriteAllText(Path.Combine(workingDir, $"{filename}_porownanie.csv"), sbCsvPorownanie.ToString(), Encoding.UTF8);
+            File.WriteAllText(Path.Combine(workingDir, $"{filename}_najlepsi_{iteracja}.csv"), sbCsvNajlepsi.ToString(), Encoding.UTF8);
+            File.WriteAllText(Path.Combine(workingDir, $"{filename}_porownanie_{iteracja}.csv"), sbCsvPorownanie.ToString(), Encoding.UTF8);
             List<string[]> linesOfFiles = new List<string[]>();
             for (int m = 0; m < j; m++)
             {
-                linesOfFiles.Add(File.ReadAllLines(Path.Combine(workingDir, $"{filename}_{m}.csv")));
+                linesOfFiles.Add(File.ReadAllLines(Path.Combine(workingDir, $"{filename}_{m}temp.csv")));
             }
             linesOfFiles.OrderByDescending(x => x.Length);
             sb.Clear();
             for (int m = 0; m < linesOfFiles[0].Length; m++)
             {
+                //var sepratedLogLines = File.ReadAllLines(Path.Combine(workingDir, $"{filename}_{m}.txt"));
                 foreach (var csvLines in linesOfFiles)
                 {
                     if (csvLines.Length > m)
@@ -102,16 +113,16 @@ namespace ParserLoga
                     }
                     else
                     {
-                        sb.Append(",,");
+                        sb.Append(",,,");
                     }
                 }
                 sb.AppendLine();
             }
-            File.WriteAllText(Path.Combine(workingDir, $"{filename}.csv"), sb.ToString(), Encoding.UTF8);
+            File.WriteAllText(Path.Combine(workingDir, $"{filename}_{iteracja}.csv"), sb.ToString(), Encoding.UTF8);
 
             for (int m = 0; m < j; m++)
             {
-                File.Delete(Path.Combine(workingDir, $"{filename}_{m}.csv"));
+                File.Delete(Path.Combine(workingDir, $"{filename}_{m}temp.csv"));
                 File.Delete(Path.Combine(workingDir, $"{filename}_{m}.txt"));
             }
         }
