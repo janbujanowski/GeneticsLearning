@@ -12,7 +12,7 @@ namespace ParserLoga
     {
         static void Main(string[] args)
         {
-            var iteracja = 4;
+            var iteracja = 5;
             var tryb = "b";
             bool nowyKod = true;
             var filename = $"JanBujanowski_{tryb}_log";
@@ -36,7 +36,7 @@ namespace ParserLoga
             sbCsvPorownanie.AppendLine($"{popsize},{pmutacji},{lprob},{krzyzowanie},{zbior},{czas},{nrpopulacji},{wynik}");
             var i = 1;
             var j = 0;
-            while (i < lines.Count())
+            while (i < lines.Count() - 13)
             {
                 sb.AppendLine(lines[i]);
                 if (lines[i].Contains("SEPARATOR"))
@@ -69,6 +69,8 @@ namespace ParserLoga
                 if (lines[i].Contains("Heavens csv"))
                 {
                     i++;
+                    var pierwszyLine = lines[i].Split(' ')[2].Split(',');
+                    var pierwszy = $"{pierwszyLine[1]}.{pierwszyLine[2]}";
                     while (!lines[i].Contains("Best:"))
                     {
                         var line = lines[i].Split(' ')[2].Split(',');
@@ -84,7 +86,7 @@ namespace ParserLoga
                         i++;
                     }
                     var najlepszy = lines[i - 1].Split(' ')[2].Split(',');
-                    sbCsvPorownanie.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]}");
+                    sbCsvPorownanie.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]},={najlepszy[1]}.{najlepszy[2]}/{pierwszy}");
                     sbCsvNajlepsi.AppendLine($"{najlepszy[0]},{najlepszy[1]}.{najlepszy[2]}");
                     sbCsvNajlepsi.AppendLine("Genotyp:," + lines[i].Split(':')[3]);
                     sb.AppendLine(lines[i]);
