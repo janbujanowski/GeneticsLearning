@@ -12,7 +12,7 @@ namespace ParserLoga
     {
         static void Main(string[] args)
         {
-            var iteracja = 5;
+            var iteracja = 6;
             var tryb = "b";
             bool nowyKod = true;
             var filename = $"JanBujanowski_{tryb}_log";
@@ -36,7 +36,7 @@ namespace ParserLoga
             sbCsvPorownanie.AppendLine($"{popsize},{pmutacji},{lprob},{krzyzowanie},{zbior},{czas},{nrpopulacji},{wynik}");
             var i = 1;
             var j = 0;
-            while (i < lines.Count() - 13)
+            while (i < lines.Count())
             {
                 sb.AppendLine(lines[i]);
                 if (lines[i].Contains("SEPARATOR"))
