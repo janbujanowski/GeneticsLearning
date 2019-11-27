@@ -19,3 +19,9 @@ C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.csprojAssemblyReference.cache
 C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.csproj.CoreCompileInputs.cache
 C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.exe
 C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.pdb
+C:\REPOS\mgr\bin\Debug\AlgorytmEwolucyjny.exe.config
+C:\REPOS\mgr\bin\Debug\AlgorytmEwolucyjny.exe
+C:\REPOS\mgr\bin\Debug\AlgorytmEwolucyjny.pdb
+C:\REPOS\mgr\obj\Debug\AlgorytmEwolucyjny.csprojAssemblyReference.cache
+C:\REPOS\mgr\obj\Debug\AlgorytmEwolucyjny.exe
+C:\REPOS\mgr\obj\Debug\AlgorytmEwolucyjny.pdb
