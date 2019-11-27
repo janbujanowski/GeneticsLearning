@@ -12,3 +12,10 @@ C:\Repos\Genetyczne\obj\Debug\AlgorytmEwolucyjny.pdb
 C:\Repos\Genetyczne\bin\Debug\AlgorytmEwolucyjny.exe.config
 C:\Repos\Genetyczne\bin\Debug\AlgorytmEwolucyjny.exe
 C:\Repos\Genetyczne\bin\Debug\AlgorytmEwolucyjny.pdb
+C:\REPO\mgr\bin\Debug\AlgorytmEwolucyjny.exe.config
+C:\REPO\mgr\bin\Debug\AlgorytmEwolucyjny.exe
+C:\REPO\mgr\bin\Debug\AlgorytmEwolucyjny.pdb
+C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.csprojAssemblyReference.cache
+C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.csproj.CoreCompileInputs.cache
+C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.exe
+C:\REPO\mgr\obj\Debug\AlgorytmEwolucyjny.pdb

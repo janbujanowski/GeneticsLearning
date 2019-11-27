@@ -10,7 +10,7 @@ namespace AlgorytmEwolucyjny
             LogInfo("===================================SEPARATOR================================================");
             LogInfo($"New instance, passed parameters {string.Join(",", args)}");
 
-            //RunTests();
+            RunTests();
             GeneticEnvironment.INSTANCE.StartDate = DateTime.Now;
             GeneticEnvironment.INSTANCE.ParseParameters(args);
             StatsInfo[] heavensOne = new StatsInfo[1];

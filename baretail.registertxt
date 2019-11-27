@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+; Open files
+[HKEY_CLASSES_ROOT\*\shell\BARETAIL LOGS]
+@="BARETAIL LOGS"
+"Icon"="C:\\baretail.exe,0"
+[HKEY_CLASSES_ROOT\*\shell\BARETAIL LOGS\command]
+@="\"C:\\baretail.exe\" \"%1\""
