@@ -1,5 +1,6 @@
 ﻿using srodowisko;
 using System;
+using System.Configuration;
 
 namespace AlgorytmEwolucyjny
 {
@@ -7,6 +8,11 @@ namespace AlgorytmEwolucyjny
     {
         static void Main(string[] args)
         {
+            string pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"];
+            string pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"]; 
+            ILogger loggerInstance = new DirectFileLogger(pathToInfoFile,pathToExceptionFile);
+            MarketFunctions market = new MarketFunctions(loggerInstance);
+
             LogInfo("===================================SEPARATOR================================================");
             LogInfo($"New instance, passed parameters {string.Join(",", args)}");
 
@@ -28,7 +34,7 @@ namespace AlgorytmEwolucyjny
             {
                 LogInfo($"{line.Population},{line.Individual.SurvivalScore},{line.Date}");
             }
-
+            
             LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
         }
         #region Metody testowe 

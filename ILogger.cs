@@ -8,7 +8,7 @@ namespace AlgorytmEwolucyjny
 {
     public interface ILogger
     {
-        void LogException(Exception ex, string message);
+        void LogException(Exception ex, string message,params object[] args);
         void LogInfo(string message);
     }
 }

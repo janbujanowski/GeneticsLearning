@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="DailyMarketData.cs" />
     <Compile Include="ILogger.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="DirectFileLogger.cs" />
     <Compile Include="MarketFunctions.cs" />
     <Compile Include="ProblemKlienta.cs" />
     <Compile Include="Program.cs" />
