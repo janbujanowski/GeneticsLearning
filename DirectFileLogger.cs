@@ -45,8 +45,9 @@ namespace AlgorytmEwolucyjny
 
         private void WriteToFile(string path, string message)
         {
-            var stream = File.AppendText(_pathToInfoFile);
-            stream.Write($"|{ DateTime.Now.ToString() }|: { message }");
+            var stream = File.AppendText(path);
+            stream.WriteLine($"|{ DateTime.Now.ToString() }|: ==========================================NEW ENTRY==========================================");
+            stream.WriteLine($"|{ DateTime.Now.ToString() }|: { message }");
             stream.Flush();
             stream.Dispose();
         }

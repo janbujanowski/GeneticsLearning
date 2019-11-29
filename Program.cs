@@ -9,8 +9,8 @@ namespace AlgorytmEwolucyjny
         static void Main(string[] args)
         {
             string pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"];
-            string pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"]; 
-            ILogger loggerInstance = new DirectFileLogger(pathToInfoFile,pathToExceptionFile);
+            string pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"];
+            ILogger loggerInstance = new DirectFileLogger(pathToInfoFile, pathToExceptionFile);
             MarketFunctions market = new MarketFunctions(loggerInstance);
 
             LogInfo("===================================SEPARATOR================================================");
@@ -34,7 +34,7 @@ namespace AlgorytmEwolucyjny
             {
                 LogInfo($"{line.Population},{line.Individual.SurvivalScore},{line.Date}");
             }
-            
+
             LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
         }
         #region Metody testowe 
@@ -354,7 +354,7 @@ namespace AlgorytmEwolucyjny
         }
         private GeneticEnvironment()
         {
-            this.ProblemKlienta = new ProblemKlienta();
+            this.ProblemKlienta = new ProblemKlienta(new DirectFileLogger(ConfigurationManager.AppSettings["pathToInfoFile"], ConfigurationManager.AppSettings["pathToExceptionFile"]));
         }
         private static Random _CUBE;
         public static Random CUBE

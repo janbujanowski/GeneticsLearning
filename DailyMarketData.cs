@@ -15,6 +15,6 @@ namespace AlgorytmEwolucyjny
         public double Closing { get; set; }
         public double Max { get; set; }
         public double Min { get; set; }
-        public int Capacity { get; set; }
+        public int Volume { get; set; }
     }
 }

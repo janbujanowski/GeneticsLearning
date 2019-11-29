@@ -9,6 +9,7 @@ namespace AlgorytmEwolucyjny
     public class MarketFunctions
     {
         ILogger _logger;
+        
         public MarketFunctions(ILogger logger)
         {
             _logger = logger;

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AlgorytmEwolucyjny;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,59 +11,57 @@ namespace srodowisko
 {
     public class ProblemKlienta
     {
-        Coords[] ParsedCitiesToVisit;
-        public ProblemKlienta()
+        List<DailyMarketData> marketData;
+        string _pathToDataFile = ConfigurationManager.AppSettings["pathToMarketDataFile"];
+        ILogger _logger;
+        MarketFunctions _marketFunctions;
+        public ProblemKlienta(ILogger loggerInstance)
         {
-            LoadCities("cities.tsp");
+            _logger = loggerInstance;
+            _marketFunctions = new MarketFunctions(_logger);
+            LoadMarketData(_pathToDataFile);
         }
-        public int Rozmiar(int numer_zbioru = 0)
+        public void LoadMarketData(string filePath)
         {
-            return ParsedCitiesToVisit.Length;
-        }
-        public double Ocena(int[] sciezka)
-        {
-            Coords[] result = new Coords[sciezka.Length];
-            for (int i = 0; i < sciezka.Length; i++)
-            {
-                result[i] = ParsedCitiesToVisit[sciezka[i]];
-            }
-            double distance = 0;
-            for (int i = result.Length-1; i > 0; i--)
-            {
-                distance += DistanceBetweenCoords(result[i], result[i - 1]);
-            }
-            distance += DistanceBetweenCoords(result[0], result[result.Length-1]);
-            return distance;
-        }
-        public void LoadCities(string filePath)
-        {
+            string[] lines = new string[1];
+            int start = 0; int end = 0;
             try
             {
-                string[] lines = File.ReadAllLines(filePath);
-                int start = FindStartingIndex(lines);
-                var end = FindEndIndex(lines);
-                this.ParsedCitiesToVisit = new Coords[end - start];
+                lines = File.ReadAllLines(filePath);
+                start = FindStartingIndex(lines);
+                end = FindEndIndex(lines);
+                marketData = new List<DailyMarketData>();
                 for (int i = start; i < end; i++)
                 {
-                    string[] values = lines[i].Split(' ');
-                    double lattitude = double.Parse(values[1]);
-                    double longitude = double.Parse(values[2]);
-                    ParsedCitiesToVisit[i - start] = new Coords()
+                    string[] values = lines[i].Split(',');
+
+                    DateTime date = DateTime.Parse(values[0]);
+                    double opening = double.Parse(values[1]);
+                    double max = double.Parse(values[2]);
+                    double min = double.Parse(values[3]);
+                    double closing = double.Parse(values[4]);
+                    int volume = int.Parse(values[5]);
+                    marketData.Add(new DailyMarketData()
                     {
-                        X = lattitude,
-                        Y = longitude
-                    };
+                        Date = date,
+                        Opening = opening,
+                        Max = max,
+                        Min = min,
+                        Closing = closing,
+                        Volume = volume
+                    });
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Can't read the cities file - Cannot continue. Exception message: {ex.Message}");
+                _logger.LogException(ex, "During loading data", filePath, lines.Count(), start, end);
             }
         }
         private int FindEndIndex(string[] lines)
         {
             var end = lines.Length - 1;
-            while (!lines[end].Contains("EOF"))
+            DateTime tryParse;
+            while (!DateTime.TryParse(lines[end].Split(',')[0], out tryParse))
             {
                 end--;
             }
@@ -70,19 +70,56 @@ namespace srodowisko
         private int FindStartingIndex(string[] lines)
         {
             var i = 0;
-            while (!char.IsDigit(lines[i][0]))
+            DateTime tryParse;
+            while (!DateTime.TryParse(lines[i].Split(',')[0], out tryParse))
             {
                 i++;
             }
             return i;
         }
-        public struct Coords
+        public int Rozmiar(int numer_zbioru = 0)
         {
-            public double X, Y;
+            return marketData.Count;
         }
-        private static double DistanceBetweenCoords(Coords startCoord, Coords endCoord)
+        public double Ocena(int[] oneLayeredNetwork)
         {
-            return Math.Sqrt(Math.Abs(Math.Pow(endCoord.Y - startCoord.Y, 2) + Math.Pow(endCoord.X - startCoord.X, 2)));
+            double startBalance = 10000.0;
+
+            Dictionary<string, object> parametersForLogging = new Dictionary<string, object>();
+            double currentBallance = startBalance;
+            for (int i = 0; i < marketData.Count; i++)
+            {
+                var todayData = marketData[i];
+                var periods = oneLayeredNetwork[10];
+                var rsiRangeIndex = i - periods;
+                if (rsiRangeIndex < 0)
+                {
+                    _logger.LogInfo($"Skipping day, periods : {periods}, i : {i}");
+                }
+                else
+                {
+                    List<DailyMarketData> historicalData = marketData.Skip(rsiRangeIndex).Take(periods).ToList();
+                    currentBallance = BuyOrSellAndGetCurrentBallance(historicalData, currentBallance, oneLayeredNetwork);
+                }
+            }
+            return currentBallance - startBalance;
+        }
+
+        private double BuyOrSellAndGetCurrentBallance(List<DailyMarketData> historicalData, double currentBallance, int[] oneLayeredNetwork)
+        {
+            double networkOutcomeIndicator = 0;
+            var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
+            networkOutcomeIndicator = rsiValue * oneLayeredNetwork.GetRSIModifier();
+            if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit())
+            {
+                currentBallance -= historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
+            }
+            else if (networkOutcomeIndicator < oneLayeredNetwork.GetStopLimit())
+            {
+                currentBallance += historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
+            }
+
+            return currentBallance;
         }
     }
 }
