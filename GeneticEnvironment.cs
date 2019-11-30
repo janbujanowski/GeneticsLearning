@@ -26,6 +26,7 @@ namespace AlgorytmEwolucyjny
         public CrossoverMethods CrossoverMethod = CrossoverMethods.OX;
         public int MUTATIONRETRIALS = 4;
         StockMarketEvaluator problemToResolve;
+        ILogger _logger;
 
         public int[] GetRandomParametersArray(int nrProblemu)
         {
@@ -43,14 +44,15 @@ namespace AlgorytmEwolucyjny
             {
                 if (_config == null)
                 {
-                    _config = new GeneticEnvironment();
+                    _config = new GeneticEnvironment(IoCFactory.Resolve<ILogger>());
                 }
                 return _config;
             }
         }
-        private GeneticEnvironment()
+        private GeneticEnvironment(ILogger loggerInstance)
         {
             problemToResolve = new StockMarketEvaluator(new DirectFileLogger());
+            _logger = loggerInstance;
         }
         private static Random _CUBE;
         public static Random CUBE
@@ -133,7 +135,7 @@ namespace AlgorytmEwolucyjny
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error parsing parameters :" + ex.Message);
+                _logger.LogException(ex, "During parsing parameters");
             }
         }
     }

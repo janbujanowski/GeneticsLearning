@@ -1,0 +1,40 @@
+|30/11/2019 22:20:42|: ==========================================NEW ENTRY==========================================
+|30/11/2019 22:20:42|: Error message : [During parsing parameters]
+|30/11/2019 22:20:42|: Exception message : [Could not find file 'C:\REPOS\mgr\AppContents\bestIndividual.json'.]
+|30/11/2019 22:20:42|: Stacktrace : [   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)
+   at System.IO.File.ReadAllText(String path)
+   at AlgorytmEwolucyjny.GeneticEnvironment.ParseParameters(String[] args) in C:\REPOS\mgr\GeneticEnvironment.cs:line 128]
+|30/11/2019 22:22:21|: ==========================================NEW ENTRY==========================================
+|30/11/2019 22:22:21|: Error message : [During parsing parameters]
+|30/11/2019 22:22:21|: Exception message : [Could not find file 'C:\REPOS\mgr\AppContents\bestIndividual.json'.]
+|30/11/2019 22:22:21|: Stacktrace : [   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)
+   at System.IO.File.ReadAllText(String path)
+   at AlgorytmEwolucyjny.GeneticEnvironment.ParseParameters(String[] args) in C:\REPOS\mgr\GeneticEnvironment.cs:line 128]
+|30/11/2019 22:23:09|: ==========================================NEW ENTRY==========================================
+|30/11/2019 22:23:09|: Error message : [During parsing parameters]
+|30/11/2019 22:23:09|: Exception message : [Could not find file 'C:\REPOS\mgr\AppContents\bestIndividual.json'.]
+|30/11/2019 22:23:09|: Stacktrace : [   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)
+   at System.IO.File.ReadAllText(String path)
+   at AlgorytmEwolucyjny.GeneticEnvironment.ParseParameters(String[] args) in C:\REPOS\mgr\GeneticEnvironment.cs:line 128]
+|30/11/2019 22:29:33|: ==========================================NEW ENTRY==========================================
+|30/11/2019 22:29:33|: Error message : [During parsing parameters]
+|30/11/2019 22:29:33|: Exception message : [Could not find file 'C:\REPOS\mgr\AppContents\bestIndividual.json'.]
+|30/11/2019 22:29:33|: Stacktrace : [   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)
+   at System.IO.File.ReadAllText(String path)
+   at AlgorytmEwolucyjny.GeneticEnvironment.ParseParameters(String[] args) in C:\REPOS\mgr\GeneticEnvironment.cs:line 128]

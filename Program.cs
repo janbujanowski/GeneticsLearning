@@ -28,18 +28,16 @@ namespace AlgorytmEwolucyjny
                 genotypes = newRandomPopulation
             };
             heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
-
+            var bestIndividualStats = heavensOne.Last();
+            LogInfo($"Najlepszy osobnik z populacji { bestIndividualStats.Population } { bestIndividualStats.Individual.ToString() }");
+            LogInfo($"Fenotyp : { string.Join(",", bestIndividualStats.Individual.Fenotype) }");
+            LogInfo($"Genotyp : { string.Join(",", bestIndividualStats.Individual.genotype) }");
             string csvFileContent = string.Empty;
-            csvFileContent += heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Date) + Environment.NewLine);
+            var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Date) + Environment.NewLine);
+            csvFileContent += string.Join("", lolek);
             File.WriteAllText(ConfigurationManager.AppSettings["pathToOutputCsvFile"], csvFileContent);
-            foreach (var line in heavensOne)
-            {
-                LogInfo($"{line.Population},{line.Individual.SurvivalScore},{line.Date}");
-            }
-
-            string jsonIndividual = JsonConvert.SerializeObject(heavensOne.Last().Individual, Formatting.Indented);
+            string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
             File.WriteAllText(ConfigurationManager.AppSettings["StartingIndividual"], jsonIndividual);
-            LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
         }
         #region Metody testowe 
         private static void RunTests()
@@ -125,9 +123,8 @@ namespace AlgorytmEwolucyjny
                 if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * GeneticEnvironment.INSTANCE.ModyfikatorWyniku < GeneticEnvironment.INSTANCE.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
                 {
                     heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount, Date = DateTime.Now });
-                    loggerInstance.LogInfo($"Populacja {populationCount} Nowy osobnik {pop.BestOne.ToString()}");
+                    loggerInstance.LogInfo($"Populacja { populationCount } Nowy osobnik { pop.BestOne.ToString() }");
                 }
-
                 populationCount++;
             }
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
@@ -312,7 +309,6 @@ namespace AlgorytmEwolucyjny
         }
     }
 
-  
     public struct Population
     {
         public Individual[] genotypes;
@@ -368,13 +364,14 @@ namespace AlgorytmEwolucyjny
             }
         }
         public int[] genotype;
-        public int[] Fenotype
+        public Dictionary<string, double> Fenotype
         {
             get
             {
-                return genotype;
+                return genotype.GetModifiers();
             }
         }
+
         private double? _survivalScore;
         public double? SurvivalScore
         {
@@ -382,15 +379,28 @@ namespace AlgorytmEwolucyjny
             {
                 if (_survivalScore == null && Fenotype != null)
                 {
-                    _survivalScore = GeneticEnvironment.SurvivalFunction(Fenotype);
+                    _survivalScore = GeneticEnvironment.SurvivalFunction(genotype);
                 }
 
                 return _survivalScore;
             }
         }
+        private double? _testedSurvivalScore;
+        public double? TestedSurvivalScore
+        {
+            get
+            {
+                if (_testedSurvivalScore == null && Fenotype != null)
+                {
+                    _testedSurvivalScore = new StockMarketEvaluator(IoCFactory.Resolve<ILogger>(), ConfigurationManager.AppSettings["pathToTestMarketDataFile"]).Ocena(genotype);
+                }
+
+                return _testedSurvivalScore;
+            }
+        }
         public override string ToString()
         {
-            return $"Zarobił :{SurvivalScore} oraz na testowych danych : {new StockMarketEvaluator(IoCFactory.Resolve<ILogger>(), ConfigurationManager.AppSettings["pathToTestMarketDataFile"]).Ocena(Fenotype)}";
+            return $"Zarobil :{ SurvivalScore } oraz na testowych danych : { TestedSurvivalScore }";
         }
     }
     public class StatsInfo

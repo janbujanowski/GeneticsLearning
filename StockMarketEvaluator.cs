@@ -15,7 +15,7 @@ namespace srodowisko
         string _pathToDataFile;
         ILogger _logger;
         MarketFunctions _marketFunctions;
-        public StockMarketEvaluator(ILogger loggerInstance,string pathToDataFile = null)
+        public StockMarketEvaluator(ILogger loggerInstance, string pathToDataFile = null)
         {
             _logger = loggerInstance;
             _marketFunctions = new MarketFunctions(_logger);
@@ -106,10 +106,10 @@ namespace srodowisko
             var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
             var modifiers = oneLayeredNetwork.GetModifiers();
             networkOutcomeIndicator = rsiValue * modifiers["RSI"]
-                                    + todayData.Opening * modifiers["Opening"] 
-                                    + todayData.Min * modifiers["Min"] 
-                                    + todayData.Max * modifiers["Max"] 
-                                    + todayData.Closing * modifiers["Closing"] ;
+                                    + todayData.Opening * modifiers["Opening"]
+                                    + todayData.Min * modifiers["Min"]
+                                    + todayData.Max * modifiers["Max"]
+                                    + todayData.Closing * modifiers["Closing"];
             if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
             {
                 oneLayeredNetwork.BuyShares();

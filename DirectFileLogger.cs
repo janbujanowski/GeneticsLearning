@@ -19,7 +19,7 @@ namespace AlgorytmEwolucyjny
         public DirectFileLogger()
         {
             //get default logger
-            _pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"]; 
+            _pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"];
             _pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"];
         }
 
@@ -29,6 +29,7 @@ namespace AlgorytmEwolucyjny
             {
                 throw new Exception("Exception log file is not specified");
             }
+            WriteToFile(_pathToInfoFile, $"ERROR {ex.Message}");
             WriteToFile(_pathToExceptionFile, $"==========================================NEW ENTRY==========================================");
             WriteToFile(_pathToExceptionFile, $"Error message : [{ message }]");
             WriteToFile(_pathToExceptionFile, $"Exception message : [{ ex.Message }]");

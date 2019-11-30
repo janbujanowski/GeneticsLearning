@@ -26,6 +26,9 @@ namespace AlgorytmEwolucyjny
             modifiers.Add("Min", neuralArray[16] == 0 ? 0 : (double)neuralArray[15] / (double)neuralArray[16]);
             modifiers.Add("Max", neuralArray[18] == 0 ? 0 : (double)neuralArray[17] / (double)neuralArray[18]);
             modifiers.Add("Closing", neuralArray[20] == 0 ? 0 : (double)neuralArray[19] / (double)neuralArray[20]);
+            modifiers.Add("Periods", neuralArray.GetPeriods());
+            modifiers.Add("BuyLimit", neuralArray.GetBuyLimit());
+            modifiers.Add("StopLimit", neuralArray.GetStopLimit());
             return modifiers;
         }
         public static int GetBuyLimit(this int[] neuralArray)
