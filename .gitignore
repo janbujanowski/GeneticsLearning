@@ -2,7 +2,10 @@
 *.exe
 *.cache
 *.pdb
-obj/Debug/*.cs
-obj/Release/*.cs
+obj/Debug
+obj/Release
+bin/Debug
+bin/Release
 ParserLoga/obj/
 ParserLoga/bin/
+packages

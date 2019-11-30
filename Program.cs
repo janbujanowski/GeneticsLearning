@@ -1,6 +1,9 @@
-﻿using srodowisko;
+﻿using Newtonsoft.Json;
+using srodowisko;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 
 namespace AlgorytmEwolucyjny
@@ -24,15 +27,18 @@ namespace AlgorytmEwolucyjny
             {
                 genotypes = newRandomPopulation
             };
-
             heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
 
-            LogInfo("===================================Heavens csv================================================");
+            string csvFileContent = string.Empty;
+            csvFileContent += heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Date) + Environment.NewLine);
+            File.WriteAllText(ConfigurationManager.AppSettings["pathToOutputCsvFile"], csvFileContent);
             foreach (var line in heavensOne)
             {
                 LogInfo($"{line.Population},{line.Individual.SurvivalScore},{line.Date}");
             }
 
+            string jsonIndividual = JsonConvert.SerializeObject(heavensOne.Last().Individual, Formatting.Indented);
+            File.WriteAllText(ConfigurationManager.AppSettings["StartingIndividual"], jsonIndividual);
             LogInfo($"Best:{ string.Join(",", heavensOne[heavensOne.Length - 1].Individual.genotype)} after { heavensOne[heavensOne.Length - 1].Population} population");
         }
         #region Metody testowe 
@@ -296,7 +302,7 @@ namespace AlgorytmEwolucyjny
         static Individual Mutate(int[] a)
         {
             int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-            a[randomPosition] = GeneticEnvironment.CUBE.Next(-1000,1000);
+            a[randomPosition] = GeneticEnvironment.CUBE.Next(-1000, 1000);
             return new Individual() { genotype = a };
         }
         static void LogInfo(string message)
@@ -306,139 +312,7 @@ namespace AlgorytmEwolucyjny
         }
     }
 
-    public class GeneticEnvironment
-    {
-        public uint COUNTVALUESTOMAP = UInt32.MaxValue;
-        public double VALUESRANGE = 2 - (-2);
-        public int POPULATIONSIZE = 20;
-        public int POPULATIONCOUNTLIMIT = 1000;
-        public double MUTATIONPROBABILITY = 0.15;
-        public int NUMBEROFEVOLUTIONTRIALS = 1;
-        public int ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = 5000;
-        public double ModyfikatorWyniku = 1;
-
-        public int[] BestGenotype { get; private set; }
-        public SelectionMethods SelectionMethod = SelectionMethods.Roulette;
-        public CrossoverMethods CrossoverMethod = CrossoverMethods.OX;
-        public int MUTATIONRETRIALS = 4;
-        StockMarketEvaluator ProblemKlienta;
-        public Coords[] ParsedCitiesToVisit;
-        public int[] GetRandomParametersArray(int nrProblemu)
-        {
-
-            int[] genotype = new int[ProblemKlienta.Rozmiar(nrProblemu)];
-            for (int i = 0; i < ProblemKlienta.Rozmiar(nrProblemu); i++)
-            {
-                genotype[i] = GeneticEnvironment.CUBE.Next(-1000,1000);
-            }
-            
-            return genotype;
-
-        }
-        private static GeneticEnvironment _config;
-        public static GeneticEnvironment INSTANCE
-        {
-            get
-            {
-                if (_config == null)
-                {
-                    _config = new GeneticEnvironment();
-                }
-                return _config;
-            }
-        }
-        private GeneticEnvironment()
-        {
-            this.ProblemKlienta = new StockMarketEvaluator(new DirectFileLogger());
-        }
-        private static Random _CUBE;
-        public static Random CUBE
-        {
-            get
-            {
-                if (_CUBE == null)
-                {
-                    _CUBE = new Random();
-                }
-                return _CUBE;
-            }
-        }
-        public DateTime StopDate { get; private set; }
-        public int NrProblemu { get; internal set; }
-        public DateTime StartDate { get; internal set; }
-
-        public static double SurvivalFunction(int[] sciezka)
-        {
-            return INSTANCE.ProblemKlienta.Ocena(sciezka);
-        }
-
-        internal void ParseParameters(string[] args)
-        {
-            try
-            {
-                Console.Write($"Parsowanie daty stopu : {args[0]}");
-                INSTANCE.StopDate = DateTime.Parse(args[0]);//Data stopu
-                Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
-                Console.WriteLine($"DATA STARTU |{INSTANCE.StopDate.ToString()}|");
-                Console.WriteLine($"DATA ZAKONCZENA |{INSTANCE.StopDate.ToString()}|");
-
-
-                Console.Write($"Parsowanie rozmiaru populacji (int) : {args[1]}");
-                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//Rozmiar Populacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.POPULATIONSIZE.ToString()}");
-
-                Console.Write($"Parsowanie prawdopodobieństwo mutacji (double) : {args[2]}");
-                INSTANCE.MUTATIONPROBABILITY = double.Parse(args[2]);//Prawdopodobienstwo mutacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.MUTATIONPROBABILITY.ToString()}");
-
-                Console.Write($"Parsowanie ilosc prob mutacji (int) : {args[3]}");
-                INSTANCE.MUTATIONRETRIALS = Int32.Parse(args[3]);//Ilosc prob mutacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.MUTATIONRETRIALS.ToString()}");
-
-                Console.Write($"Parsowanie selekcji (enum) : {args[4]}");
-                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), args[4]);//Rodzaj selekcji
-                Console.WriteLine($" Sparsowano : {INSTANCE.SelectionMethod.ToString()}");
-
-                Console.Write($"Parsowanie krzyzowania (enum) : {args[5]}");
-                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), args[5]);//Rodzaj krzyzowania
-                Console.WriteLine($" Sparsowano : {INSTANCE.CrossoverMethod.ToString()}");
-
-                Console.Write($"Parsowanie iteracji (int) : {args[6]}");
-                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//Ilosc iteracji bez poprawy
-                Console.WriteLine($" Sparsowano : {INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT.ToString()}");
-
-                Console.Write($"Parsowanie modyfikatora (double) : {args[7]}");
-                INSTANCE.ModyfikatorWyniku = double.Parse(args[7]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.ModyfikatorWyniku.ToString()}");
-
-                Console.Write($"Parsowanie numeru zbioru (int) : {args[8]}");
-                INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
-                Console.WriteLine($" Sparsowano : {INSTANCE.NrProblemu.ToString()}");
-
-                Console.Write($"Parsowanie czasu do stopu (double) : {args[9]}");
-                var dataStopuOdMinut = DateTime.Now.AddMinutes(double.Parse(args[9]));
-                if (dataStopuOdMinut < StopDate)
-                {
-                    INSTANCE.StopDate = dataStopuOdMinut;
-                    Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
-                }
-                if (args.Length > 10)
-                {
-                    Console.Write($"Parsowanie osobnika : {args[10]}");
-                    var genotypeArray = args[10].Split(',');
-                    INSTANCE.BestGenotype = new int[genotypeArray.Length];
-                    for (int i = 0; i < genotypeArray.Length; i++)
-                    {
-                        INSTANCE.BestGenotype[i] = Int32.Parse(genotypeArray[i]);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error parsing parameters :" + ex.Message);
-            }
-        }
-    }
+  
     public struct Population
     {
         public Individual[] genotypes;
@@ -524,10 +398,6 @@ namespace AlgorytmEwolucyjny
         public Individual Individual { get; set; }
         public int Population { get; set; }
         public DateTime Date { get; set; }
-    }
-    public struct Coords
-    {
-        public double X, Y;
     }
     public enum SelectionMethods
     {

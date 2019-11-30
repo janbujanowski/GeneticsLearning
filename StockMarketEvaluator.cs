@@ -82,7 +82,7 @@ namespace srodowisko
             }
             return i;
         }
-        public int Rozmiar(int numer_zbioru = 0)
+        public int ProblemSize(int numer_zbioru = 0)
         {
             return 35;
         }
