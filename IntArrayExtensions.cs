@@ -14,6 +14,10 @@ namespace AlgorytmEwolucyjny
         }
         public static double GetRSIModifier(this int[] neuralArray)
         {
+            if (neuralArray[12] == 0)
+            {
+                return 0;
+            }
             return neuralArray[11]/ neuralArray[12];
         }
         public static int GetBuyLimit(this int[] neuralArray)

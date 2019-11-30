@@ -1,6 +1,7 @@
 ﻿using srodowisko;
 using System;
 using System.Configuration;
+using System.Linq;
 
 namespace AlgorytmEwolucyjny
 {
@@ -8,15 +9,13 @@ namespace AlgorytmEwolucyjny
     {
         static void Main(string[] args)
         {
-            string pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"];
-            string pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"];
-            ILogger loggerInstance = new DirectFileLogger(pathToInfoFile, pathToExceptionFile);
+            ILogger loggerInstance = new DirectFileLogger();
             MarketFunctions market = new MarketFunctions(loggerInstance);
 
             LogInfo("===================================SEPARATOR================================================");
             LogInfo($"New instance, passed parameters {string.Join(",", args)}");
 
-            RunTests();
+            //RunTests();
             GeneticEnvironment.INSTANCE.StartDate = DateTime.Now;
             GeneticEnvironment.INSTANCE.ParseParameters(args);
             StatsInfo[] heavensOne = new StatsInfo[1];
@@ -27,7 +26,7 @@ namespace AlgorytmEwolucyjny
                 genotypes = newRandomPopulation
             };
 
-            heavensOne = EvolvePopulationCriteriaUntilDateStop(pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
+            heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
 
             LogInfo("===================================Heavens csv================================================");
             foreach (var line in heavensOne)
@@ -102,7 +101,7 @@ namespace AlgorytmEwolucyjny
             LogInfo(string.Join(",", lol2.genotype));
         }
         #endregion
-        private static StatsInfo[] EvolvePopulationCriteriaUntilDateStop(Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
+        private static StatsInfo[] EvolvePopulationCriteriaUntilDateStop(ILogger loggerInstance, Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
         {
             StatsInfo[] heavenPopulationDict;
             if (GeneticEnvironment.INSTANCE.BestGenotype != null)
@@ -121,7 +120,7 @@ namespace AlgorytmEwolucyjny
                 if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * GeneticEnvironment.INSTANCE.ModyfikatorWyniku < GeneticEnvironment.INSTANCE.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
                 {
                     heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount, Date = DateTime.Now });
-                    LogInfo($"Populacja {populationCount} Nowy osobnik {pop.BestOne.ToString()}");
+                    loggerInstance.LogInfo($"Populacja {populationCount} Nowy osobnik {pop.BestOne.ToString()}");
                 }
 
                 populationCount++;
@@ -307,7 +306,8 @@ namespace AlgorytmEwolucyjny
         }
         static void LogInfo(string message)
         {
-            Console.WriteLine($"[{DateTime.Now.ToString()}]| {message}");
+            var logger = IoCFactory.Resolve<ILogger>();
+            logger.LogInfo(message);
         }
     }
 
@@ -354,7 +354,7 @@ namespace AlgorytmEwolucyjny
         }
         private GeneticEnvironment()
         {
-            this.ProblemKlienta = new ProblemKlienta(new DirectFileLogger(ConfigurationManager.AppSettings["pathToInfoFile"], ConfigurationManager.AppSettings["pathToExceptionFile"]));
+            this.ProblemKlienta = new ProblemKlienta(new DirectFileLogger());
         }
         private static Random _CUBE;
         public static Random CUBE
@@ -453,11 +453,11 @@ namespace AlgorytmEwolucyjny
             {
                 if (GeneticEnvironment.INSTANCE.ModyfikatorWyniku < 0)
                 {
-                    return genotypes.OrderBySurvivalScore()[0];
+                    return genotypes.OrderBy(p => p.SurvivalScore).ToArray()[0];
                 }
                 else
                 {
-                    return genotypes.OrderBySurvivalScore()[genotypes.Length - 1];
+                    return genotypes.OrderBy(p => p.SurvivalScore).ToArray()[genotypes.Length - 1];
                 }
             }
         }
@@ -473,6 +473,10 @@ namespace AlgorytmEwolucyjny
     }
     public class Individual
     {
+        public Individual()
+        {
+            _survivalScore = null;
+        }
         public bool CzyPoprawny
         {
             get
@@ -502,11 +506,17 @@ namespace AlgorytmEwolucyjny
                 return genotype;
             }
         }
-        public double SurvivalScore
+        private double? _survivalScore;
+        public double? SurvivalScore
         {
             get
             {
-                return GeneticEnvironment.SurvivalFunction(Fenotype);
+                if (_survivalScore == null && Fenotype != null)
+                {
+                    _survivalScore = GeneticEnvironment.SurvivalFunction(Fenotype);
+                }
+
+                return _survivalScore;
             }
         }
         public override string ToString()
@@ -538,11 +548,6 @@ namespace AlgorytmEwolucyjny
     }
     public static class GeneticExtensions
     {
-        public static Individual[] OrderBySurvivalScore(this Individual[] genotypes)
-        {
-            Array.Sort(genotypes, delegate (Individual x, Individual y) { return x.SurvivalScore.CompareTo(y.SurvivalScore); });
-            return genotypes;
-        }
 
         public static Individual GetTournamentParent(this Population population)
         {
@@ -550,16 +555,16 @@ namespace AlgorytmEwolucyjny
             Individual[] competitors = new Individual[TOURNAMENTSIZE];
             for (int i = 0; i < TOURNAMENTSIZE; i++)
             {
-                competitors = competitors.Add(population.genotypes[GeneticEnvironment.CUBE.Next(0, population.genotypes.Length)]);
+                competitors[i] = population.genotypes[GeneticEnvironment.CUBE.Next(0, population.genotypes.Length)];
             }
-            return competitors.OrderBySurvivalScore()[competitors.Length - 1];
+            return competitors.OrderBy(p => p.SurvivalScore).ToArray()[competitors.Length - 1];
         }
 
         public static Individual GetRouletteParent(this Population population)
         {
-            var sorted = population.genotypes.OrderBySurvivalScore();
+            var sorted = population.genotypes.OrderBy(p => p.SurvivalScore).ToArray();
             var theLastIndividual = sorted[sorted.Length - 1];
-            double maxSumRange = 0;
+            double? maxSumRange = 0;
             for (int j = 0; j < population.genotypes.Length; j++)
             {
                 maxSumRange += theLastIndividual.SurvivalScore / population.genotypes[j].SurvivalScore;
@@ -587,7 +592,7 @@ namespace AlgorytmEwolucyjny
 
         public static Individual GetRankedRouletteParent(this Population population)
         {
-            population.genotypes.OrderBySurvivalScore();
+            population.genotypes.OrderBy(p => p.SurvivalScore).ToArray();
 
             var sumArray = ((population.genotypes.Length - 1) / 2) * population.genotypes.Length;
             Individual parent = null;
@@ -638,15 +643,6 @@ namespace AlgorytmEwolucyjny
                 array[k] = array[n];
                 array[n] = value;
             }
-        }
-        public static double Sum(this Individual[] arrayOfStuff)
-        {
-            double sum = 0;
-            foreach (var item in arrayOfStuff)
-            {
-                sum += item.SurvivalScore;
-            }
-            return sum;
         }
         public static T[] Add<T>(this T[] array, T newItem)
         {

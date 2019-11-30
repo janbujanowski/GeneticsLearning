@@ -79,28 +79,17 @@ namespace srodowisko
         }
         public int Rozmiar(int numer_zbioru = 0)
         {
-            return marketData.Count;
+            return 35;
         }
         public double Ocena(int[] oneLayeredNetwork)
         {
             double startBalance = 10000.0;
-
-            Dictionary<string, object> parametersForLogging = new Dictionary<string, object>();
             double currentBallance = startBalance;
-            for (int i = 0; i < marketData.Count; i++)
+            for (int i = oneLayeredNetwork.GetPeriods(); i < marketData.Count; i++)
             {
-                var todayData = marketData[i];
-                var periods = oneLayeredNetwork[10];
-                var rsiRangeIndex = i - periods;
-                if (rsiRangeIndex < 0)
-                {
-                    _logger.LogInfo($"Skipping day, periods : {periods}, i : {i}");
-                }
-                else
-                {
-                    List<DailyMarketData> historicalData = marketData.Skip(rsiRangeIndex).Take(periods).ToList();
-                    currentBallance = BuyOrSellAndGetCurrentBallance(historicalData, currentBallance, oneLayeredNetwork);
-                }
+                var rsiRangeIndex = i - oneLayeredNetwork.GetPeriods();
+                List<DailyMarketData> historicalData = marketData.Skip(rsiRangeIndex).Take(oneLayeredNetwork.GetPeriods()).ToList();
+                currentBallance = BuyOrSellAndGetCurrentBallance(historicalData, currentBallance, oneLayeredNetwork);
             }
             return currentBallance - startBalance;
         }

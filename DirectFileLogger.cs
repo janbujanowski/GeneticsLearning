@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,14 @@ namespace AlgorytmEwolucyjny
         string _pathToExceptionFile, _pathToInfoFile;
         public DirectFileLogger(string pathToInfoFile, string pathToExceptionFile)
         {
-            _pathToExceptionFile = pathToExceptionFile;
             _pathToInfoFile = pathToInfoFile;
+            _pathToExceptionFile = pathToExceptionFile;
+        }
+        public DirectFileLogger()
+        {
+            //get default logger
+            _pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"]; 
+            _pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"];
         }
 
         public void LogException(Exception ex, string message, params object[] args)

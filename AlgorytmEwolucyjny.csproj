@@ -47,6 +47,7 @@
     <Compile Include="ILogger.cs" />
     <Compile Include="DirectFileLogger.cs" />
     <Compile Include="IntArrayExtensions.cs" />
+    <Compile Include="IoCFactory.cs" />
     <Compile Include="MarketFunctions.cs" />
     <Compile Include="ProblemKlienta.cs" />
     <Compile Include="Program.cs" />
