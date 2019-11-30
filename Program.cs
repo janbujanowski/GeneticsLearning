@@ -12,13 +12,12 @@ namespace AlgorytmEwolucyjny
             ILogger loggerInstance = new DirectFileLogger();
             MarketFunctions market = new MarketFunctions(loggerInstance);
 
-            LogInfo("===================================SEPARATOR================================================");
             LogInfo($"New instance, passed parameters {string.Join(",", args)}");
 
             //RunTests();
             GeneticEnvironment.INSTANCE.StartDate = DateTime.Now;
             GeneticEnvironment.INSTANCE.ParseParameters(args);
-            StatsInfo[] heavensOne = new StatsInfo[1];
+            StatsInfo[] heavensOne;
             Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
             LogInfo($"Nr Problemu {GeneticEnvironment.INSTANCE.NrProblemu} Rozmiar tablicy : {newRandomPopulation[0].genotype.Length} ");
             Population pop = new Population()
@@ -137,7 +136,7 @@ namespace AlgorytmEwolucyjny
             {
                 population[i] = new Individual()
                 {
-                    genotype = GeneticEnvironment.INSTANCE.GetRandomCitiesRoute(nrProblemu)
+                    genotype = GeneticEnvironment.INSTANCE.GetRandomParametersArray(nrProblemu)
                 };
             }
             return population;
@@ -297,11 +296,7 @@ namespace AlgorytmEwolucyjny
         static Individual Mutate(int[] a)
         {
             int randomPosition = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-            int randomPosition2 = GeneticEnvironment.CUBE.Next(1, a.Length - 1);
-            int temp = a[randomPosition];
-            a[randomPosition] = a[randomPosition2];
-            a[randomPosition2] = temp;
-
+            a[randomPosition] = GeneticEnvironment.CUBE.Next(-1000,1000);
             return new Individual() { genotype = a };
         }
         static void LogInfo(string message)
@@ -328,15 +323,15 @@ namespace AlgorytmEwolucyjny
         public int MUTATIONRETRIALS = 4;
         StockMarketEvaluator ProblemKlienta;
         public Coords[] ParsedCitiesToVisit;
-        public int[] GetRandomCitiesRoute(int nrProblemu)
+        public int[] GetRandomParametersArray(int nrProblemu)
         {
 
             int[] genotype = new int[ProblemKlienta.Rozmiar(nrProblemu)];
             for (int i = 0; i < ProblemKlienta.Rozmiar(nrProblemu); i++)
             {
-                genotype[i] = i;
+                genotype[i] = GeneticEnvironment.CUBE.Next(-1000,1000);
             }
-            genotype.Shuffle();
+            
             return genotype;
 
         }
@@ -521,7 +516,7 @@ namespace AlgorytmEwolucyjny
         }
         public override string ToString()
         {
-            return $"Zarobiono :{SurvivalScore} poprawny : {CzyPoprawny}";
+            return $"Zarobił :{SurvivalScore} oraz na testowych danych : {new StockMarketEvaluator(IoCFactory.Resolve<ILogger>(), ConfigurationManager.AppSettings["pathToTestMarketDataFile"]).Ocena(Fenotype)}";
         }
     }
     public class StatsInfo
@@ -544,7 +539,8 @@ namespace AlgorytmEwolucyjny
     {
         PMX,
         OX,
-        CX
+        CX,
+        Basic
     }
     public static class GeneticExtensions
     {

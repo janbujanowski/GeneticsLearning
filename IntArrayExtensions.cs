@@ -9,17 +9,24 @@ namespace AlgorytmEwolucyjny
     public static class IntArrayExtensions
     {
         static int hasSharesIndex = 26;
+        static int periodsIndex = 10;
         public static int GetPeriods(this int[] neuralArray)
         {
-            return neuralArray[10];
-        }
-        public static double GetRSIModifier(this int[] neuralArray)
-        {
-            if (neuralArray[12] == 0)
+            if (neuralArray[periodsIndex] < 0)
             {
-                return 0;
+                neuralArray[periodsIndex] = GeneticEnvironment.CUBE.Next(1, 255);
             }
-            return neuralArray[11]/ neuralArray[12];
+            return neuralArray[periodsIndex];
+        }
+        public static Dictionary<string,double> GetModifiers(this int[] neuralArray)
+        {
+            var modifiers = new Dictionary<string, double>();
+            modifiers.Add("RSI", neuralArray[12] == 0 ? 0 : (double)neuralArray[11] / (double)neuralArray[12]);
+            modifiers.Add("Opening", neuralArray[14] == 0 ? 0 : (double)neuralArray[13] / (double)neuralArray[14]);
+            modifiers.Add("Min", neuralArray[16] == 0 ? 0 : (double)neuralArray[15] / (double)neuralArray[16]);
+            modifiers.Add("Max", neuralArray[18] == 0 ? 0 : (double)neuralArray[17] / (double)neuralArray[18]);
+            modifiers.Add("Closing", neuralArray[20] == 0 ? 0 : (double)neuralArray[19] / (double)neuralArray[20]);
+            return modifiers;
         }
         public static int GetBuyLimit(this int[] neuralArray)
         {

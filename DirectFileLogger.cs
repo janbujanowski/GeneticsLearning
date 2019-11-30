@@ -29,6 +29,7 @@ namespace AlgorytmEwolucyjny
             {
                 throw new Exception("Exception log file is not specified");
             }
+            WriteToFile(_pathToExceptionFile, $"==========================================NEW ENTRY==========================================");
             WriteToFile(_pathToExceptionFile, $"Error message : [{ message }]");
             WriteToFile(_pathToExceptionFile, $"Exception message : [{ ex.Message }]");
             WriteToFile(_pathToExceptionFile, $"Stacktrace : [{ ex.StackTrace }]");
@@ -53,7 +54,6 @@ namespace AlgorytmEwolucyjny
         private void WriteToFile(string path, string message)
         {
             var stream = File.AppendText(path);
-            stream.WriteLine($"|{ DateTime.Now.ToString() }|: ==========================================NEW ENTRY==========================================");
             stream.WriteLine($"|{ DateTime.Now.ToString() }|: { message }");
             stream.Flush();
             stream.Dispose();

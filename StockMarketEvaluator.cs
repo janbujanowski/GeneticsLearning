@@ -19,7 +19,8 @@ namespace srodowisko
         {
             _logger = loggerInstance;
             _marketFunctions = new MarketFunctions(_logger);
-            if (string.IsNullOrEmpty(pathToDataFile))
+            _pathToDataFile = pathToDataFile;
+            if (string.IsNullOrEmpty(_pathToDataFile))
             {
                 _pathToDataFile = ConfigurationManager.AppSettings["pathToMarketDataFile"];
             }
@@ -100,9 +101,15 @@ namespace srodowisko
 
         private double BuyOrSellAndGetCurrentBallance(List<DailyMarketData> historicalData, double currentBallance, int[] oneLayeredNetwork)
         {
+            DailyMarketData todayData = historicalData.Last();
             double networkOutcomeIndicator = 0;
             var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
-            networkOutcomeIndicator = rsiValue * oneLayeredNetwork.GetRSIModifier();
+            var modifiers = oneLayeredNetwork.GetModifiers();
+            networkOutcomeIndicator = rsiValue * modifiers["RSI"]
+                                    + todayData.Opening * modifiers["Opening"] 
+                                    + todayData.Min * modifiers["Min"] 
+                                    + todayData.Max * modifiers["Max"] 
+                                    + todayData.Closing * modifiers["Closing"] ;
             if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
             {
                 oneLayeredNetwork.BuyShares();
