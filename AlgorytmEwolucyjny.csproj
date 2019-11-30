@@ -49,7 +49,7 @@
     <Compile Include="IntArrayExtensions.cs" />
     <Compile Include="IoCFactory.cs" />
     <Compile Include="MarketFunctions.cs" />
-    <Compile Include="ProblemKlienta.cs" />
+    <Compile Include="StockMarketEvaluator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

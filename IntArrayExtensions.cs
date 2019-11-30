@@ -8,6 +8,7 @@ namespace AlgorytmEwolucyjny
 {
     public static class IntArrayExtensions
     {
+        static int hasSharesIndex = 26;
         public static int GetPeriods(this int[] neuralArray)
         {
             return neuralArray[10];
@@ -31,6 +32,18 @@ namespace AlgorytmEwolucyjny
         public static int GetVolume(this int[] neuralArray)
         {
             return neuralArray[27];
+        }
+        public static bool GetHasShares(this int[] neuralArray)
+        {
+            return neuralArray[hasSharesIndex] == 1;
+        }
+        public static void BuyShares(this int[] neuralArray)
+        {
+            neuralArray[hasSharesIndex] = 1;
+        }
+        public static void SellShares(this int[] neuralArray)
+        {
+            neuralArray[hasSharesIndex] = 0;
         }
         public static bool IsValidNeuralArray(this int[] neuralArray)
         {

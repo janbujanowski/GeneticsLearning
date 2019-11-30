@@ -326,7 +326,7 @@ namespace AlgorytmEwolucyjny
         public SelectionMethods SelectionMethod = SelectionMethods.Roulette;
         public CrossoverMethods CrossoverMethod = CrossoverMethods.OX;
         public int MUTATIONRETRIALS = 4;
-        ProblemKlienta ProblemKlienta;
+        StockMarketEvaluator ProblemKlienta;
         public Coords[] ParsedCitiesToVisit;
         public int[] GetRandomCitiesRoute(int nrProblemu)
         {
@@ -354,7 +354,7 @@ namespace AlgorytmEwolucyjny
         }
         private GeneticEnvironment()
         {
-            this.ProblemKlienta = new ProblemKlienta(new DirectFileLogger());
+            this.ProblemKlienta = new StockMarketEvaluator(new DirectFileLogger());
         }
         private static Random _CUBE;
         public static Random CUBE
@@ -521,7 +521,7 @@ namespace AlgorytmEwolucyjny
         }
         public override string ToString()
         {
-            return $"Dlugosc trasy :{SurvivalScore} poprawny : {CzyPoprawny}";
+            return $"Zarobiono :{SurvivalScore} poprawny : {CzyPoprawny}";
         }
     }
     public class StatsInfo

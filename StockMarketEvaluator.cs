@@ -9,16 +9,20 @@ using System.Threading.Tasks;
 
 namespace srodowisko
 {
-    public class ProblemKlienta
+    public class StockMarketEvaluator
     {
         List<DailyMarketData> marketData;
-        string _pathToDataFile = ConfigurationManager.AppSettings["pathToMarketDataFile"];
+        string _pathToDataFile;
         ILogger _logger;
         MarketFunctions _marketFunctions;
-        public ProblemKlienta(ILogger loggerInstance)
+        public StockMarketEvaluator(ILogger loggerInstance,string pathToDataFile = null)
         {
             _logger = loggerInstance;
             _marketFunctions = new MarketFunctions(_logger);
+            if (string.IsNullOrEmpty(pathToDataFile))
+            {
+                _pathToDataFile = ConfigurationManager.AppSettings["pathToMarketDataFile"];
+            }
             LoadMarketData(_pathToDataFile);
         }
         public void LoadMarketData(string filePath)
@@ -99,12 +103,14 @@ namespace srodowisko
             double networkOutcomeIndicator = 0;
             var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
             networkOutcomeIndicator = rsiValue * oneLayeredNetwork.GetRSIModifier();
-            if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit())
+            if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
             {
+                oneLayeredNetwork.BuyShares();
                 currentBallance -= historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
             }
-            else if (networkOutcomeIndicator < oneLayeredNetwork.GetStopLimit())
+            else if (networkOutcomeIndicator < oneLayeredNetwork.GetStopLimit() && oneLayeredNetwork.GetHasShares())
             {
+                oneLayeredNetwork.SellShares();
                 currentBallance += historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
             }
 
