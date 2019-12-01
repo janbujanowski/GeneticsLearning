@@ -79,59 +79,36 @@ namespace AlgorytmEwolucyjny
         {
             try
             {
-                Console.Write($"Parsowanie daty stopu : {args[0]}");
-                INSTANCE.StopDate = DateTime.Parse(ConfigurationManager.AppSettings["StopDate"]); //DateTime.Parse(args[0]);//Data stopu
-                Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
-                Console.WriteLine($"DATA STARTU |{INSTANCE.StopDate.ToString()}|");
-                Console.WriteLine($"DATA ZAKONCZENA |{INSTANCE.StopDate.ToString()}|");
-
-
-                Console.Write($"Parsowanie rozmiaru populacji (int) : {args[1]}");
-                INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);//Rozmiar Populacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.POPULATIONSIZE.ToString()}");
-
-                Console.Write($"Parsowanie prawdopodobieństwo mutacji (double) : {args[2]}");
-                INSTANCE.MUTATIONPROBABILITY = double.Parse(ConfigurationManager.AppSettings["MUTATIONPROBABILITY"]);//Prawdopodobienstwo mutacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.MUTATIONPROBABILITY.ToString()}");
-
-                Console.Write($"Parsowanie ilosc prob mutacji (int) : {args[3]}");
-                INSTANCE.MUTATIONRETRIALS = Int32.Parse(ConfigurationManager.AppSettings["MUTATIONRETRIALS"]);//Ilosc prob mutacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.MUTATIONRETRIALS.ToString()}");
-
-                Console.Write($"Parsowanie selekcji (enum) : {args[4]}");
-                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), ConfigurationManager.AppSettings["SelectionMethod"]);//Rodzaj selekcji
-                Console.WriteLine($" Sparsowano : {INSTANCE.SelectionMethod.ToString()}");
-
-                Console.Write($"Parsowanie krzyzowania (enum) : {args[5]}");
-                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), ConfigurationManager.AppSettings["CrossoverMethod"]);//Rodzaj krzyzowania
-                Console.WriteLine($" Sparsowano : {INSTANCE.CrossoverMethod.ToString()}");
-
-                Console.Write($"Parsowanie iteracji (int) : {args[6]}");
-                INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);//Ilosc iteracji bez poprawy
-                Console.WriteLine($" Sparsowano : {INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT.ToString()}");
-
-                Console.Write($"Parsowanie modyfikatora (double) : {args[7]}");
+                INSTANCE.StopDate = DateTime.Parse(ConfigurationManager.AppSettings["StopDate"]);
+                //INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);
+                INSTANCE.MUTATIONPROBABILITY = double.Parse(ConfigurationManager.AppSettings["MUTATIONPROBABILITY"]);
+                INSTANCE.MUTATIONRETRIALS = Int32.Parse(ConfigurationManager.AppSettings["MUTATIONRETRIALS"]);
+                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), ConfigurationManager.AppSettings["SelectionMethod"]);
+                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), ConfigurationManager.AppSettings["CrossoverMethod"]);
+                //INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);
                 INSTANCE.ModyfikatorWyniku = double.Parse(ConfigurationManager.AppSettings["ScoreModifier"]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
-                Console.WriteLine($" Sparsowano : {INSTANCE.ModyfikatorWyniku.ToString()}");
-
-                Console.Write($"Parsowanie numeru zbioru (int) : {args[8]}");
-                INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
-                Console.WriteLine($" Sparsowano : {INSTANCE.NrProblemu.ToString()}");
-
-                Console.Write($"Parsowanie czasu do stopu (double) : {args[9]}");
+                //INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
                 var dataStopuOdMinut = DateTime.Now.AddMinutes(double.Parse(ConfigurationManager.AppSettings["MinutesLimit"]));
                 if (dataStopuOdMinut < StopDate)
                 {
                     INSTANCE.StopDate = dataStopuOdMinut;
-                    Console.WriteLine($" Sparsowano : {INSTANCE.StopDate.ToString()}");
                 }
-                var jsonContent = File.ReadAllText(ConfigurationManager.AppSettings["StartingIndividual"]);
-                if (!string.IsNullOrEmpty(jsonContent))
+                Console.WriteLine($"DATA STARTU |{DateTime.Now.ToString()}|");
+                Console.WriteLine($"DATA ZAKONCZENA |{INSTANCE.StopDate.ToString()}|");
+                Console.WriteLine($"MUTATIONPROBABILITY : |{INSTANCE.MUTATIONPROBABILITY.ToString()}|");
+                Console.WriteLine($"MUTATIONRETRIALS : |{INSTANCE.MUTATIONRETRIALS.ToString()}|");
+                if (File.Exists(ConfigurationManager.AppSettings["StartingIndividual"]))
                 {
-                    //Console.Write($"Parsowanie osobnika : {args[10]}");
-                    //var genotypeArray = args[10].Split(',');
-                    INSTANCE.BestGenotype = JsonConvert.DeserializeObject<Individual>(jsonContent).genotype;
+                    var jsonContent = File.ReadAllText(ConfigurationManager.AppSettings["StartingIndividual"]);
+                    if (!string.IsNullOrEmpty(jsonContent))
+                    {
+                        INSTANCE.BestGenotype = JsonConvert.DeserializeObject<Individual>(jsonContent).genotype;
+                    }
                 }
+                _logger.LogInfo($"DATA STARTU |{DateTime.Now.ToString()}|");
+                _logger.LogInfo($"DATA ZAKONCZENA |{INSTANCE.StopDate.ToString()}|");
+                _logger.LogInfo($"MUTATIONPROBABILITY : |{INSTANCE.MUTATIONPROBABILITY.ToString()}|");
+                _logger.LogInfo($"MUTATIONRETRIALS : |{INSTANCE.MUTATIONRETRIALS.ToString()}|");
             }
             catch (Exception ex)
             {

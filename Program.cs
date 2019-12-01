@@ -14,9 +14,6 @@ namespace AlgorytmEwolucyjny
         {
             ILogger loggerInstance = new DirectFileLogger();
             MarketFunctions market = new MarketFunctions(loggerInstance);
-
-            LogInfo($"New instance, passed parameters {string.Join(",", args)}");
-
             //RunTests();
             GeneticEnvironment.INSTANCE.StartDate = DateTime.Now;
             GeneticEnvironment.INSTANCE.ParseParameters(args);
@@ -33,7 +30,7 @@ namespace AlgorytmEwolucyjny
             LogInfo($"Fenotyp : { string.Join(",", bestIndividualStats.Individual.Fenotype) }");
             LogInfo($"Genotyp : { string.Join(",", bestIndividualStats.Individual.genotype) }");
             string csvFileContent = string.Empty;
-            var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Date) + Environment.NewLine);
+            var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Individual.TestedSurvivalScore, x.Date) + Environment.NewLine);
             csvFileContent += string.Join("", lolek);
             File.WriteAllText(ConfigurationManager.AppSettings["pathToOutputCsvFile"], csvFileContent);
             string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
@@ -126,6 +123,10 @@ namespace AlgorytmEwolucyjny
                     loggerInstance.LogInfo($"Populacja { populationCount } Nowy osobnik { pop.BestOne.ToString() }");
                 }
                 populationCount++;
+                if (populationCount % 20 == 0)
+                {
+                    Console.WriteLine($"|{ DateTime.Now.ToString() }|: Populacja : {populationCount} ");
+                }
             }
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
             LogInfo($"Czas pracy w minutach : {(GeneticEnvironment.INSTANCE.StopDate - GeneticEnvironment.INSTANCE.StartDate).TotalMinutes}");

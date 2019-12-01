@@ -101,26 +101,32 @@ namespace srodowisko
 
         private double BuyOrSellAndGetCurrentBallance(List<DailyMarketData> historicalData, double currentBallance, int[] oneLayeredNetwork)
         {
-            DailyMarketData todayData = historicalData.Last();
-            double networkOutcomeIndicator = 0;
-            var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
-            var modifiers = oneLayeredNetwork.GetModifiers();
-            networkOutcomeIndicator = rsiValue * modifiers["RSI"]
-                                    + todayData.Opening * modifiers["Opening"]
-                                    + todayData.Min * modifiers["Min"]
-                                    + todayData.Max * modifiers["Max"]
-                                    + todayData.Closing * modifiers["Closing"];
-            if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
+            try
             {
-                oneLayeredNetwork.BuyShares();
-                currentBallance -= historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
+                DailyMarketData todayData = historicalData.Last();
+                double networkOutcomeIndicator = 0;
+                var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
+                var modifiers = oneLayeredNetwork.GetModifiers();
+                networkOutcomeIndicator = rsiValue * modifiers["RSI"]
+                                        + todayData.Opening * modifiers["Opening"]
+                                        + todayData.Min * modifiers["Min"]
+                                        + todayData.Max * modifiers["Max"]
+                                        + todayData.Closing * modifiers["Closing"];
+                if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
+                {
+                    oneLayeredNetwork.BuyShares();
+                    currentBallance -= historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
+                }
+                else if (networkOutcomeIndicator < oneLayeredNetwork.GetStopLimit() && oneLayeredNetwork.GetHasShares())
+                {
+                    oneLayeredNetwork.SellShares();
+                    currentBallance += historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
+                }
             }
-            else if (networkOutcomeIndicator < oneLayeredNetwork.GetStopLimit() && oneLayeredNetwork.GetHasShares())
+            catch (Exception ex) 
             {
-                oneLayeredNetwork.SellShares();
-                currentBallance += historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
+                _logger.LogException(ex, "During counting network indicator");
             }
-
             return currentBallance;
         }
     }
