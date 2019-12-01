@@ -32,9 +32,9 @@ namespace AlgorytmEwolucyjny
             string csvFileContent = string.Empty;
             var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Individual.TestedSurvivalScore, x.Date) + Environment.NewLine);
             csvFileContent += string.Join("", lolek);
-            File.WriteAllText(ConfigurationManager.AppSettings["pathToOutputCsvFile"], csvFileContent);
+            File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
             string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
-            File.WriteAllText(ConfigurationManager.AppSettings["StartingIndividual"], jsonIndividual);
+            File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "StartingIndividual"), jsonIndividual);
         }
         #region Metody testowe 
         private static void RunTests()
@@ -393,9 +393,8 @@ namespace AlgorytmEwolucyjny
             {
                 if (_testedSurvivalScore == null && Fenotype != null)
                 {
-                    _testedSurvivalScore = new StockMarketEvaluator(IoCFactory.Resolve<ILogger>(), ConfigurationManager.AppSettings["pathToTestMarketDataFile"]).Ocena(genotype);
+                    _testedSurvivalScore = new StockMarketEvaluator(IoCFactory.Resolve<ILogger>(), IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToTestMarketDataFile")).Ocena(genotype);
                 }
-
                 return _testedSurvivalScore;
             }
         }

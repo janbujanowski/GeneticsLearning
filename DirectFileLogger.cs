@@ -19,8 +19,8 @@ namespace AlgorytmEwolucyjny
         public DirectFileLogger()
         {
             //get default logger
-            _pathToInfoFile = ConfigurationManager.AppSettings["pathToInfoFile"];
-            _pathToExceptionFile = ConfigurationManager.AppSettings["pathToExceptionFile"];
+            _pathToInfoFile = IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToInfoFile");
+            _pathToExceptionFile = IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToExceptionFile");
         }
 
         public void LogException(Exception ex, string message, params object[] args)

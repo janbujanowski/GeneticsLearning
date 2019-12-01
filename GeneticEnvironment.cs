@@ -27,6 +27,7 @@ namespace AlgorytmEwolucyjny
         public int MUTATIONRETRIALS = 4;
         StockMarketEvaluator problemToResolve;
         ILogger _logger;
+        IConfigurationProvider _configurationProvider;
 
         public int[] GetRandomParametersArray(int nrProblemu)
         {
@@ -44,15 +45,16 @@ namespace AlgorytmEwolucyjny
             {
                 if (_config == null)
                 {
-                    _config = new GeneticEnvironment(IoCFactory.Resolve<ILogger>());
+                    _config = new GeneticEnvironment(IoCFactory.Resolve<ILogger>(), IoCFactory.Resolve<IConfigurationProvider>());
                 }
                 return _config;
             }
         }
-        private GeneticEnvironment(ILogger loggerInstance)
+        private GeneticEnvironment(ILogger loggerInstance, IConfigurationProvider configurationProvider)
         {
             problemToResolve = new StockMarketEvaluator(new DirectFileLogger());
             _logger = loggerInstance;
+            _configurationProvider = configurationProvider;
         }
         private static Random _CUBE;
         public static Random CUBE
@@ -79,16 +81,16 @@ namespace AlgorytmEwolucyjny
         {
             try
             {
-                INSTANCE.StopDate = DateTime.Parse(ConfigurationManager.AppSettings["StopDate"]);
+                INSTANCE.StopDate = DateTime.Parse(_configurationProvider["StopDate"]);
                 //INSTANCE.POPULATIONSIZE = Int32.Parse(args[1]);
-                INSTANCE.MUTATIONPROBABILITY = double.Parse(ConfigurationManager.AppSettings["MUTATIONPROBABILITY"]);
-                INSTANCE.MUTATIONRETRIALS = Int32.Parse(ConfigurationManager.AppSettings["MUTATIONRETRIALS"]);
-                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), ConfigurationManager.AppSettings["SelectionMethod"]);
-                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), ConfigurationManager.AppSettings["CrossoverMethod"]);
+                INSTANCE.MUTATIONPROBABILITY = double.Parse(_configurationProvider["MUTATIONPROBABILITY"]);
+                INSTANCE.MUTATIONRETRIALS = Int32.Parse(_configurationProvider["MUTATIONRETRIALS"]);
+                INSTANCE.SelectionMethod = (SelectionMethods)Enum.Parse(typeof(SelectionMethods), _configurationProvider["SelectionMethod"]);
+                INSTANCE.CrossoverMethod = (CrossoverMethods)Enum.Parse(typeof(CrossoverMethods), _configurationProvider["CrossoverMethod"]);
                 //INSTANCE.ITERATIONSWITHOUTBETTERSCOREMAXCOUNT = Int32.Parse(args[6]);
-                INSTANCE.ModyfikatorWyniku = double.Parse(ConfigurationManager.AppSettings["ScoreModifier"]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
+                INSTANCE.ModyfikatorWyniku = double.Parse(_configurationProvider["ScoreModifier"]);//1 lub -1 zaleznie od rodzaju problemu maksymalizacji/minimalizacji
                 //INSTANCE.NrProblemu = Int32.Parse(args[8]);//numer zbioru
-                var dataStopuOdMinut = DateTime.Now.AddMinutes(double.Parse(ConfigurationManager.AppSettings["MinutesLimit"]));
+                var dataStopuOdMinut = DateTime.Now.AddMinutes(double.Parse(_configurationProvider["MinutesLimit"]));
                 if (dataStopuOdMinut < StopDate)
                 {
                     INSTANCE.StopDate = dataStopuOdMinut;
@@ -99,7 +101,7 @@ namespace AlgorytmEwolucyjny
                 Console.WriteLine($"MUTATIONRETRIALS : |{INSTANCE.MUTATIONRETRIALS.ToString()}|");
                 if (File.Exists(ConfigurationManager.AppSettings["StartingIndividual"]))
                 {
-                    var jsonContent = File.ReadAllText(ConfigurationManager.AppSettings["StartingIndividual"]);
+                    var jsonContent = File.ReadAllText(_configurationProvider.GetConfigurationString("workingDirectory", "StartingIndividual"));
                     if (!string.IsNullOrEmpty(jsonContent))
                     {
                         INSTANCE.BestGenotype = JsonConvert.DeserializeObject<Individual>(jsonContent).genotype;

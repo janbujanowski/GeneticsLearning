@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="DailyMarketData.cs" />
     <Compile Include="GeneticEnvironment.cs" />
+    <Compile Include="IConfigurationProvider.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="DirectFileLogger.cs" />
     <Compile Include="IntArrayExtensions.cs" />

@@ -22,7 +22,7 @@ namespace srodowisko
             _pathToDataFile = pathToDataFile;
             if (string.IsNullOrEmpty(_pathToDataFile))
             {
-                _pathToDataFile = ConfigurationManager.AppSettings["pathToMarketDataFile"];
+                _pathToDataFile = IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToMarketDataFile");
             }
             LoadMarketData(_pathToDataFile);
         }
@@ -123,7 +123,7 @@ namespace srodowisko
                     currentBallance += historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 _logger.LogException(ex, "During counting network indicator");
             }

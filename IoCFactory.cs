@@ -12,6 +12,7 @@ namespace AlgorytmEwolucyjny
         private static void ContainerWarmUp()
         {
             _registeredDependencies = new Dictionary<Type, object>();
+            _registeredDependencies.Add(typeof(IConfigurationProvider), new ConfigurationProvider());
             _registeredDependencies.Add(typeof(ILogger), new DirectFileLogger());
         }
 
