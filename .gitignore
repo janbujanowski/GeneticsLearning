@@ -9,3 +9,6 @@ bin/Release
 ParserLoga/obj/
 ParserLoga/bin/
 packages
+Iteration1/*/*.dll
+Iteration1/*/*.xml
+Iteration1/*/*Exception.txt
