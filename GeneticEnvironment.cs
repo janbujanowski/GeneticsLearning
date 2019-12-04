@@ -99,7 +99,7 @@ namespace AlgorytmEwolucyjny
                 Console.WriteLine($"DATA ZAKONCZENA |{INSTANCE.StopDate.ToString()}|");
                 Console.WriteLine($"MUTATIONPROBABILITY : |{INSTANCE.MUTATIONPROBABILITY.ToString()}|");
                 Console.WriteLine($"MUTATIONRETRIALS : |{INSTANCE.MUTATIONRETRIALS.ToString()}|");
-                if (File.Exists(ConfigurationManager.AppSettings["StartingIndividual"]))
+                if (File.Exists(_configurationProvider.GetConfigurationString("workingDirectory", "StartingIndividual")))
                 {
                     var jsonContent = File.ReadAllText(_configurationProvider.GetConfigurationString("workingDirectory", "StartingIndividual"));
                     if (!string.IsNullOrEmpty(jsonContent))
