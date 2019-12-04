@@ -29,7 +29,7 @@ namespace AlgorytmEwolucyjny
             {
                 throw new Exception("Exception log file is not specified");
             }
-            WriteToFile(_pathToInfoFile, $"ERROR {ex.Message}");
+            WriteToFile(_pathToInfoFile, $"ERROR {message} Exception message : {ex.Message}");
             WriteToFile(_pathToExceptionFile, $"==========================================NEW ENTRY==========================================");
             WriteToFile(_pathToExceptionFile, $"Error message : [{ message }]");
             WriteToFile(_pathToExceptionFile, $"Exception message : [{ ex.Message }]");
@@ -49,7 +49,7 @@ namespace AlgorytmEwolucyjny
             {
                 throw new Exception("Info log file is not specified");
             }
-            WriteToFile(_pathToInfoFile, $"Info : [{ message }]");
+            WriteToFile(_pathToInfoFile, $"INFO : [{ message }]");
         }
 
         private void WriteToFile(string path, string message)
