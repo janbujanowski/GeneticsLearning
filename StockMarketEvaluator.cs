@@ -30,16 +30,18 @@ namespace srodowisko
         {
             string[] lines = new string[1];
             int start = 0; int end = 0;
+            var currentrow = 0;
             try
             {
                 lines = File.ReadAllLines(filePath);
                 start = FindStartingIndex(lines);
                 end = FindEndIndex(lines);
                 marketData = new List<DailyMarketData>();
+                
                 for (int i = start; i < end; i++)
                 {
                     string[] values = lines[i].Split(',');
-
+                    currentrow = i;
                     DateTime date = DateTime.Parse(values[0]);
                     double opening = double.Parse(values[1]);
                     double max = double.Parse(values[2]);
