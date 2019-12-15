@@ -94,6 +94,10 @@ namespace srodowisko
             {
                 var rsiRangeIndex = i - oneLayeredNetwork.GetPeriods();
                 List<DailyMarketData> historicalData = marketData.Skip(rsiRangeIndex).Take(oneLayeredNetwork.GetPeriods()).ToList();
+                if (historicalData.Count == 0)
+                {
+                    return currentBallance;
+                }
                 currentBallance = BuyOrSellAndGetCurrentBallance(historicalData, currentBallance, oneLayeredNetwork);
             }
             return currentBallance - startBalance;
