@@ -369,7 +369,7 @@ namespace AlgorytmEwolucyjny
         {
             get
             {
-                return genotype.GetModifiers();
+                return genotype.GetInputLayerModifiers();
             }
         }
 

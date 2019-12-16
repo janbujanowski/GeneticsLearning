@@ -31,11 +31,12 @@ namespace AlgorytmEwolucyjny
 
         public int[] GetRandomParametersArray(int nrProblemu)
         {
-            int[] genotype = new int[problemToResolve.ProblemSize(nrProblemu)];
-            for (int i = 0; i < problemToResolve.ProblemSize(nrProblemu); i++)
+            int[] genotype = new int[IntArrayExtensions.neuralNetworkGenotypeLength];
+            for (int i = 0; i < genotype.Length; i++)
             {
-                genotype[i] = CUBE.Next(-1000, 1000);
+                genotype[i] = CUBE.Next(-100000, 100000);
             }
+            genotype.SetDefaultModifiers();
             return genotype;
         }
         private static GeneticEnvironment _config;

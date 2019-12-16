@@ -37,7 +37,7 @@ namespace srodowisko
                 start = FindStartingIndex(lines);
                 end = FindEndIndex(lines);
                 marketData = new List<DailyMarketData>();
-                
+
                 for (int i = start; i < end; i++)
                 {
                     string[] values = lines[i].Split(',');
@@ -84,56 +84,69 @@ namespace srodowisko
             }
             return i;
         }
-        public int ProblemSize(int numer_zbioru = 0)
-        {
-            return 35;
-        }
         public double Ocena(int[] oneLayeredNetwork)
         {
             double startBalance = 10000.0;
             double currentBallance = startBalance;
-            for (int i = oneLayeredNetwork.GetPeriods(); i < marketData.Count; i++)
+            var modifiers = oneLayeredNetwork.GetInputLayerModifiers();
+            var neuralayer = oneLayeredNetwork.GetHiddenLayerWeights();
+            var neuralayerOutput = oneLayeredNetwork.GetHiddenToOutputLayerWeights();
+            for (int i = oneLayeredNetwork.GetLongestPeriods(); i < marketData.Count; i++)
             {
-                var rsiRangeIndex = i - oneLayeredNetwork.GetPeriods();
-                List<DailyMarketData> historicalData = marketData.Skip(rsiRangeIndex).Take(oneLayeredNetwork.GetPeriods()).ToList();
-                if (historicalData.Count == 0)
+                double[] inputLayerScores = new double[IntArrayExtensions.neuronsInputLayerCount];
+                var rsiPeriods = (int)modifiers["RSI"];
+                var bollingerPeriods = (int)modifiers["BollingerPeriods"];
+
+                inputLayerScores[0] = marketData[i].Min;
+                inputLayerScores[1] = marketData[i].Max;
+                inputLayerScores[2] = marketData[i].Closing;
+                inputLayerScores[3] = marketData[i].Volume * modifiers["Volume"];
+                inputLayerScores[4] = _marketFunctions.MACDIndicator(marketData.GetRange(i, oneLayeredNetwork.GetLongestPeriods()), modifiers["MACDEMA1"], modifiers["MACDEMA2"], modifiers["MACDEMASignal"]);
+                inputLayerScores[5] = _marketFunctions.RSI(marketData.GetRange(i - rsiPeriods, rsiPeriods), (int)modifiers["RSI"]);
+
+                var bollingerBands = _marketFunctions.BollingerBands(marketData.GetRange(i - bollingerPeriods, bollingerPeriods), bollingerPeriods, modifiers["BollingerDeviation"]);
+                inputLayerScores[6] = bollingerBands[0];
+                inputLayerScores[7] = bollingerBands[1];
+                inputLayerScores[8] = bollingerBands[2];
+
+                var hiddenLayerScores = new double[IntArrayExtensions.neuronsHiddenLayerCount];
+                for (int k = 0; k < IntArrayExtensions.neuronsHiddenLayerCount; k++)
                 {
-                    return currentBallance;
+                    hiddenLayerScores[k] = 0;
+                    for (int j = 0; j < IntArrayExtensions.neuronsInputLayerCount; j++)
+                    {
+                        hiddenLayerScores[k] += neuralayer[j, k] * inputLayerScores[j];
+                    }
                 }
-                currentBallance = BuyOrSellAndGetCurrentBallance(historicalData, currentBallance, oneLayeredNetwork);
+                var outputLayerScores = new double[IntArrayExtensions.neuronsOutputLayerCount];
+                for (int k = 0; k < IntArrayExtensions.neuronsOutputLayerCount; k++)
+                {
+                    outputLayerScores[k] = 0;
+                    for (int j = 0; j < IntArrayExtensions.neuronsHiddenLayerCount; j++)
+                    {
+                        hiddenLayerScores[k] += neuralayerOutput[j, k] * hiddenLayerScores[j];
+                    }
+                }
+
+                try
+                {
+                    if (outputLayerScores[0] > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
+                    {
+                        oneLayeredNetwork.BuyShares();
+                        currentBallance -= marketData[i].Closing * oneLayeredNetwork.GetVolume();
+                    }
+                    else if (outputLayerScores[0] < oneLayeredNetwork.GetStopLimit() && oneLayeredNetwork.GetHasShares())
+                    {
+                        oneLayeredNetwork.SellShares();
+                        currentBallance += marketData[i].Closing * oneLayeredNetwork.GetVolume();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogException(ex, "During executing transaction network indicator");
+                }
             }
             return currentBallance - startBalance;
-        }
-
-        private double BuyOrSellAndGetCurrentBallance(List<DailyMarketData> historicalData, double currentBallance, int[] oneLayeredNetwork)
-        {
-            try
-            {
-                DailyMarketData todayData = historicalData.Last();
-                double networkOutcomeIndicator = 0;
-                var rsiValue = _marketFunctions.RSI(historicalData, oneLayeredNetwork.GetPeriods());
-                var modifiers = oneLayeredNetwork.GetModifiers();
-                networkOutcomeIndicator = rsiValue * modifiers["RSI"]
-                                        + todayData.Opening * modifiers["Opening"]
-                                        + todayData.Min * modifiers["Min"]
-                                        + todayData.Max * modifiers["Max"]
-                                        + todayData.Closing * modifiers["Closing"];
-                if (networkOutcomeIndicator > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
-                {
-                    oneLayeredNetwork.BuyShares();
-                    currentBallance -= historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
-                }
-                else if (networkOutcomeIndicator < oneLayeredNetwork.GetStopLimit() && oneLayeredNetwork.GetHasShares())
-                {
-                    oneLayeredNetwork.SellShares();
-                    currentBallance += historicalData.OrderBy(x => x.Date).Last().Closing * oneLayeredNetwork.GetVolume();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogException(ex, "During counting network indicator");
-            }
-            return currentBallance;
         }
     }
 }
