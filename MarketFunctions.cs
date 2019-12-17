@@ -52,7 +52,10 @@ namespace AlgorytmEwolucyjny
                 };
             }
             var emaMacdSignal = EMA(macdDaily.ToList());
-
+            if (MACDEMASignal == 0)
+            {
+                return 0;
+            }
             return emaMacdSignal - macdDaily[0].Closing;
         }
 

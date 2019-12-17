@@ -91,7 +91,8 @@ namespace srodowisko
             var modifiers = oneLayeredNetwork.GetInputLayerModifiers();
             var neuralayer = oneLayeredNetwork.GetHiddenLayerWeights();
             var neuralayerOutput = oneLayeredNetwork.GetHiddenToOutputLayerWeights();
-            for (int i = oneLayeredNetwork.GetLongestPeriods(); i < marketData.Count; i++)
+            var longestPeriods = oneLayeredNetwork.GetLongestPeriods();
+            for (int i = longestPeriods; i < marketData.Count; i++)
             {
                 double[] inputLayerScores = new double[IntArrayExtensions.neuronsInputLayerCount];
                 var rsiPeriods = (int)modifiers["RSI"];
@@ -101,7 +102,7 @@ namespace srodowisko
                 inputLayerScores[1] = marketData[i].Max;
                 inputLayerScores[2] = marketData[i].Closing;
                 inputLayerScores[3] = marketData[i].Volume * modifiers["Volume"];
-                inputLayerScores[4] = _marketFunctions.MACDIndicator(marketData.GetRange(i, oneLayeredNetwork.GetLongestPeriods()), modifiers["MACDEMA1"], modifiers["MACDEMA2"], modifiers["MACDEMASignal"]);
+                inputLayerScores[4] = _marketFunctions.MACDIndicator(marketData.GetRange(i - longestPeriods, longestPeriods), modifiers["MACDEMA1"], modifiers["MACDEMA2"], modifiers["MACDEMASignal"]);
                 inputLayerScores[5] = _marketFunctions.RSI(marketData.GetRange(i - rsiPeriods, rsiPeriods), (int)modifiers["RSI"]);
 
                 var bollingerBands = _marketFunctions.BollingerBands(marketData.GetRange(i - bollingerPeriods, bollingerPeriods), bollingerPeriods, modifiers["BollingerDeviation"]);

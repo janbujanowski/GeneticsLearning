@@ -104,11 +104,11 @@ namespace AlgorytmEwolucyjny
             modifiers.Add("Max", neuralArray[18] == 0 ? 0 : (double)neuralArray[17] / (double)neuralArray[18]);
             modifiers.Add("Closing", neuralArray[20] == 0 ? 0 : (double)neuralArray[19] / (double)neuralArray[20]);
 
-            modifiers.Add("MACDEMA1", neuralArray[periodsIndex_MACDEMA1]);
-            modifiers.Add("MACDEMA2", neuralArray[periodsIndex_MACDEMA2]);
-            modifiers.Add("MACDEMASignal", neuralArray[periodsIndex_MACDEMASignal]);
-            modifiers.Add("RSI", neuralArray[periodsIndex_RSI]);
-            modifiers.Add("BollingerPeriods", neuralArray[periodsIndex_BollingerPeriods]);
+            modifiers.Add("MACDEMA1", neuralArray[periodsIndex_MACDEMA1] <= 0 ? 0 : neuralArray[periodsIndex_MACDEMA1]);
+            modifiers.Add("MACDEMA2", neuralArray[periodsIndex_MACDEMA2] <= 0 ? 0 : neuralArray[periodsIndex_MACDEMA2]);
+            modifiers.Add("MACDEMASignal", neuralArray[periodsIndex_MACDEMASignal] <= 0 ? 0 : neuralArray[periodsIndex_MACDEMASignal]);
+            modifiers.Add("RSI", neuralArray[periodsIndex_RSI] <= 0 ? 0 : neuralArray[periodsIndex_RSI]);
+            modifiers.Add("BollingerPeriods", neuralArray[periodsIndex_BollingerPeriods] <= 0 ? 0 : neuralArray[periodsIndex_BollingerPeriods]);
             modifiers.Add("BollingerDeviation", neuralArray[periodsIndex_BollingerDeviationDenominator] == 0 ? 0 : (double)neuralArray[periodsIndex_BollingerDeviationEnumerator] / (double)neuralArray[periodsIndex_BollingerDeviationDenominator]);
 
             return modifiers;

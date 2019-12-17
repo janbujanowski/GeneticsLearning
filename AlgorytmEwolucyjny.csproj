@@ -52,6 +52,7 @@
     <Compile Include="IConfigurationProvider.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="DirectFileLogger.cs" />
+    <Compile Include="Individual.cs" />
     <Compile Include="IntArrayExtensions.cs" />
     <Compile Include="IoCFactory.cs" />
     <Compile Include="MarketFunctions.cs" />

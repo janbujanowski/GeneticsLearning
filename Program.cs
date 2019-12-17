@@ -337,72 +337,7 @@ namespace AlgorytmEwolucyjny
             return new Population { genotypes = this.genotypes };
         }
     }
-    public class Individual
-    {
-        public Individual()
-        {
-            _survivalScore = null;
-        }
-        public bool CzyPoprawny
-        {
-            get
-            {
-                bool czy = true;
-                int[] testArray = new int[1] { -1 };
-                for (int i = 0; i < genotype.Length; i++)
-                {
-                    if (!Array.Exists(testArray, x => x == genotype[i]))
-                    {
-                        testArray = testArray.Add(genotype[i]);
-                    }
-                    else
-                    {
-                        czy = false;
-                        break;
-                    }
-                }
-                return czy;
-            }
-        }
-        public int[] genotype;
-        public Dictionary<string, double> Fenotype
-        {
-            get
-            {
-                return genotype.GetInputLayerModifiers();
-            }
-        }
-
-        private double? _survivalScore;
-        public double? SurvivalScore
-        {
-            get
-            {
-                if (_survivalScore == null && Fenotype != null)
-                {
-                    _survivalScore = GeneticEnvironment.SurvivalFunction(genotype);
-                }
-
-                return _survivalScore;
-            }
-        }
-        private double? _testedSurvivalScore;
-        public double? TestedSurvivalScore
-        {
-            get
-            {
-                if (_testedSurvivalScore == null && Fenotype != null)
-                {
-                    _testedSurvivalScore = new StockMarketEvaluator(IoCFactory.Resolve<ILogger>(), IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToTestMarketDataFile")).Ocena(genotype);
-                }
-                return _testedSurvivalScore;
-            }
-        }
-        public override string ToString()
-        {
-            return $"Zarobil :{ SurvivalScore } oraz na testowych danych : { TestedSurvivalScore }";
-        }
-    }
+   
     public class StatsInfo
     {
         public Individual Individual { get; set; }
@@ -468,7 +403,7 @@ namespace AlgorytmEwolucyjny
 
         public static Individual GetRankedRouletteParent(this Population population)
         {
-            population.genotypes.OrderBy(p => p.SurvivalScore).ToArray();
+            var sorted = population.genotypes.OrderBy(p => p.SurvivalScore).ToArray();
 
             var sumArray = ((population.genotypes.Length - 1) / 2) * population.genotypes.Length;
             Individual parent = null;
@@ -479,7 +414,7 @@ namespace AlgorytmEwolucyjny
             {
                 if (rankedChosenValue <= sum)
                 {
-                    parent = population.genotypes[i];
+                    parent = sorted[i];
                 }
                 i++;
                 sum += i;
