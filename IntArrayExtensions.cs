@@ -21,7 +21,7 @@ namespace AlgorytmEwolucyjny
 
         public static int neuralNetworkGenotypeLength = 500;
         public static int neuronsInputLayerCount = 9;
-        public static int neuronsHiddenLayerCount = 9;
+        public static int neuronsHiddenLayerCount = 3;
         public static int neuronsOutputLayerCount = 1;
 
         public static void SetDefaultModifiers(this int[] neuralArray)

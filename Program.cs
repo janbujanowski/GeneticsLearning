@@ -123,10 +123,10 @@ namespace AlgorytmEwolucyjny
                     loggerInstance.LogInfo($"Populacja { populationCount } Nowy osobnik { pop.BestOne.ToString() }");
                 }
                 populationCount++;
-                if (populationCount % 20 == 0)
-                {
+                //if (populationCount % 20 == 0)
+                //{
                     Console.WriteLine($"|{ DateTime.Now.ToString() }|: Populacja : {populationCount} ");
-                }
+                //}
             }
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
             LogInfo($"Czas pracy w minutach : {(GeneticEnvironment.INSTANCE.StopDate - GeneticEnvironment.INSTANCE.StartDate).TotalMinutes}");

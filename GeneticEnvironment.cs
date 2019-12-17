@@ -34,7 +34,7 @@ namespace AlgorytmEwolucyjny
             int[] genotype = new int[IntArrayExtensions.neuralNetworkGenotypeLength];
             for (int i = 0; i < genotype.Length; i++)
             {
-                genotype[i] = CUBE.Next(-100000, 100000);
+                genotype[i] = CUBE.Next(-1000, 1000);
             }
             genotype.SetDefaultModifiers();
             return genotype;
