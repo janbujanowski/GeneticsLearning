@@ -33,7 +33,7 @@ namespace AlgorytmEwolucyjny
                 avgLoss += loss;
             }
 
-            return 100 - 100 / (1 - (avgGain / avgLoss));
+            return 100 - 100 / (1 + (avgGain / avgLoss));
         }
 
         internal double MACDIndicator(List<DailyMarketData> dailyMarketDatas, double MACDEMA1, double MACDEMA2, double MACDEMASignal)

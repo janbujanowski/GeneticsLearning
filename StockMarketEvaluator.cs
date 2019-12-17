@@ -125,7 +125,7 @@ namespace srodowisko
                     outputLayerScores[k] = 0;
                     for (int j = 0; j < IntArrayExtensions.neuronsHiddenLayerCount; j++)
                     {
-                        hiddenLayerScores[k] += neuralayerOutput[j, k] * hiddenLayerScores[j];
+                        outputLayerScores[k] += neuralayerOutput[j, k] * hiddenLayerScores[j];
                     }
                 }
 
