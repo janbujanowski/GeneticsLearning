@@ -24,17 +24,24 @@ namespace AlgorytmEwolucyjny
             {
                 genotypes = newRandomPopulation
             };
-            heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
-            var bestIndividualStats = heavensOne.Last();
-            LogInfo($"Najlepszy osobnik z populacji { bestIndividualStats.Population } { bestIndividualStats.Individual.ToString() }");
-            LogInfo($"Fenotyp : { string.Join(",", bestIndividualStats.Individual.Fenotype) }");
-            LogInfo($"Genotyp : { string.Join(",", bestIndividualStats.Individual.genotype) }");
-            string csvFileContent = string.Empty;
-            var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Individual.TestedSurvivalScore, x.Date) + Environment.NewLine);
-            csvFileContent += string.Join("", lolek);
-            File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
-            string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
-            File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "StartingIndividual"), jsonIndividual);
+            try
+            {
+                heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
+                var bestIndividualStats = heavensOne.Last();
+                LogInfo($"Najlepszy osobnik z populacji { bestIndividualStats.Population } { bestIndividualStats.Individual.ToString() }");
+                LogInfo($"Fenotyp : { string.Join(",", bestIndividualStats.Individual.Fenotype) }");
+                LogInfo($"Genotyp : { string.Join(",", bestIndividualStats.Individual.genotype) }");
+                string csvFileContent = string.Empty;
+                var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Individual.TestedSurvivalScore, x.Date) + Environment.NewLine);
+                csvFileContent += string.Join("", lolek);
+                File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
+                string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
+                File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "StartingIndividual"), jsonIndividual);
+            }
+            catch (Exception ex)
+            {
+                loggerInstance.LogException(ex, "Critical evolution error");
+            }
         }
         #region Metody testowe 
         private static void RunTests()
@@ -121,11 +128,18 @@ namespace AlgorytmEwolucyjny
                 {
                     heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount, Date = DateTime.Now });
                     loggerInstance.LogInfo($"Populacja { populationCount } Nowy osobnik { pop.BestOne.ToString() }");
+                    string csvFileContent = string.Empty;
+
+                    var lolek = string.Join(",", populationCount, pop.BestOne.SurvivalScore, pop.BestOne.TestedSurvivalScore, DateTime.Now) + Environment.NewLine;
+                    csvFileContent += string.Join("", lolek);
+                    File.AppendAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
+                    string jsonIndividual = JsonConvert.SerializeObject(pop.BestOne, Formatting.Indented);
+                    File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfigurationString("workingDirectory", "StartingIndividual"), jsonIndividual);
                 }
                 populationCount++;
                 //if (populationCount % 20 == 0)
                 //{
-                    Console.WriteLine($"|{ DateTime.Now.ToString() }|: Populacja : {populationCount} ");
+                Console.WriteLine($"|{ DateTime.Now.ToString() }|: Populacja : {populationCount} ");
                 //}
             }
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
@@ -337,7 +351,7 @@ namespace AlgorytmEwolucyjny
             return new Population { genotypes = this.genotypes };
         }
     }
-   
+
     public class StatsInfo
     {
         public Individual Individual { get; set; }
