@@ -86,51 +86,58 @@ namespace srodowisko
         }
         public double Ocena(int[] oneLayeredNetwork)
         {
-            double startBalance = 10000.0;
-            double currentBallance = startBalance;
-            var modifiers = oneLayeredNetwork.GetInputLayerModifiers();
-            var neuralayer = oneLayeredNetwork.GetHiddenLayerWeights();
-            var neuralayerOutput = oneLayeredNetwork.GetHiddenToOutputLayerWeights();
-            var longestPeriods = oneLayeredNetwork.GetLongestPeriods();
-            for (int i = longestPeriods; i < marketData.Count; i++)
+            var lineofCode = 89;
+            try
             {
-                double[] inputLayerScores = new double[IntArrayExtensions.neuronsInputLayerCount];
-                var rsiPeriods = (int)modifiers["RSI"];
-                var bollingerPeriods = (int)modifiers["BollingerPeriods"];
-
-                inputLayerScores[0] = marketData[i].Min;
-                inputLayerScores[1] = marketData[i].Max;
-                inputLayerScores[2] = marketData[i].Closing;
-                inputLayerScores[3] = marketData[i].Volume * modifiers["Volume"];
-                inputLayerScores[4] = _marketFunctions.MACDIndicator(marketData.GetRange(i - longestPeriods, longestPeriods), modifiers["MACDEMA1"], modifiers["MACDEMA2"], modifiers["MACDEMASignal"]);
-                inputLayerScores[5] = _marketFunctions.RSI(marketData.GetRange(i - rsiPeriods, rsiPeriods), (int)modifiers["RSI"]);
-
-                var bollingerBands = _marketFunctions.BollingerBands(marketData.GetRange(i - bollingerPeriods, bollingerPeriods), bollingerPeriods, modifiers["BollingerDeviation"]);
-                inputLayerScores[6] = bollingerBands[0];
-                inputLayerScores[7] = bollingerBands[1];
-                inputLayerScores[8] = bollingerBands[2];
-
-                var hiddenLayerScores = new double[IntArrayExtensions.neuronsHiddenLayerCount];
-                for (int k = 0; k < IntArrayExtensions.neuronsHiddenLayerCount; k++)
+                double startBalance = 10000.0;
+                double currentBallance = startBalance;
+                var modifiers = oneLayeredNetwork.GetInputLayerModifiers();
+                var neuralayer = oneLayeredNetwork.GetHiddenLayerWeights();
+                var neuralayerOutput = oneLayeredNetwork.GetHiddenToOutputLayerWeights();
+                var longestPeriods = oneLayeredNetwork.GetLongestPeriods();
+                if (longestPeriods > marketData.Count)
                 {
-                    hiddenLayerScores[k] = 0;
-                    for (int j = 0; j < IntArrayExtensions.neuronsInputLayerCount; j++)
-                    {
-                        hiddenLayerScores[k] += neuralayer[j, k] * inputLayerScores[j];
-                    }
+                    return -100000;
                 }
-                var outputLayerScores = new double[IntArrayExtensions.neuronsOutputLayerCount];
-                for (int k = 0; k < IntArrayExtensions.neuronsOutputLayerCount; k++)
+                for (int i = longestPeriods; i < marketData.Count; i++)
                 {
-                    outputLayerScores[k] = 0;
-                    for (int j = 0; j < IntArrayExtensions.neuronsHiddenLayerCount; j++)
-                    {
-                        outputLayerScores[k] += neuralayerOutput[j, k] * hiddenLayerScores[j];
-                    }
-                }
+                    double[] inputLayerScores = new double[IntArrayExtensions.neuronsInputLayerCount];
+                    var rsiPeriods = (int)modifiers["RSI"];
+                    var bollingerPeriods = (int)modifiers["BollingerPeriods"];
+                    lineofCode = 107;
+                    inputLayerScores[0] = marketData[i].Min;
+                    inputLayerScores[1] = marketData[i].Max;
+                    inputLayerScores[2] = marketData[i].Closing;
+                    inputLayerScores[3] = marketData[i].Volume * modifiers["Volume"];
+                    lineofCode = 112;
+                    inputLayerScores[4] = _marketFunctions.MACDIndicator(marketData.GetRange(i - longestPeriods, longestPeriods), modifiers["MACDEMA1"], modifiers["MACDEMA2"], modifiers["MACDEMASignal"]);
+                    lineofCode = 114;
+                    inputLayerScores[5] = _marketFunctions.RSI(marketData.GetRange(i - rsiPeriods, rsiPeriods), (int)modifiers["RSI"]);
+                    lineofCode = 116;
+                    var bollingerBands = _marketFunctions.BollingerBands(marketData.GetRange(i - bollingerPeriods, bollingerPeriods), bollingerPeriods, modifiers["BollingerDeviation"]);
+                    inputLayerScores[6] = bollingerBands[0];
+                    inputLayerScores[7] = bollingerBands[1];
+                    inputLayerScores[8] = bollingerBands[2];
 
-                try
-                {
+                    var hiddenLayerScores = new double[IntArrayExtensions.neuronsHiddenLayerCount];
+                    for (int k = 0; k < IntArrayExtensions.neuronsHiddenLayerCount; k++)
+                    {
+                        hiddenLayerScores[k] = 0;
+                        for (int j = 0; j < IntArrayExtensions.neuronsInputLayerCount; j++)
+                        {
+                            hiddenLayerScores[k] += neuralayer[j, k] * inputLayerScores[j];
+                        }
+                    }
+                    var outputLayerScores = new double[IntArrayExtensions.neuronsOutputLayerCount];
+                    for (int k = 0; k < IntArrayExtensions.neuronsOutputLayerCount; k++)
+                    {
+                        outputLayerScores[k] = 0;
+                        for (int j = 0; j < IntArrayExtensions.neuronsHiddenLayerCount; j++)
+                        {
+                            outputLayerScores[k] += neuralayerOutput[j, k] * hiddenLayerScores[j];
+                        }
+                    }
+
                     if (outputLayerScores[0] > oneLayeredNetwork.GetBuyLimit() && !oneLayeredNetwork.GetHasShares())
                     {
                         oneLayeredNetwork.BuyShares();
@@ -142,12 +149,13 @@ namespace srodowisko
                         currentBallance += marketData[i].Closing * oneLayeredNetwork.GetVolume();
                     }
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogException(ex, "During executing transaction network indicator");
-                }
+                return currentBallance - startBalance;
             }
-            return currentBallance - startBalance;
+            catch (Exception ex)
+            {
+                _logger.LogException(ex, $"During network indicator line: {lineofCode} ");
+            }
+            return -100000;
         }
     }
 }

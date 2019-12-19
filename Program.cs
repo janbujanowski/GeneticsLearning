@@ -119,6 +119,7 @@ namespace AlgorytmEwolucyjny
             {
                 heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0, Date = DateTime.Now } };
             }
+            pop.genotypes.Add(new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype });
             var populationCount = 0;
             LogInfo($"Początkowy najlepszy osobnik {heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.ToString()}");
             while (DateTime.Now <= dateStop)
