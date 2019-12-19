@@ -1,0 +1,28 @@
+|17/12/2019 20:12:22|: INFO : [DATA STARTU |17/12/2019 20:12:22|]
+|17/12/2019 20:12:22|: INFO : [DATA ZAKONCZENA |18/12/2019 01:35:00|]
+|17/12/2019 20:12:22|: INFO : [MUTATIONPROBABILITY : |0.47|]
+|17/12/2019 20:12:22|: INFO : [MUTATIONRETRIALS : |80|]
+|17/12/2019 20:12:22|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 20:12:26|: INFO : [Początkowy najlepszy osobnik Zarobil :19076.868 oraz na testowych danych : 0]
+|18/12/2019 00:22:38|: ERROR Critical evolution error Exception message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+|18/12/2019 03:24:02|: INFO : [DATA STARTU |18/12/2019 03:24:02|]
+|18/12/2019 03:24:02|: INFO : [DATA ZAKONCZENA |18/12/2019 10:35:00|]
+|18/12/2019 03:24:02|: INFO : [MUTATIONPROBABILITY : |0.47|]
+|18/12/2019 03:24:02|: INFO : [MUTATIONRETRIALS : |80|]
+|18/12/2019 03:24:02|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 03:24:06|: INFO : [Początkowy najlepszy osobnik Zarobil :18452.676 oraz na testowych danych : 0]
+|18/12/2019 03:25:13|: INFO : [Populacja 2 Nowy osobnik Zarobil :34568.342 oraz na testowych danych : 0]
+|18/12/2019 03:27:24|: INFO : [Populacja 5 Nowy osobnik Zarobil :43761.9175000002 oraz na testowych danych : 3485.65400000005]
+|18/12/2019 03:34:24|: INFO : [Populacja 12 Nowy osobnik Zarobil :49433.312 oraz na testowych danych : 0]
+|18/12/2019 04:04:58|: INFO : [Populacja 20 Nowy osobnik Zarobil :57244.708 oraz na testowych danych : 0]
+|18/12/2019 04:08:46|: ERROR Critical evolution error Exception message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+|18/12/2019 15:52:03|: INFO : [DATA STARTU |18/12/2019 15:52:03|]
+|18/12/2019 15:52:03|: INFO : [DATA ZAKONCZENA |19/12/2019 08:35:00|]
+|18/12/2019 15:52:03|: INFO : [MUTATIONPROBABILITY : |0.47|]
+|18/12/2019 15:52:03|: INFO : [MUTATIONRETRIALS : |80|]
+|18/12/2019 15:52:03|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 15:52:04|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]
+|18/12/2019 15:52:51|: INFO : [Populacja 1 Nowy osobnik Zarobil :1628.20320000003 oraz na testowych danych : 114.384000000002]
+|18/12/2019 16:07:15|: INFO : [Populacja 7 Nowy osobnik Zarobil :17541.443 oraz na testowych danych : 0]

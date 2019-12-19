@@ -1,0 +1,32 @@
+|17/12/2019 22:24:11|: ==========================================NEW ENTRY==========================================
+|17/12/2019 22:24:11|: Error message : [Critical evolution error]
+|17/12/2019 22:24:11|: Exception message : [Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index]
+|17/12/2019 22:24:11|: Stacktrace : [   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at srodowisko.StockMarketEvaluator.Ocena(Int32[] oneLayeredNetwork)
+   at AlgorytmEwolucyjny.Individual.get_SurvivalScore()
+   at AlgorytmEwolucyjny.Population.<>c.<get_BestOne>b__2_1(Individual p)
+   at System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
+   at System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
+   at System.Linq.OrderedEnumerable`1.<GetEnumerator>d__1.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at AlgorytmEwolucyjny.Population.get_BestOne()
+   at AlgorytmEwolucyjny.Program.EvolvePopulationCriteriaUntilDateStop(ILogger loggerInstance, Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
+   at AlgorytmEwolucyjny.Program.Main(String[] args)]
+|18/12/2019 16:43:51|: ==========================================NEW ENTRY==========================================
+|18/12/2019 16:43:51|: Error message : [Critical evolution error]
+|18/12/2019 16:43:51|: Exception message : [Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index]
+|18/12/2019 16:43:51|: Stacktrace : [   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at srodowisko.StockMarketEvaluator.Ocena(Int32[] oneLayeredNetwork)
+   at AlgorytmEwolucyjny.Individual.get_SurvivalScore()
+   at AlgorytmEwolucyjny.Population.<>c.<get_BestOne>b__2_1(Individual p)
+   at System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
+   at System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
+   at System.Linq.OrderedEnumerable`1.<GetEnumerator>d__1.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at AlgorytmEwolucyjny.Population.get_BestOne()
+   at AlgorytmEwolucyjny.Program.EvolvePopulationCriteriaUntilDateStop(ILogger loggerInstance, Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
+   at AlgorytmEwolucyjny.Program.Main(String[] args)]

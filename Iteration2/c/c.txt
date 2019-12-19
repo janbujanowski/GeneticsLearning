@@ -1,0 +1,8 @@
+|17/12/2019 20:12:22|: INFO : [DATA STARTU |17/12/2019 20:12:22|]
+|17/12/2019 20:12:22|: INFO : [DATA ZAKONCZENA |18/12/2019 01:35:00|]
+|17/12/2019 20:12:22|: INFO : [MUTATIONPROBABILITY : |0.47|]
+|17/12/2019 20:12:22|: INFO : [MUTATIONRETRIALS : |80|]
+|17/12/2019 20:12:22|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 20:12:26|: INFO : [Początkowy najlepszy osobnik Zarobil :19076.868 oraz na testowych danych : 0]
+|18/12/2019 00:22:38|: ERROR Critical evolution error Exception message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
