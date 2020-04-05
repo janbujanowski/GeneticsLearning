@@ -2,12 +2,6 @@
 *.exe
 *.cache
 *.pdb
-obj/Debug
-obj/Release
-bin/Debug
-bin/Release
-ParserLoga/obj/
-ParserLoga/bin/
-packages
-Neurox.Core/bin/
-Neurox.Core/obj/
+obj/
+bin/
+packages/

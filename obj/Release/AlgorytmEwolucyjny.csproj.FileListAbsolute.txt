@@ -1,7 +1,0 @@
-C:\Repos\Genetyczne\bin\Release\AlgorytmEwolucyjny.exe.config
-C:\Repos\Genetyczne\bin\Release\AlgorytmEwolucyjny.exe
-C:\Repos\Genetyczne\bin\Release\AlgorytmEwolucyjny.pdb
-C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.csproj.CoreCompileInputs.cache
-C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.exe
-C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.pdb
-C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.csprojAssemblyReference.cache
