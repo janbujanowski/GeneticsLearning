@@ -9,3 +9,5 @@ bin/Release
 ParserLoga/obj/
 ParserLoga/bin/
 packages
+Neurox.Core/bin/
+Neurox.Core/obj/
