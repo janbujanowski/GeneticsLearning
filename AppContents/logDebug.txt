@@ -34,3 +34,855 @@
 |01/12/2019 17:35:13|: Info : [Najlepszy osobnik z populacji 9 Zarobil :120531.5832 oraz na testowych danych : -13786.7880000001]
 |01/12/2019 17:35:13|: Info : [Fenotyp : [RSI, -2.37606837606838],[Opening, -0.38101788170564],[Min, 0.669822485207101],[Max, 0.602636534839925],[Closing, -1.15133171912833],[Periods, 98],[BuyLimit, 743],[StopLimit, -220]]
 |01/12/2019 17:35:13|: Info : [Genotyp : -184,-422,593,-58,681,-750,660,-976,-510,190,98,834,-351,277,-727,-566,-845,320,531,951,-826,-665,-431,-864,686,-597,1,-807,-220,743,6,-102,492,583,891]
+|13/12/2019 22:51:52|: ERROR During loading data Exception message : Input string was not in a correct format.
+|13/12/2019 22:51:53|: INFO : [DATA STARTU |13/12/2019 22:51:53|]
+|13/12/2019 22:51:53|: INFO : [DATA ZAKONCZENA |13/12/2019 22:52:53|]
+|13/12/2019 22:51:53|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|13/12/2019 22:51:53|: INFO : [MUTATIONRETRIALS : |8|]
+|13/12/2019 22:51:53|: INFO : [Nr Problemu 0 Rozmiar tablicy : 35 ]
+|13/12/2019 22:51:53|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : -89468.862]
+|13/12/2019 22:51:53|: INFO : [Populacja 0 Nowy osobnik Zarobil :24.336000000003 oraz na testowych danych : 3916.88]
+|13/12/2019 22:51:53|: INFO : [Populacja 4 Nowy osobnik Zarobil :345.841600000002 oraz na testowych danych : -5091.94400000001]
+|13/12/2019 22:51:53|: INFO : [Populacja 8 Nowy osobnik Zarobil :4610.3512 oraz na testowych danych : 39046.5249999998]
+|13/12/2019 22:51:53|: INFO : [Populacja 27 Nowy osobnik Zarobil :6119.6832 oraz na testowych danych : -149402.736]
+|13/12/2019 22:51:53|: INFO : [Populacja 86 Nowy osobnik Zarobil :6301.4679 oraz na testowych danych : -114889.599]
+|13/12/2019 22:51:53|: INFO : [Populacja 87 Nowy osobnik Zarobil :6401.4912 oraz na testowych danych : -115707.213]
+|13/12/2019 22:51:53|: INFO : [Populacja 96 Nowy osobnik Zarobil :6510.5991 oraz na testowych danych : -142275.96]
+|13/12/2019 22:51:53|: INFO : [Populacja 111 Nowy osobnik Zarobil :6537.9456 oraz na testowych danych : -141773.526]
+|13/12/2019 22:51:53|: INFO : [Populacja 130 Nowy osobnik Zarobil :6783.4152 oraz na testowych danych : 8376.372]
+|13/12/2019 22:51:55|: INFO : [Populacja 719 Nowy osobnik Zarobil :7205.7524 oraz na testowych danych : -18232.224]
+|13/12/2019 22:51:55|: INFO : [Populacja 724 Nowy osobnik Zarobil :9590.1553 oraz na testowych danych : 2270.71999999997]
+|13/12/2019 22:52:18|: ERROR During loading data Exception message : Input string was not in a correct format.
+|13/12/2019 22:52:18|: INFO : [DATA STARTU |13/12/2019 22:52:18|]
+|13/12/2019 22:52:18|: INFO : [DATA ZAKONCZENA |13/12/2019 22:53:18|]
+|13/12/2019 22:52:18|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|13/12/2019 22:52:18|: INFO : [MUTATIONRETRIALS : |8|]
+|13/12/2019 22:52:18|: INFO : [Nr Problemu 0 Rozmiar tablicy : 35 ]
+|13/12/2019 22:52:18|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : -89468.862]
+|13/12/2019 22:52:18|: INFO : [Populacja 43 Nowy osobnik Zarobil :3375.80390000001 oraz na testowych danych : 74007.664]
+|13/12/2019 22:52:18|: INFO : [Populacja 53 Nowy osobnik Zarobil :5231.9506 oraz na testowych danych : -1066.64799999999]
+|13/12/2019 22:52:18|: INFO : [Populacja 77 Nowy osobnik Zarobil :8130.8682 oraz na testowych danych : -7615.06200000001]
+|13/12/2019 22:52:18|: INFO : [Populacja 124 Nowy osobnik Zarobil :8701.46549999999 oraz na testowych danych : 3274.36200000005]
+|13/12/2019 22:52:18|: INFO : [Populacja 164 Nowy osobnik Zarobil :9021.7764 oraz na testowych danych : -69027.777]
+|13/12/2019 22:52:18|: INFO : [Populacja 264 Nowy osobnik Zarobil :9400.2363 oraz na testowych danych : -137858.175]
+|13/12/2019 22:52:19|: INFO : [Populacja 351 Nowy osobnik Zarobil :10823.4711 oraz na testowych danych : 104744.668]
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:21|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:22|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:23|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:24|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:25|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:26|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:27|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:28|: INFO : [Populacja 2340 Nowy osobnik Zarobil :11823.1454 oraz na testowych danych : -116461.442999999]
+|13/12/2019 22:52:28|: INFO : [Populacja 2341 Nowy osobnik Zarobil :11841.6282 oraz na testowych danych : -119875.103]
+|13/12/2019 22:52:28|: INFO : [Populacja 2382 Nowy osobnik Zarobil :12042.5466 oraz na testowych danych : -64521.52]
+|13/12/2019 22:52:28|: INFO : [Populacja 2411 Nowy osobnik Zarobil :12164.8191 oraz na testowych danych : -29175.6569999999]
+|13/12/2019 22:52:29|: INFO : [Populacja 2736 Nowy osobnik Zarobil :12281.1372 oraz na testowych danych : -35115.09]
+|13/12/2019 22:52:30|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:30|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:30|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:31|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:32|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:33|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:34|: INFO : [Populacja 4027 Nowy osobnik Zarobil :12405.8322 oraz na testowych danych : -27659.7959999999]
+|13/12/2019 22:52:35|: INFO : [Populacja 4695 Nowy osobnik Zarobil :12494.6265 oraz na testowych danych : -27857.7699999999]
+|13/12/2019 22:52:39|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:40|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:41|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:42|: INFO : [Populacja 6861 Nowy osobnik Zarobil :12537.8 oraz na testowych danych : -29532.0000000001]
+|13/12/2019 22:52:42|: INFO : [Populacja 6863 Nowy osobnik Zarobil :12557.4 oraz na testowych danych : -13560]
+|13/12/2019 22:52:43|: INFO : [Populacja 7513 Nowy osobnik Zarobil :12684.9 oraz na testowych danych : -48894.0000000001]
+|13/12/2019 22:52:43|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:43|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:44|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:45|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:46|: INFO : [Populacja 7637 Nowy osobnik Zarobil :12791.6 oraz na testowych danych : 13179]
+|13/12/2019 22:52:46|: INFO : [Populacja 7640 Nowy osobnik Zarobil :12830.8 oraz na testowych danych : 6346]
+|13/12/2019 22:52:46|: INFO : [Populacja 7738 Nowy osobnik Zarobil :12850.4 oraz na testowych danych : 6699]
+|13/12/2019 22:52:47|: INFO : [Populacja 8060 Nowy osobnik Zarobil :13578.6 oraz na testowych danych : -19502]
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:48|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:49|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:50|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:51|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:51|: ERROR During counting network indicator Exception message : Sequence contains no elements
+|13/12/2019 22:52:52|: INFO : [Populacja 9498 Nowy osobnik Zarobil :13772.9 oraz na testowych danych : -16528]
+|13/12/2019 22:52:52|: INFO : [Populacja 9522 Nowy osobnik Zarobil :13812.1 oraz na testowych danych : -25483]
+|13/12/2019 22:55:21|: INFO : [DATA STARTU |13/12/2019 22:55:21|]
+|13/12/2019 22:55:21|: INFO : [DATA ZAKONCZENA |13/12/2019 22:56:20|]
+|13/12/2019 22:55:21|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|13/12/2019 22:55:21|: INFO : [MUTATIONRETRIALS : |8|]
+|13/12/2019 22:55:21|: INFO : [Nr Problemu 0 Rozmiar tablicy : 35 ]
+|13/12/2019 22:55:21|: INFO : [Początkowy najlepszy osobnik Zarobil :20094.7035 oraz na testowych danych : -77864.202]
+|16/12/2019 01:41:06|: INFO : [DATA STARTU |16/12/2019 01:41:06|]
+|16/12/2019 01:41:06|: INFO : [DATA ZAKONCZENA |14/12/2019 19:30:00|]
+|16/12/2019 01:41:06|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 01:41:06|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 01:41:06|: INFO : [Nr Problemu 0 Rozmiar tablicy : 35 ]
+|16/12/2019 01:41:06|: INFO : [Początkowy najlepszy osobnik Zarobil :20094.7035 oraz na testowych danych : -77864.202]
+|16/12/2019 01:41:06|: INFO : [Koniec ewolucji z powodu limitu czasu : 14/12/2019 19:30:00]
+|16/12/2019 01:41:06|: INFO : [Czas pracy w minutach : -1811.09978868]
+|16/12/2019 01:41:06|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :20094.7035 oraz na testowych danych : -77864.202]
+|16/12/2019 01:41:06|: INFO : [Fenotyp : [RSI, -2.37606837606838],[Opening, -0.38101788170564],[Min, 0.669822485207101],[Max, 0.602636534839925],[Closing, -1.15133171912833],[Periods, 98],[BuyLimit, 743],[StopLimit, -220]]
+|16/12/2019 01:41:06|: INFO : [Genotyp : -184,-422,593,-58,681,-750,660,-976,-510,190,98,834,-351,277,-727,-566,-845,320,531,951,-826,-665,-431,-864,686,-597,0,-807,-220,743,6,-102,492,583,891]
+|16/12/2019 21:24:57|: INFO : [DATA STARTU |16/12/2019 21:24:57|]
+|16/12/2019 21:24:57|: INFO : [DATA ZAKONCZENA |14/12/2019 19:30:00|]
+|16/12/2019 21:24:57|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:24:57|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:24:57|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:25:35|: INFO : [DATA STARTU |16/12/2019 21:25:35|]
+|16/12/2019 21:25:35|: INFO : [DATA ZAKONCZENA |14/12/2019 19:30:00|]
+|16/12/2019 21:25:35|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:25:35|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:25:35|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:28:05|: INFO : [DATA STARTU |16/12/2019 21:28:05|]
+|16/12/2019 21:28:05|: INFO : [DATA ZAKONCZENA |14/12/2019 19:30:00|]
+|16/12/2019 21:28:06|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:28:06|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:28:06|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:28:11|: INFO : [Początkowy najlepszy osobnik Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:28:12|: INFO : [Koniec ewolucji z powodu limitu czasu : 14/12/2019 19:30:00]
+|16/12/2019 21:28:12|: INFO : [Czas pracy w minutach : -2998.09955076167]
+|16/12/2019 21:28:12|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:28:12|: INFO : [Fenotyp : [Volume, 0.164980265518479],[Opening, -1.45802694776215],[Min, -4.23172521324406],[Max, 0.439302292868195],[Closing, 0.88757101564836],[MACDEMA1, 26],[MACDEMA2, 12],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 21:28:12|: INFO : [Genotyp : -52730,27418,46835,-79690,39993,-3579,-86461,-49877,91844,-92823,60296,-11495,-69675,-34303,23527,-92277,21806,-40599,-92417,44525,50165,2,1,-2993,-62967,-88156,0,-66511,71234,-2725,26,12,9,14,20,-9247,-94818,771,-1381,-98599,93240,-34592,-91603,-76196,23132,-33769,-3509,15881,94559,56675,-96783,-20763,-57426,84456,-89002,32238,71854,-50172,83277,28148,-5833,80050,-21111,-5431,-42161,16827,-83723,-93846,-88437,-67227,-97460,-78965,60782,-93818,51284,-15243,6634,31759,73874,70801,15352,-13628,-61071,-85442,-5943,-29900,-99105,-12230,-86829,21895,18899,55353,17493,70470,7233,-86811,86519,13827,65965,-93695,-50046,-9663,4317,61785,54134,82182,18454,-63609,-66828,26241,-74397,-59905,-24046,-87524,-87204,-92206,41120,-35670,-99489,87739,15932,28506,92982,-10333,13874,-52813,3541,90312,-1052,38094,-1762,92806,65794,67568,20846,-74985,82054,-22856,-39576,11875,51645,64503,-45402,-13070,-3709,-21197,-20602,5017,57673,-561,-27932,22188,13316,78225,-9627,21447,-2646,-85350,-52089,6946,-21359,28142,37443,-4923,-71997,-67204,-25699,8385,-8371,87780,-74261,-36024,-96094,-11364,-63907,51428,-26092,6052,93375,-64930,67788,98523,-67362,99509,-33975,76049,-20510,87568,-22805,99399,27661,67404,-70768,53477,-66766,-76498,-72941,59520,-41074,-36505,-95498,71012,-86612,69893,-26301,-91908,18282,-75320,42132,38944,-52461,91301,-78726,-87160,39158,-19883,-4496,37934,-70948,-48047,53306,-13268,-68810,-7771,-39881,-41666,-65257,-49572,-44598,-87409,24368,14388,-52875,29880,-69432,96775,85135,-37255,25809,-42067,-42233,-45191,-54564,38250,51860,36359,46130,-83608,-85681,53116,27997,-10875,30467,-93027,10188,17770,39822,21158,9773,-84636,73348,-32147,69278,29540,-85425,33150,44176,-8606,82272,42382,-5019,-67241,-87876,71119,94185,-1504,-58704,-7061,40369,23760,12204,-81649,-63891,2285,-15407,-64757,83920,-59848,-80309,12798,-43047,-36023,52971,10444,-15416,89914,-14469,15895,23675,-81291,92183,-45265,-65881,-28063,-41865,-4762,-22999,59348,-87213,-88308,-23527,-53118,80788,86013,3160,54996,-68256,-33007,-55053,79332,49230,4023,-28298,-30526,-14572,-68996,-20212,1679,-13466,-95729,-87035,25400,69264,21660,31576,-42532,84232,64172,-55851,89355,58241,-75429,-72636,-92001,-63676,-89930,-16812,66958,-92716,29587,58170,-81463,-29052,44342,-30521,-11841,83033,64644,86508,-72869,-84551,75321,-27187,-91484,98726,51073,-22382,-40872,-45564,-54309,70764,-32429,-77156,-44408,-78910,24658,-23341,-36297,-66850,-24642,47815,12829,-5605,56946,-53899,94427,-45548,-75079,-47820,-56584,-25565,-80413,77664,-82982,73905,82920,51758,-81152,-90728,-14750,32452,-75941,12521,61593,58822,-9402,95693,-84645,23251,44821,-88500,19330,31494,11149,-20685,2620,-19075,15867,62415,-95701,-3380,-47304,-93052,-88980,71256,51177,-10093,-94175,-18314,-61830,72900,-42190,-45570,47899,42905,23756,-99692,32802,98124,55502,98733,-60904,1669,7359,-68084,55105,-11908,-33486,37703,-28715,1994,-64110,-43568,-95027,88630,-20245,-82889,1501,90337,-92355,-99310,89867,33668,-14919,71920,53689,-35101,83594,68244,55558,2311,48123,17742,-93088,-94435,-42477,51026,-412,79103,-83849,-36916,-76607,-31878,-89599,36176,37009,-98622,-50543,59269,-36851,6645,-1194,42465,90479,54812,-91135,5427,-83412,35438,-21774]
+|16/12/2019 21:29:10|: INFO : [DATA STARTU |16/12/2019 21:29:10|]
+|16/12/2019 21:29:10|: INFO : [DATA ZAKONCZENA |16/12/2019 21:30:10|]
+|16/12/2019 21:29:10|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:29:10|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:29:10|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:29:11|: INFO : [Początkowy najlepszy osobnik Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:29:19|: INFO : [Populacja 0 Nowy osobnik Zarobil :1173964.2684 oraz na testowych danych : -15977501.694]
+|16/12/2019 21:29:47|: INFO : [Populacja 4 Nowy osobnik Zarobil :1222921.4844 oraz na testowych danych : -12692406.342]
+|16/12/2019 21:33:08|: INFO : [DATA STARTU |16/12/2019 21:33:08|]
+|16/12/2019 21:33:08|: INFO : [DATA ZAKONCZENA |16/12/2019 21:34:07|]
+|16/12/2019 21:33:08|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:33:08|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:33:08|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:33:08|: INFO : [Początkowy najlepszy osobnik Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:34:12|: INFO : [Koniec ewolucji z powodu limitu czasu : 16/12/2019 21:34:07]
+|16/12/2019 21:34:12|: INFO : [Czas pracy w minutach : 1.00004948833333]
+|16/12/2019 21:34:12|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:34:12|: INFO : [Fenotyp : [Volume, 0.164980265518479],[Opening, -1.45802694776215],[Min, -4.23172521324406],[Max, 0.439302292868195],[Closing, 0.88757101564836],[MACDEMA1, 26],[MACDEMA2, 12],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 21:34:12|: INFO : [Genotyp : -52730,27418,46835,-79690,39993,-3579,-86461,-49877,91844,-92823,60296,-11495,-69675,-34303,23527,-92277,21806,-40599,-92417,44525,50165,2,1,-2993,-62967,-88156,0,-66511,71234,-2725,26,12,9,14,20,-9247,-94818,771,-1381,-98599,93240,-34592,-91603,-76196,23132,-33769,-3509,15881,94559,56675,-96783,-20763,-57426,84456,-89002,32238,71854,-50172,83277,28148,-5833,80050,-21111,-5431,-42161,16827,-83723,-93846,-88437,-67227,-97460,-78965,60782,-93818,51284,-15243,6634,31759,73874,70801,15352,-13628,-61071,-85442,-5943,-29900,-99105,-12230,-86829,21895,18899,55353,17493,70470,7233,-86811,86519,13827,65965,-93695,-50046,-9663,4317,61785,54134,82182,18454,-63609,-66828,26241,-74397,-59905,-24046,-87524,-87204,-92206,41120,-35670,-99489,87739,15932,28506,92982,-10333,13874,-52813,3541,90312,-1052,38094,-1762,92806,65794,67568,20846,-74985,82054,-22856,-39576,11875,51645,64503,-45402,-13070,-3709,-21197,-20602,5017,57673,-561,-27932,22188,13316,78225,-9627,21447,-2646,-85350,-52089,6946,-21359,28142,37443,-4923,-71997,-67204,-25699,8385,-8371,87780,-74261,-36024,-96094,-11364,-63907,51428,-26092,6052,93375,-64930,67788,98523,-67362,99509,-33975,76049,-20510,87568,-22805,99399,27661,67404,-70768,53477,-66766,-76498,-72941,59520,-41074,-36505,-95498,71012,-86612,69893,-26301,-91908,18282,-75320,42132,38944,-52461,91301,-78726,-87160,39158,-19883,-4496,37934,-70948,-48047,53306,-13268,-68810,-7771,-39881,-41666,-65257,-49572,-44598,-87409,24368,14388,-52875,29880,-69432,96775,85135,-37255,25809,-42067,-42233,-45191,-54564,38250,51860,36359,46130,-83608,-85681,53116,27997,-10875,30467,-93027,10188,17770,39822,21158,9773,-84636,73348,-32147,69278,29540,-85425,33150,44176,-8606,82272,42382,-5019,-67241,-87876,71119,94185,-1504,-58704,-7061,40369,23760,12204,-81649,-63891,2285,-15407,-64757,83920,-59848,-80309,12798,-43047,-36023,52971,10444,-15416,89914,-14469,15895,23675,-81291,92183,-45265,-65881,-28063,-41865,-4762,-22999,59348,-87213,-88308,-23527,-53118,80788,86013,3160,54996,-68256,-33007,-55053,79332,49230,4023,-28298,-30526,-14572,-68996,-20212,1679,-13466,-95729,-87035,25400,69264,21660,31576,-42532,84232,64172,-55851,89355,58241,-75429,-72636,-92001,-63676,-89930,-16812,66958,-92716,29587,58170,-81463,-29052,44342,-30521,-11841,83033,64644,86508,-72869,-84551,75321,-27187,-91484,98726,51073,-22382,-40872,-45564,-54309,70764,-32429,-77156,-44408,-78910,24658,-23341,-36297,-66850,-24642,47815,12829,-5605,56946,-53899,94427,-45548,-75079,-47820,-56584,-25565,-80413,77664,-82982,73905,82920,51758,-81152,-90728,-14750,32452,-75941,12521,61593,58822,-9402,95693,-84645,23251,44821,-88500,19330,31494,11149,-20685,2620,-19075,15867,62415,-95701,-3380,-47304,-93052,-88980,71256,51177,-10093,-94175,-18314,-61830,72900,-42190,-45570,47899,42905,23756,-99692,32802,98124,55502,98733,-60904,1669,7359,-68084,55105,-11908,-33486,37703,-28715,1994,-64110,-43568,-95027,88630,-20245,-82889,1501,90337,-92355,-99310,89867,33668,-14919,71920,53689,-35101,83594,68244,55558,2311,48123,17742,-93088,-94435,-42477,51026,-412,79103,-83849,-36916,-76607,-31878,-89599,36176,37009,-98622,-50543,59269,-36851,6645,-1194,42465,90479,54812,-91135,5427,-83412,35438,-21774]
+|16/12/2019 21:39:27|: INFO : [DATA STARTU |16/12/2019 21:39:27|]
+|16/12/2019 21:39:27|: INFO : [DATA ZAKONCZENA |16/12/2019 22:00:00|]
+|16/12/2019 21:39:27|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:39:27|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:39:27|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:39:28|: INFO : [Początkowy najlepszy osobnik Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:39:38|: INFO : [Populacja 0 Nowy osobnik Zarobil :1370760.64380001 oraz na testowych danych : -18655874.883]
+|16/12/2019 21:41:54|: INFO : [DATA STARTU |16/12/2019 21:41:54|]
+|16/12/2019 21:41:54|: INFO : [DATA ZAKONCZENA |16/12/2019 22:00:00|]
+|16/12/2019 21:41:54|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 21:41:54|: INFO : [MUTATIONRETRIALS : |8|]
+|16/12/2019 21:41:54|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 21:41:55|: INFO : [Początkowy najlepszy osobnik Zarobil :944176.853799989 oraz na testowych danych : -12850124.733]
+|16/12/2019 21:42:02|: INFO : [Populacja 0 Nowy osobnik Zarobil :1406605.0388 oraz na testowych danych : -19143712.458]
+|16/12/2019 21:43:58|: INFO : [Populacja 8 Nowy osobnik Zarobil :1796320.18540001 oraz na testowych danych : -18485285.988]
+|16/12/2019 21:46:41|: INFO : [Populacja 30 Nowy osobnik Zarobil :2530042.10680002 oraz na testowych danych : -19146288.694]
+|16/12/2019 21:58:29|: INFO : [Populacja 44 Nowy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:00:21|: INFO : [Koniec ewolucji z powodu limitu czasu : 16/12/2019 22:00:00]
+|16/12/2019 22:00:21|: INFO : [Czas pracy w minutach : 18.0934062633333]
+|16/12/2019 22:00:21|: INFO : [Najlepszy osobnik z populacji 44 Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:00:21|: INFO : [Fenotyp : [Volume, -7.17683391149843],[Opening, 5.41201602136182],[Min, 1.07991598319664],[Max, -3.4001072673639],[Closing, -5.38988526233708],[MACDEMA1, 392],[MACDEMA2, 632],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 22:00:21|: INFO : [Genotyp : -81629,65337,47360,-18678,-685,92575,12842,736,-11836,736,54804,84823,-11819,40536,7490,-64782,-59988,-38037,11187,-96770,17954,2,1,-702,368,304,0,-99086,13168,-52000,392,632,9,14,20,25716,25157,96200,-591,-61351,24284,9851,80029,32460,929,723,-20840,36004,68669,-62884,-9919,-84614,-52997,-45119,-16921,-85191,-7681,59062,80954,-93059,-28762,11927,28431,-59837,2419,-42814,42008,-31916,17091,81773,10060,-56189,85878,-27462,-21054,-91897,-76467,40558,-335,41207,-13006,85331,-67755,-23948,57919,-59283,-49386,87934,37017,-91365,-66604,-257,-84754,96,67410,-921,81419,39865,-69959,-58497,-253,-88924,-81087,-288,27055,-53730,-70493,74465,706,-25024,91275,51761,-30547,-60254,19946,-14094,-20318,-47621,-17756,-38299,-93429,587,31066,8455,48376,43965,-71436,16735,5127,-33410,-73317,-16333,10517,-51896,24055,-24083,66418,-54650,-692,891,-88790,-23851,-88001,-37959,-82641,277,-3359,75500,49196,-18497,32673,29040,-42379,68339,-65069,-526,-19990,10457,-61482,83090,-82295,668,-30663,9344,859,7608,-58756,-78651,-386,-55972,19488,250,3382,70594,-49509,30422,42074,108,-8905,-33259,-52677,-46936,723,-76376,33916,-2358,-73954,-964,-86827,764,95907,707,-93169,-33,-6057,-1563,-93188,-921,-86252,9751,-59610,-24708,-40190,5167,62015,-1659,-74343,665,739,4509,-505,-89016,-80639,71776,35766,64641,18,57,75428,50650,-18439,-933,-91825,-45288,-51879,-36474,-72500,37476,-854,52053,23610,-60580,-44723,792,-73649,72031,93254,-37629,-38391,-64426,-883,39019,-75672,8664,-731,84922,-63400,256,-69861,29302,53204,61099,27225,-36903,-71811,41323,-32884,-94903,-42954,-1512,600,-11820,-89625,65795,80898,914,55707,-61983,45425,63734,71386,-17138,-4,39853,-21335,42542,-25262,-489,14736,93,-73074,92446,7337,47347,-373,-955,12194,92179,181,-14973,-106,88156,-56,63120,570,83803,-168,-41468,27765,-41607,-70785,98582,-10371,-33596,57915,-29658,76995,87372,84431,-638,-33416,670,-9639,76,-28439,-21606,80843,-52,-597,-81613,69387,63528,357,-39603,-41180,83230,-22463,37,75119,419,-86101,-83795,71746,-43657,-66017,-71657,2816,-59067,89432,28506,85515,24822,719,-32494,-81557,37309,-379,557,-8442,-13661,-97040,-34385,-8415,-213,9,79570,-58047,774,38454,5833,841,-94,793,-10020,-883,5843,-17573,-48245,-71585,-26453,69323,-42167,-12364,-9066,15834,9609,-83814,22806,39647,5196,94577,-681,21283,-954,-76166,-59263,-41656,-48657,-669,63783,47151,89355,803,704,85803,47334,-90923,-4214,64905,-88479,63,-91402,-894,-15855,9753,61687,88780,-831,58359,49555,63384,19146,359,-66742,11256,50581,14630,-99477,-33855,808,101,-68916,40648,-35369,-148,79968,-5294,-79072,5130,68500,-705,20399,57901,28126,35438,85979,-574,539,-680,-37853,-48044,-383,-7017,61550,-99601,-71996,-445,194,55451,-64779,-940,-91446,-70360,-12871,64022,38673,-32051,-34364,57749,29785,-33019,67852,88123,299,-50977,-57016,61245,72232,-2180,25277,44499,-22509,-138,-96002,-74181,-17593,38100,79097,-35768,-1609,-9029,64838,572,98,669,-8022,-210,-152,221,315,18029,40445,-20611,-41143,95166,-15896,76967,3124,120,57414]
+|16/12/2019 22:02:33|: INFO : [DATA STARTU |16/12/2019 22:02:33|]
+|16/12/2019 22:02:33|: INFO : [DATA ZAKONCZENA |16/12/2019 22:00:00|]
+|16/12/2019 22:02:33|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 22:02:33|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 22:02:33|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 22:02:40|: INFO : [Początkowy najlepszy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:02:40|: INFO : [Koniec ewolucji z powodu limitu czasu : 16/12/2019 22:00:00]
+|16/12/2019 22:02:40|: INFO : [Czas pracy w minutach : -2.55934369]
+|16/12/2019 22:02:40|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:02:40|: INFO : [Fenotyp : [Volume, -7.17683391149843],[Opening, 5.41201602136182],[Min, 1.07991598319664],[Max, -3.4001072673639],[Closing, -5.38988526233708],[MACDEMA1, 392],[MACDEMA2, 632],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 22:02:40|: INFO : [Genotyp : -81629,65337,47360,-18678,-685,92575,12842,736,-11836,736,54804,84823,-11819,40536,7490,-64782,-59988,-38037,11187,-96770,17954,2,1,-702,368,304,0,-99086,13168,-52000,392,632,9,14,20,25716,25157,96200,-591,-61351,24284,9851,80029,32460,929,723,-20840,36004,68669,-62884,-9919,-84614,-52997,-45119,-16921,-85191,-7681,59062,80954,-93059,-28762,11927,28431,-59837,2419,-42814,42008,-31916,17091,81773,10060,-56189,85878,-27462,-21054,-91897,-76467,40558,-335,41207,-13006,85331,-67755,-23948,57919,-59283,-49386,87934,37017,-91365,-66604,-257,-84754,96,67410,-921,81419,39865,-69959,-58497,-253,-88924,-81087,-288,27055,-53730,-70493,74465,706,-25024,91275,51761,-30547,-60254,19946,-14094,-20318,-47621,-17756,-38299,-93429,587,31066,8455,48376,43965,-71436,16735,5127,-33410,-73317,-16333,10517,-51896,24055,-24083,66418,-54650,-692,891,-88790,-23851,-88001,-37959,-82641,277,-3359,75500,49196,-18497,32673,29040,-42379,68339,-65069,-526,-19990,10457,-61482,83090,-82295,668,-30663,9344,859,7608,-58756,-78651,-386,-55972,19488,250,3382,70594,-49509,30422,42074,108,-8905,-33259,-52677,-46936,723,-76376,33916,-2358,-73954,-964,-86827,764,95907,707,-93169,-33,-6057,-1563,-93188,-921,-86252,9751,-59610,-24708,-40190,5167,62015,-1659,-74343,665,739,4509,-505,-89016,-80639,71776,35766,64641,18,57,75428,50650,-18439,-933,-91825,-45288,-51879,-36474,-72500,37476,-854,52053,23610,-60580,-44723,792,-73649,72031,93254,-37629,-38391,-64426,-883,39019,-75672,8664,-731,84922,-63400,256,-69861,29302,53204,61099,27225,-36903,-71811,41323,-32884,-94903,-42954,-1512,600,-11820,-89625,65795,80898,914,55707,-61983,45425,63734,71386,-17138,-4,39853,-21335,42542,-25262,-489,14736,93,-73074,92446,7337,47347,-373,-955,12194,92179,181,-14973,-106,88156,-56,63120,570,83803,-168,-41468,27765,-41607,-70785,98582,-10371,-33596,57915,-29658,76995,87372,84431,-638,-33416,670,-9639,76,-28439,-21606,80843,-52,-597,-81613,69387,63528,357,-39603,-41180,83230,-22463,37,75119,419,-86101,-83795,71746,-43657,-66017,-71657,2816,-59067,89432,28506,85515,24822,719,-32494,-81557,37309,-379,557,-8442,-13661,-97040,-34385,-8415,-213,9,79570,-58047,774,38454,5833,841,-94,793,-10020,-883,5843,-17573,-48245,-71585,-26453,69323,-42167,-12364,-9066,15834,9609,-83814,22806,39647,5196,94577,-681,21283,-954,-76166,-59263,-41656,-48657,-669,63783,47151,89355,803,704,85803,47334,-90923,-4214,64905,-88479,63,-91402,-894,-15855,9753,61687,88780,-831,58359,49555,63384,19146,359,-66742,11256,50581,14630,-99477,-33855,808,101,-68916,40648,-35369,-148,79968,-5294,-79072,5130,68500,-705,20399,57901,28126,35438,85979,-574,539,-680,-37853,-48044,-383,-7017,61550,-99601,-71996,-445,194,55451,-64779,-940,-91446,-70360,-12871,64022,38673,-32051,-34364,57749,29785,-33019,67852,88123,299,-50977,-57016,61245,72232,-2180,25277,44499,-22509,-138,-96002,-74181,-17593,38100,79097,-35768,-1609,-9029,64838,572,98,669,-8022,-210,-152,221,315,18029,40445,-20611,-41143,95166,-15896,76967,3124,120,57414]
+|16/12/2019 22:03:06|: INFO : [DATA STARTU |16/12/2019 22:03:06|]
+|16/12/2019 22:03:07|: INFO : [DATA ZAKONCZENA |16/12/2019 22:50:00|]
+|16/12/2019 22:03:07|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 22:03:07|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 22:03:07|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 22:03:13|: INFO : [Początkowy najlepszy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:07:00|: INFO : [DATA STARTU |16/12/2019 22:07:00|]
+|16/12/2019 22:07:00|: INFO : [DATA ZAKONCZENA |16/12/2019 22:50:00|]
+|16/12/2019 22:07:00|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 22:07:00|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 22:07:00|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 22:07:06|: INFO : [Początkowy najlepszy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:09:51|: INFO : [DATA STARTU |16/12/2019 22:09:51|]
+|16/12/2019 22:09:51|: INFO : [DATA ZAKONCZENA |16/12/2019 22:50:00|]
+|16/12/2019 22:09:51|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 22:09:51|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 22:09:51|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 22:09:58|: INFO : [Początkowy najlepszy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:10:37|: INFO : [DATA STARTU |16/12/2019 22:10:37|]
+|16/12/2019 22:10:38|: INFO : [DATA ZAKONCZENA |16/12/2019 22:50:00|]
+|16/12/2019 22:10:38|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 22:10:38|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 22:10:38|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 22:10:44|: INFO : [Początkowy najlepszy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 22:13:09|: INFO : [DATA STARTU |16/12/2019 22:13:09|]
+|16/12/2019 22:13:09|: INFO : [DATA ZAKONCZENA |16/12/2019 23:15:00|]
+|16/12/2019 22:13:09|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 22:13:09|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 22:13:09|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 22:13:16|: INFO : [Początkowy najlepszy osobnik Zarobil :2756750.87480001 oraz na testowych danych : -18655218.478]
+|16/12/2019 23:15:08|: INFO : [DATA STARTU |16/12/2019 23:15:08|]
+|16/12/2019 23:15:08|: INFO : [DATA ZAKONCZENA |16/12/2019 23:15:00|]
+|16/12/2019 23:15:08|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 23:15:08|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 23:15:08|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 23:15:21|: INFO : [Początkowy najlepszy osobnik Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|16/12/2019 23:15:21|: INFO : [Koniec ewolucji z powodu limitu czasu : 16/12/2019 23:15:00]
+|16/12/2019 23:15:21|: INFO : [Czas pracy w minutach : -0.135196505]
+|16/12/2019 23:15:21|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|16/12/2019 23:15:21|: INFO : [Fenotyp : [Volume, -7.17683391149843],[Opening, 5.41201602136182],[Min, 1.07991598319664],[Max, -3.4001072673639],[Closing, -5.38988526233708],[MACDEMA1, 392],[MACDEMA2, 632],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 23:15:21|: INFO : [Genotyp : -81629,65337,47360,-18678,-685,92575,12842,736,-11836,736,54804,84823,-11819,40536,7490,-64782,-59988,-38037,11187,-96770,17954,2,1,-702,368,304,0,-99086,13168,-52000,392,632,9,14,20,25716,25157,96200,-591,-61351,24284,9851,80029,32460,929,723,-20840,36004,68669,-62884,-9919,-84614,-52997,-45119,-16921,-85191,-7681,59062,80954,-93059,-28762,11927,28431,-59837,2419,-42814,42008,-31916,17091,81773,10060,-56189,85878,-27462,-21054,-91897,-76467,40558,-335,41207,-13006,85331,-67755,-23948,57919,-59283,-49386,87934,37017,-91365,-66604,-257,-84754,96,67410,-921,81419,39865,-69959,-58497,-253,-88924,-81087,-288,27055,-53730,-70493,74465,706,-25024,91275,51761,-30547,-60254,19946,-14094,-20318,-47621,-17756,-38299,-93429,587,31066,8455,48376,43965,-71436,16735,5127,-33410,-73317,-16333,10517,-51896,24055,-24083,66418,-54650,-692,891,-88790,-23851,-88001,-37959,-82641,277,-3359,75500,49196,-18497,32673,29040,-42379,68339,-65069,-526,-19990,10457,-61482,83090,-82295,668,-30663,9344,859,7608,-58756,-78651,-386,-55972,19488,250,3382,70594,-49509,30422,42074,108,-8905,-33259,-52677,-46936,723,-76376,33916,-2358,-73954,-964,-86827,764,95907,707,-93169,-33,-6057,-1563,-93188,-921,-86252,9751,-59610,-24708,-40190,5167,62015,-1659,-74343,665,739,4509,-505,-89016,-80639,71776,35766,64641,18,57,75428,50650,-18439,-933,-91825,-45288,-51879,-36474,-72500,37476,-854,52053,23610,-60580,-44723,792,-73649,72031,93254,-37629,-38391,-64426,-883,39019,-75672,8664,-731,84922,-63400,256,-69861,29302,53204,61099,27225,-36903,-71811,41323,-32884,-94903,-42954,-1512,600,-11820,-89625,65795,80898,914,55707,-61983,45425,63734,71386,-17138,-4,39853,-21335,42542,-25262,-489,14736,93,-73074,92446,7337,47347,-373,-955,12194,92179,181,-14973,-106,88156,-56,63120,570,83803,-168,-41468,27765,-41607,-70785,98582,-10371,-33596,57915,-29658,76995,87372,84431,-638,-33416,670,-9639,76,-28439,-21606,80843,-52,-597,-81613,69387,63528,357,-39603,-41180,83230,-22463,37,75119,419,-86101,-83795,71746,-43657,-66017,-71657,2816,-59067,89432,28506,85515,24822,719,-32494,-81557,37309,-379,557,-8442,-13661,-97040,-34385,-8415,-213,9,79570,-58047,774,38454,5833,841,-94,793,-10020,-883,5843,-17573,-48245,-71585,-26453,69323,-42167,-12364,-9066,15834,9609,-83814,22806,39647,5196,94577,-681,21283,-954,-76166,-59263,-41656,-48657,-669,63783,47151,89355,803,704,85803,47334,-90923,-4214,64905,-88479,63,-91402,-894,-15855,9753,61687,88780,-831,58359,49555,63384,19146,359,-66742,11256,50581,14630,-99477,-33855,808,101,-68916,40648,-35369,-148,79968,-5294,-79072,5130,68500,-705,20399,57901,28126,35438,85979,-574,539,-680,-37853,-48044,-383,-7017,61550,-99601,-71996,-445,194,55451,-64779,-940,-91446,-70360,-12871,64022,38673,-32051,-34364,57749,29785,-33019,67852,88123,299,-50977,-57016,61245,72232,-2180,25277,44499,-22509,-138,-96002,-74181,-17593,38100,79097,-35768,-1609,-9029,64838,572,98,669,-8022,-210,-152,221,315,18029,40445,-20611,-41143,95166,-15896,76967,3124,120,57414]
+|16/12/2019 23:18:16|: INFO : [DATA STARTU |16/12/2019 23:18:16|]
+|16/12/2019 23:18:16|: INFO : [DATA ZAKONCZENA |16/12/2019 23:15:00|]
+|16/12/2019 23:18:16|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 23:18:16|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 23:18:16|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 23:18:21|: INFO : [Początkowy najlepszy osobnik Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|16/12/2019 23:18:21|: INFO : [Koniec ewolucji z powodu limitu czasu : 16/12/2019 23:15:00]
+|16/12/2019 23:18:21|: INFO : [Czas pracy w minutach : -3.26828910166667]
+|16/12/2019 23:18:21|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|16/12/2019 23:18:21|: INFO : [Fenotyp : [Volume, -7.17683391149843],[Opening, 5.41201602136182],[Min, 1.07991598319664],[Max, -3.4001072673639],[Closing, -5.38988526233708],[MACDEMA1, 392],[MACDEMA2, 632],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 23:18:21|: INFO : [Genotyp : -81629,65337,47360,-18678,-685,92575,12842,736,-11836,736,54804,84823,-11819,40536,7490,-64782,-59988,-38037,11187,-96770,17954,2,1,-702,368,304,0,-99086,13168,-52000,392,632,9,14,20,25716,25157,96200,-591,-61351,24284,9851,80029,32460,929,723,-20840,36004,68669,-62884,-9919,-84614,-52997,-45119,-16921,-85191,-7681,59062,80954,-93059,-28762,11927,28431,-59837,2419,-42814,42008,-31916,17091,81773,10060,-56189,85878,-27462,-21054,-91897,-76467,40558,-335,41207,-13006,85331,-67755,-23948,57919,-59283,-49386,87934,37017,-91365,-66604,-257,-84754,96,67410,-921,81419,39865,-69959,-58497,-253,-88924,-81087,-288,27055,-53730,-70493,74465,706,-25024,91275,51761,-30547,-60254,19946,-14094,-20318,-47621,-17756,-38299,-93429,587,31066,8455,48376,43965,-71436,16735,5127,-33410,-73317,-16333,10517,-51896,24055,-24083,66418,-54650,-692,891,-88790,-23851,-88001,-37959,-82641,277,-3359,75500,49196,-18497,32673,29040,-42379,68339,-65069,-526,-19990,10457,-61482,83090,-82295,668,-30663,9344,859,7608,-58756,-78651,-386,-55972,19488,250,3382,70594,-49509,30422,42074,108,-8905,-33259,-52677,-46936,723,-76376,33916,-2358,-73954,-964,-86827,764,95907,707,-93169,-33,-6057,-1563,-93188,-921,-86252,9751,-59610,-24708,-40190,5167,62015,-1659,-74343,665,739,4509,-505,-89016,-80639,71776,35766,64641,18,57,75428,50650,-18439,-933,-91825,-45288,-51879,-36474,-72500,37476,-854,52053,23610,-60580,-44723,792,-73649,72031,93254,-37629,-38391,-64426,-883,39019,-75672,8664,-731,84922,-63400,256,-69861,29302,53204,61099,27225,-36903,-71811,41323,-32884,-94903,-42954,-1512,600,-11820,-89625,65795,80898,914,55707,-61983,45425,63734,71386,-17138,-4,39853,-21335,42542,-25262,-489,14736,93,-73074,92446,7337,47347,-373,-955,12194,92179,181,-14973,-106,88156,-56,63120,570,83803,-168,-41468,27765,-41607,-70785,98582,-10371,-33596,57915,-29658,76995,87372,84431,-638,-33416,670,-9639,76,-28439,-21606,80843,-52,-597,-81613,69387,63528,357,-39603,-41180,83230,-22463,37,75119,419,-86101,-83795,71746,-43657,-66017,-71657,2816,-59067,89432,28506,85515,24822,719,-32494,-81557,37309,-379,557,-8442,-13661,-97040,-34385,-8415,-213,9,79570,-58047,774,38454,5833,841,-94,793,-10020,-883,5843,-17573,-48245,-71585,-26453,69323,-42167,-12364,-9066,15834,9609,-83814,22806,39647,5196,94577,-681,21283,-954,-76166,-59263,-41656,-48657,-669,63783,47151,89355,803,704,85803,47334,-90923,-4214,64905,-88479,63,-91402,-894,-15855,9753,61687,88780,-831,58359,49555,63384,19146,359,-66742,11256,50581,14630,-99477,-33855,808,101,-68916,40648,-35369,-148,79968,-5294,-79072,5130,68500,-705,20399,57901,28126,35438,85979,-574,539,-680,-37853,-48044,-383,-7017,61550,-99601,-71996,-445,194,55451,-64779,-940,-91446,-70360,-12871,64022,38673,-32051,-34364,57749,29785,-33019,67852,88123,299,-50977,-57016,61245,72232,-2180,25277,44499,-22509,-138,-96002,-74181,-17593,38100,79097,-35768,-1609,-9029,64838,572,98,669,-8022,-210,-152,221,315,18029,40445,-20611,-41143,95166,-15896,76967,3124,120,57414]
+|16/12/2019 23:18:33|: INFO : [DATA STARTU |16/12/2019 23:18:33|]
+|16/12/2019 23:18:33|: INFO : [DATA ZAKONCZENA |16/12/2019 23:35:00|]
+|16/12/2019 23:18:33|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|16/12/2019 23:18:33|: INFO : [MUTATIONRETRIALS : |40|]
+|16/12/2019 23:18:33|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|16/12/2019 23:18:42|: INFO : [Początkowy najlepszy osobnik Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|16/12/2019 23:37:04|: INFO : [Koniec ewolucji z powodu limitu czasu : 16/12/2019 23:35:00]
+|16/12/2019 23:37:04|: INFO : [Czas pracy w minutach : 16.4421963116667]
+|16/12/2019 23:37:04|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|16/12/2019 23:37:04|: INFO : [Fenotyp : [Volume, -7.17683391149843],[Opening, 5.41201602136182],[Min, 1.07991598319664],[Max, -3.4001072673639],[Closing, -5.38988526233708],[MACDEMA1, 392],[MACDEMA2, 632],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|16/12/2019 23:37:04|: INFO : [Genotyp : -81629,65337,47360,-18678,-685,92575,12842,736,-11836,736,54804,84823,-11819,40536,7490,-64782,-59988,-38037,11187,-96770,17954,2,1,-702,368,304,0,-99086,13168,-52000,392,632,9,14,20,25716,25157,96200,-591,-61351,24284,9851,80029,32460,929,723,-20840,36004,68669,-62884,-9919,-84614,-52997,-45119,-16921,-85191,-7681,59062,80954,-93059,-28762,11927,28431,-59837,2419,-42814,42008,-31916,17091,81773,10060,-56189,85878,-27462,-21054,-91897,-76467,40558,-335,41207,-13006,85331,-67755,-23948,57919,-59283,-49386,87934,37017,-91365,-66604,-257,-84754,96,67410,-921,81419,39865,-69959,-58497,-253,-88924,-81087,-288,27055,-53730,-70493,74465,706,-25024,91275,51761,-30547,-60254,19946,-14094,-20318,-47621,-17756,-38299,-93429,587,31066,8455,48376,43965,-71436,16735,5127,-33410,-73317,-16333,10517,-51896,24055,-24083,66418,-54650,-692,891,-88790,-23851,-88001,-37959,-82641,277,-3359,75500,49196,-18497,32673,29040,-42379,68339,-65069,-526,-19990,10457,-61482,83090,-82295,668,-30663,9344,859,7608,-58756,-78651,-386,-55972,19488,250,3382,70594,-49509,30422,42074,108,-8905,-33259,-52677,-46936,723,-76376,33916,-2358,-73954,-964,-86827,764,95907,707,-93169,-33,-6057,-1563,-93188,-921,-86252,9751,-59610,-24708,-40190,5167,62015,-1659,-74343,665,739,4509,-505,-89016,-80639,71776,35766,64641,18,57,75428,50650,-18439,-933,-91825,-45288,-51879,-36474,-72500,37476,-854,52053,23610,-60580,-44723,792,-73649,72031,93254,-37629,-38391,-64426,-883,39019,-75672,8664,-731,84922,-63400,256,-69861,29302,53204,61099,27225,-36903,-71811,41323,-32884,-94903,-42954,-1512,600,-11820,-89625,65795,80898,914,55707,-61983,45425,63734,71386,-17138,-4,39853,-21335,42542,-25262,-489,14736,93,-73074,92446,7337,47347,-373,-955,12194,92179,181,-14973,-106,88156,-56,63120,570,83803,-168,-41468,27765,-41607,-70785,98582,-10371,-33596,57915,-29658,76995,87372,84431,-638,-33416,670,-9639,76,-28439,-21606,80843,-52,-597,-81613,69387,63528,357,-39603,-41180,83230,-22463,37,75119,419,-86101,-83795,71746,-43657,-66017,-71657,2816,-59067,89432,28506,85515,24822,719,-32494,-81557,37309,-379,557,-8442,-13661,-97040,-34385,-8415,-213,9,79570,-58047,774,38454,5833,841,-94,793,-10020,-883,5843,-17573,-48245,-71585,-26453,69323,-42167,-12364,-9066,15834,9609,-83814,22806,39647,5196,94577,-681,21283,-954,-76166,-59263,-41656,-48657,-669,63783,47151,89355,803,704,85803,47334,-90923,-4214,64905,-88479,63,-91402,-894,-15855,9753,61687,88780,-831,58359,49555,63384,19146,359,-66742,11256,50581,14630,-99477,-33855,808,101,-68916,40648,-35369,-148,79968,-5294,-79072,5130,68500,-705,20399,57901,28126,35438,85979,-574,539,-680,-37853,-48044,-383,-7017,61550,-99601,-71996,-445,194,55451,-64779,-940,-91446,-70360,-12871,64022,38673,-32051,-34364,57749,29785,-33019,67852,88123,299,-50977,-57016,61245,72232,-2180,25277,44499,-22509,-138,-96002,-74181,-17593,38100,79097,-35768,-1609,-9029,64838,572,98,669,-8022,-210,-152,221,315,18029,40445,-20611,-41143,95166,-15896,76967,3124,120,57414]
+|17/12/2019 00:05:55|: INFO : [DATA STARTU |17/12/2019 00:05:55|]
+|17/12/2019 00:05:55|: INFO : [DATA ZAKONCZENA |17/12/2019 01:05:55|]
+|17/12/2019 00:05:55|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 00:05:55|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 00:05:55|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 00:06:01|: INFO : [Początkowy najlepszy osobnik Zarobil :4760220.25180001 oraz na testowych danych : -9072611.41799998]
+|17/12/2019 00:11:05|: INFO : [Populacja 9 Nowy osobnik Zarobil :4761102.11720001 oraz na testowych danych : -12964610.412]
+|17/12/2019 01:06:30|: INFO : [Koniec ewolucji z powodu limitu czasu : 17/12/2019 01:05:55]
+|17/12/2019 01:06:30|: INFO : [Czas pracy w minutach : 60.0002604266667]
+|17/12/2019 01:06:30|: INFO : [Najlepszy osobnik z populacji 9 Zarobil :4761102.11720001 oraz na testowych danych : -12964610.412]
+|17/12/2019 01:06:30|: INFO : [Fenotyp : [Volume, -7.17683391149843],[Opening, 5.41201602136182],[Min, 1.07991598319664],[Max, -3.4001072673639],[Closing, -5.38988526233708],[MACDEMA1, 392],[MACDEMA2, 632],[MACDEMASignal, 9],[RSI, 865],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|17/12/2019 01:06:30|: INFO : [Genotyp : -81629,65337,47360,-18678,-685,92575,12842,736,-11836,736,54804,84823,-11819,40536,7490,-64782,-59988,-38037,11187,-96770,17954,2,1,-702,368,304,0,-99086,13168,-52000,392,632,9,865,20,25716,25157,96200,985,-61351,24284,9851,526,32460,929,723,-20840,36004,68669,-62884,-9919,-84614,-52997,-45119,-16921,-85191,-7681,59062,80954,-93059,-28762,11927,28431,-59837,2419,-42814,42008,-31916,17091,81773,10060,-56189,85878,-27462,-21054,-91897,-76467,40558,-335,41207,196,85331,-67755,-23948,57919,-59283,-49386,87934,37017,-91365,-66604,-257,-84754,96,67410,-921,81419,39865,-69959,-58497,-253,-88924,-81087,-288,27055,-53730,-70493,74465,706,-25024,91275,51761,-30547,118,19946,-14094,-20318,-47621,-17756,-38299,-93429,-244,31066,8455,48376,43965,-71436,16735,5127,-33410,-73317,-16333,10517,-51896,24055,-590,66418,-54650,-692,891,-140,-23851,-88001,-37959,-82641,277,-3359,75500,49196,-18497,32673,29040,-42379,68339,-65069,-526,-19990,10457,-61482,83090,-82295,-163,-30663,9344,859,7608,-58756,-78651,-386,-55972,19488,250,3382,70594,-49509,30422,42074,108,-8905,-33259,-52677,-46936,847,-76376,33916,-2358,-73954,-964,-86827,764,95907,707,-239,-33,-6057,-1563,-93188,-921,-86252,9751,-59610,-24708,-40190,5167,62015,-1659,-74343,665,739,4509,-505,977,-80639,71776,35766,64641,18,513,75428,50650,-584,-933,-91825,-45288,-51879,-36474,-72500,37476,-854,52053,23610,-60580,-44723,792,-73649,72031,93254,-548,-38391,-64426,-883,-332,-75672,8664,-731,84922,-63400,256,-69861,29302,53204,-76,655,-36903,-71811,41323,-32884,-94903,-42954,-1512,-311,-11820,-89625,65795,80898,914,55707,-61983,45425,63734,71386,-17138,-4,39853,-389,42542,-240,-489,14736,93,105,92446,7337,47347,-373,-955,12194,92179,181,-14973,-106,88156,-56,63120,570,83803,-168,-41468,27765,-41607,-70785,98582,202,-33596,57915,-29658,76995,87372,84431,-638,-33416,670,-9639,76,-28439,-21606,80843,-52,-597,-81613,69387,79,357,-39603,-41180,-280,-22463,37,75119,419,-86101,-83795,71746,-43657,-66017,-71657,2816,-59067,89432,28506,85515,24822,719,-32494,-81557,37309,-379,557,-8442,-13661,-97040,-34385,-8415,-213,9,79570,-58047,774,38454,5833,841,-94,793,-10020,-883,5843,-17573,-48245,-71585,-26453,69323,-42167,-12364,-9066,15834,9609,-83814,22806,39647,5196,94577,-681,21283,-954,-76166,-59263,-41656,-48657,-669,63783,47151,89355,803,704,85803,47334,-90923,-4214,64905,-88479,63,-91402,-894,-15855,485,61687,88780,-831,58359,49555,63384,19146,359,-66742,11256,50581,14630,-99477,-33855,808,-559,-68916,40648,-35369,-148,79968,-5294,-79072,5130,68500,-705,20399,57901,28126,35438,85979,-574,539,-680,-37853,-48044,-383,-7017,61550,-99601,-71996,-445,194,55451,-64779,-940,952,-70360,-12871,64022,38673,-32051,-34364,57749,29785,-33019,67852,88123,299,-50977,-516,61245,72232,-2180,25277,44499,-22509,-138,-96002,-74181,-17593,-644,79097,-35768,-1609,-708,64838,572,98,669,-8022,-210,-152,221,315,18029,40445,-20611,-41143,95166,-15896,76967,3124,120,57414]
+|17/12/2019 17:00:26|: INFO : [DATA STARTU |17/12/2019 17:00:26|]
+|17/12/2019 17:00:26|: INFO : [DATA ZAKONCZENA |17/12/2019 18:00:26|]
+|17/12/2019 17:00:26|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 17:00:26|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 17:00:26|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 17:01:23|: INFO : [Początkowy najlepszy osobnik Zarobil :4761102.11720001 oraz na testowych danych : -12964610.412]
+|17/12/2019 17:02:48|: INFO : [DATA STARTU |17/12/2019 17:02:48|]
+|17/12/2019 17:02:48|: INFO : [DATA ZAKONCZENA |17/12/2019 18:02:48|]
+|17/12/2019 17:02:48|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 17:02:48|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 17:02:48|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 17:02:55|: INFO : [Początkowy najlepszy osobnik Zarobil :4761102.11720001 oraz na testowych danych : -12964610.412]
+|17/12/2019 17:38:14|: INFO : [DATA STARTU |17/12/2019 17:38:14|]
+|17/12/2019 17:38:14|: INFO : [DATA ZAKONCZENA |17/12/2019 18:38:14|]
+|17/12/2019 17:38:14|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 17:38:14|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 17:38:14|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 17:38:19|: INFO : [Początkowy najlepszy osobnik Zarobil :4761102.11720001 oraz na testowych danych : -12964610.412]
+|17/12/2019 18:19:25|: INFO : [DATA STARTU |17/12/2019 18:19:25|]
+|17/12/2019 18:19:25|: INFO : [DATA ZAKONCZENA |17/12/2019 19:19:25|]
+|17/12/2019 18:19:25|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:19:25|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:19:25|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:24:17|: INFO : [DATA STARTU |17/12/2019 18:24:17|]
+|17/12/2019 18:24:17|: INFO : [DATA ZAKONCZENA |17/12/2019 19:24:17|]
+|17/12/2019 18:24:17|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:24:17|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:24:17|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:25:25|: INFO : [DATA STARTU |17/12/2019 18:25:25|]
+|17/12/2019 18:25:25|: INFO : [DATA ZAKONCZENA |17/12/2019 19:25:25|]
+|17/12/2019 18:25:25|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:25:25|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:25:25|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:35:54|: INFO : [DATA STARTU |17/12/2019 18:35:54|]
+|17/12/2019 18:35:54|: INFO : [DATA ZAKONCZENA |17/12/2019 19:35:53|]
+|17/12/2019 18:35:54|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:35:54|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:35:54|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:37:24|: INFO : [DATA STARTU |17/12/2019 18:37:24|]
+|17/12/2019 18:37:24|: INFO : [DATA ZAKONCZENA |17/12/2019 19:37:24|]
+|17/12/2019 18:37:24|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:37:24|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:37:24|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:37:53|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]
+|17/12/2019 18:40:49|: INFO : [Populacja 0 Nowy osobnik Zarobil :1306820.65360001 oraz na testowych danych : -1724417.77200001]
+|17/12/2019 18:41:07|: INFO : [DATA STARTU |17/12/2019 18:41:07|]
+|17/12/2019 18:41:07|: INFO : [DATA ZAKONCZENA |17/12/2019 19:41:06|]
+|17/12/2019 18:41:07|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:41:07|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:41:07|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:41:12|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]
+|17/12/2019 18:43:34|: INFO : [DATA STARTU |17/12/2019 18:43:34|]
+|17/12/2019 18:43:34|: INFO : [DATA ZAKONCZENA |17/12/2019 19:43:34|]
+|17/12/2019 18:43:34|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:43:34|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:43:34|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:43:39|: INFO : [Początkowy najlepszy osobnik Zarobil :5915.5746 oraz na testowych danych : 0]
+|17/12/2019 18:46:47|: INFO : [DATA STARTU |17/12/2019 18:46:47|]
+|17/12/2019 18:46:47|: INFO : [DATA ZAKONCZENA |17/12/2019 19:46:47|]
+|17/12/2019 18:46:47|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 18:46:47|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 18:46:47|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 18:46:52|: INFO : [Początkowy najlepszy osobnik Zarobil :6606.1086 oraz na testowych danych : 0]
+|17/12/2019 18:47:26|: INFO : [Populacja 2 Nowy osobnik Zarobil :7991.61600000002 oraz na testowych danych : 0]
+|17/12/2019 18:47:33|: INFO : [Populacja 3 Nowy osobnik Zarobil :9316.60770000003 oraz na testowych danych : 0]
+|17/12/2019 18:47:38|: INFO : [Populacja 4 Nowy osobnik Zarobil :16633.257 oraz na testowych danych : -57218.25]
+|17/12/2019 18:49:27|: INFO : [Populacja 10 Nowy osobnik Zarobil :19096.1616 oraz na testowych danych : -57218.25]
+|17/12/2019 18:49:40|: INFO : [Populacja 13 Nowy osobnik Zarobil :20617.8621 oraz na testowych danych : -59297.367]
+|17/12/2019 18:50:16|: INFO : [Populacja 16 Nowy osobnik Zarobil :23774.2551 oraz na testowych danych : -65954.265]
+|17/12/2019 18:51:10|: INFO : [Populacja 23 Nowy osobnik Zarobil :23933.1501 oraz na testowych danych : -63017.115]
+|17/12/2019 18:54:48|: INFO : [Populacja 43 Nowy osobnik Zarobil :25060.6305 oraz na testowych danych : -58158.7800000001]
+|17/12/2019 18:54:52|: INFO : [Populacja 44 Nowy osobnik Zarobil :52093.7143999999 oraz na testowych danych : -177193.52]
+|17/12/2019 18:58:18|: INFO : [Populacja 57 Nowy osobnik Zarobil :54628.2743999999 oraz na testowych danych : -178738.56]
+|17/12/2019 19:06:37|: INFO : [Populacja 61 Nowy osobnik Zarobil :57626.8671999999 oraz na testowych danych : -165513.712]
+|17/12/2019 19:06:57|: INFO : [Populacja 64 Nowy osobnik Zarobil :71817.1048 oraz na testowych danych : -108673.6]
+|17/12/2019 19:09:18|: INFO : [Populacja 80 Nowy osobnik Zarobil :77748.5828 oraz na testowych danych : -104941.2]
+|17/12/2019 19:09:49|: INFO : [Populacja 81 Nowy osobnik Zarobil :78922.1188000001 oraz na testowych danych : -108447.92]
+|17/12/2019 19:49:41|: INFO : [DATA STARTU |17/12/2019 19:49:41|]
+|17/12/2019 19:49:41|: INFO : [DATA ZAKONCZENA |17/12/2019 19:50:41|]
+|17/12/2019 19:49:41|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 19:49:41|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 19:49:41|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 19:49:50|: INFO : [Początkowy najlepszy osobnik Zarobil :4473.1258 oraz na testowych danych : 0]
+|17/12/2019 19:51:01|: INFO : [Koniec ewolucji z powodu limitu czasu : 17/12/2019 19:50:41]
+|17/12/2019 19:51:01|: INFO : [Czas pracy w minutach : 1.00004987333333]
+|17/12/2019 19:51:01|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :4473.1258 oraz na testowych danych : 0]
+|17/12/2019 19:51:01|: INFO : [Fenotyp : [Volume, -0.0672926447574335],[Opening, 0.982558139534884],[Min, 104.333333333333],[Max, 3.385],[Closing, 1.36311239193084],[MACDEMA1, 26],[MACDEMA2, 12],[MACDEMASignal, 9],[RSI, 14],[BollingerPeriods, 20],[BollingerDeviation, 2]]
+|17/12/2019 19:51:01|: INFO : [Genotyp : 532,977,-561,430,-72,733,-753,994,-762,274,-580,43,-639,-338,-344,626,6,-677,-200,-473,-347,2,1,-441,-881,219,1,-583,772,967,26,12,9,14,20,-377,651,75,422,610,936,602,399,-827,616,791,-432,-958,-782,596,-386,437,-525,-533,704,947,-651,880,311,709,596,829,-779,-730,677,-904,-201,224,-423,-967,974,931,-100,190,-410,51,-815,453,-57,-673,-349,-906,-801,-824,353,-841,848,775,432,-862,-727,771,764,713,-987,-893,380,128,-505,519,-9,343,465,-815,621,-317,-464,284,876,-348,761,-105,-64,-17,58,501,630,-955,-83,518,-752,24,792,-561,760,-798,-834,187,176,-517,671,57,-43,424,335,307,-371,-987,-445,-331,622,-437,898,-221,-624,377,-165,-220,-346,-489,-524,335,-789,-23,271,967,551,26,-575,418,-484,349,-892,393,-19,-296,937,512,647,751,-128,616,490,-753,895,684,125,13,-938,-618,367,385,-468,-336,-994,-664,-154,980,-848,368,756,603,588,136,-847,-727,-545,-495,797,672,439,322,133,-97,639,-140,845,963,82,586,-158,-463,-37,-958,-949,131,-184,443,386,-355,857,957,359,-721,995,269,-973,-647,-906,621,229,-381,215,-611,-58,-955,-748,629,25,146,-509,-118,-103,-434,-474,218,-361,546,85,22,456,11,118,152,815,482,962,-146,-92,-631,-167,491,868,460,-643,-778,322,-426,99,-994,-122,187,-582,-760,-847,-26,59,-207,752,-224,-370,-519,268,72,-835,-783,500,-938,-426,460,-918,398,-279,-345,-688,-1,13,437,-792,-697,895,-936,-554,78,-857,-731,-407,-122,-2,-160,-578,169,101,-869,739,-649,-778,-204,295,-861,-279,259,-1000,639,924,480,-534,762,927,153,961,622,-416,448,-119,-435,-965,-810,-71,896,624,-378,63,734,38,-88,-704,-411,-84,960,-223,-783,-858,-931,582,-365,-936,-193,154,-337,803,-169,-50,844,-122,-201,-416,652,250,173,-684,-968,867,399,-485,-902,-805,-734,-400,11,183,876,-155,967,-624,743,480,-486,866,-755,-499,227,35,-734,-907,-208,672,218,-145,-762,-673,-356,339,743,644,-255,-650,-258,554,483,-561,798,-794,-857,479,926,985,-17,468,135,319,-931,785,4,-329,88,-3,601,306,722,-574,-23,410,-639,-317,-461,-464,102,-678,631,393,-263,-40,-617,805,-297,21,-109,-214,-834,-193,-311,750,719,-81,-743,-142,-665,71,-445,747,-251,436,832,57,462,-613,845,459,-60,390,-117,-340,837,742,-418,109,402,199,968,-933,-895,-186,139,-85,736,226,690,442,-575,680,-799,-969,767,883,-356,300,128,325,-658]
+|17/12/2019 19:53:38|: INFO : [DATA STARTU |17/12/2019 19:53:38|]
+|17/12/2019 19:53:38|: INFO : [DATA ZAKONCZENA |17/12/2019 19:58:37|]
+|17/12/2019 19:53:38|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|17/12/2019 19:53:38|: INFO : [MUTATIONRETRIALS : |40|]
+|17/12/2019 19:53:38|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|17/12/2019 19:53:38|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]
+|17/12/2019 19:53:51|: INFO : [Populacja 0 Nowy osobnik Zarobil :3613.7946 oraz na testowych danych : 0]
+|17/12/2019 19:54:01|: INFO : [Populacja 2 Nowy osobnik Zarobil :7206.92940000001 oraz na testowych danych : -274.010000000017]
+|17/12/2019 19:54:06|: INFO : [Populacja 3 Nowy osobnik Zarobil :11590.04 oraz na testowych danych : -1121.69199999998]
+|17/12/2019 19:55:12|: INFO : [Populacja 6 Nowy osobnik Zarobil :12088.9131 oraz na testowych danych : -31757.759]
+|17/12/2019 19:55:46|: INFO : [Populacja 7 Nowy osobnik Zarobil :13995.498 oraz na testowych danych : -24933.744]
+|17/12/2019 19:56:18|: INFO : [Populacja 8 Nowy osobnik Zarobil :26316.5033999999 oraz na testowych danych : -8136.93100000002]
+|17/12/2019 19:56:47|: INFO : [Populacja 10 Nowy osobnik Zarobil :48543.7282 oraz na testowych danych : 22762.652]
+|17/12/2019 19:58:35|: INFO : [Populacja 18 Nowy osobnik Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|17/12/2019 19:58:49|: INFO : [Koniec ewolucji z powodu limitu czasu : 17/12/2019 19:58:37]
+|17/12/2019 19:58:49|: INFO : [Czas pracy w minutach : 5.00004989166667]
+|17/12/2019 19:58:49|: INFO : [Najlepszy osobnik z populacji 18 Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|17/12/2019 19:58:49|: INFO : [Fenotyp : [Volume, -0.0672926447574335],[Opening, 0.982558139534884],[Min, -80.1666666666667],[Max, -3.9],[Closing, -1.5111821086262],[MACDEMA1, 26],[MACDEMA2, 0],[MACDEMASignal, 0],[RSI, 14],[BollingerPeriods, 513],[BollingerDeviation, 189]]
+|17/12/2019 19:58:49|: INFO : [Genotyp : 532,977,820,409,-72,-577,-885,994,-980,230,-580,43,-639,-338,-344,-481,6,780,-200,-473,313,189,1,115,-881,219,1,911,-120,177,26,-664,-5,14,513,-377,651,75,-295,610,484,-79,-600,-827,616,791,-454,-958,87,596,-939,437,-525,-533,334,947,-615,-974,311,709,596,829,319,-730,26,-904,697,269,-423,-967,252,931,794,438,-410,51,51,453,-57,339,440,-906,-801,-824,353,-841,-511,531,432,-862,-727,-472,764,713,709,-893,380,128,-371,444,-9,343,465,-406,621,-317,-464,284,876,658,761,-105,-64,698,58,501,630,-369,338,-408,-752,906,-285,-561,-700,-798,-834,-593,176,-668,455,57,34,424,335,121,530,-987,-445,-331,-219,-909,898,-998,91,377,-424,-220,378,-204,-524,-949,-93,131,7,-520,-715,357,160,-565,-472,485,-442,319,331,-572,720,-266,-903,-194,-818,619,136,691,-56,-559,602,-553,854,-90,-338,-813,866,783,788,-505,17,-220,-833,140,665,168,-756,-949,741,83,744,624,-891,-489,-4,387,-991,-268,14,-103,456,216,-530,-863,256,-840,165,-750,-355,502,481,-226,-2,897,870,-557,-646,642,141,-145,374,84,-533,-842,-716,127,-985,-279,914,275,-822,133,214,-110,985,666,-981,189,624,25,995,812,-722,721,-206,104,-299,-895,-677,-264,437,-846,-722,-841,523,830,-186,499,-307,360,-856,-704,-665,-503,323,-993,629,854,-661,-821,-892,209,110,636,263,270,896,-255,-518,314,-119,910,-602,143,-714,-819,542,826,367,749,-83,-481,-504,-737,328,-353,-628,780,-372,-928,-36,-154,682,163,-504,-601,-185,-870,20,-857,-79,-998,16,-434,-412,-766,417,157,883,511,375,395,-513,-327,-38,720,-287,754,-242,-541,720,24,-653,393,781,445,714,954,-102,-247,-497,587,-115,396,-276,954,503,-730,396,-988,929,-499,569,-114,911,-110,-641,8,-751,-225,-166,108,678,264,43,-552,655,821,28,395,-994,-909,-524,812,-953,787,-548,749,949,-953,299,595,734,-463,-470,219,356,461,284,33,-753,694,-527,905,-73,-129,908,-889,317,-392,259,78,-912,60,119,-128,781,865,-162,-877,58,95,59,433,-374,470,196,-337,-266,-243,-455,-184,359,354,49,-213,111,-430,-738,175,-316,-112,-563,225,-213,226,506,48,572,789,194,286,-683,-945,836,152,-840,39,346,970,675,-962,-113,993,-822,-363,641,840,578,-668,-780,454,602,662,-756,299,595,364,-309,-977,963,-141,380,-958,-992,-44,570,375,-475,-58,-309,-423,-518,-708,-287,-501,317,-166,47,-837,389,665,954,697]
+|18/12/2019 16:29:34|: INFO : [DATA STARTU |18/12/2019 16:29:34|]
+|18/12/2019 16:29:34|: INFO : [DATA ZAKONCZENA |17/12/2019 23:35:00|]
+|18/12/2019 16:29:34|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|18/12/2019 16:29:34|: INFO : [MUTATIONRETRIALS : |40|]
+|18/12/2019 16:29:34|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 16:29:35|: INFO : [Początkowy najlepszy osobnik Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|18/12/2019 16:29:35|: INFO : [Koniec ewolucji z powodu limitu czasu : 17/12/2019 23:35:00]
+|18/12/2019 16:29:35|: INFO : [Czas pracy w minutach : -1014.573201515]
+|18/12/2019 16:29:35|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|18/12/2019 16:29:35|: INFO : [Fenotyp : [Volume, -0.0672926447574335],[Opening, 0.982558139534884],[Min, -80.1666666666667],[Max, -3.9],[Closing, -1.5111821086262],[MACDEMA1, 26],[MACDEMA2, 0],[MACDEMASignal, 0],[RSI, 14],[BollingerPeriods, 513],[BollingerDeviation, 189]]
+|18/12/2019 16:29:35|: INFO : [Genotyp : 532,977,820,409,-72,-577,-885,994,-980,230,-580,43,-639,-338,-344,-481,6,780,-200,-473,313,189,1,115,-881,219,1,911,-120,177,26,-664,-5,14,513,-377,651,75,-295,610,484,-79,-600,-827,616,791,-454,-958,87,596,-939,437,-525,-533,334,947,-615,-974,311,709,596,829,319,-730,26,-904,697,269,-423,-967,252,931,794,438,-410,51,51,453,-57,339,440,-906,-801,-824,353,-841,-511,531,432,-862,-727,-472,764,713,709,-893,380,128,-371,444,-9,343,465,-406,621,-317,-464,284,876,658,761,-105,-64,698,58,501,630,-369,338,-408,-752,906,-285,-561,-700,-798,-834,-593,176,-668,455,57,34,424,335,121,530,-987,-445,-331,-219,-909,898,-998,91,377,-424,-220,378,-204,-524,-949,-93,131,7,-520,-715,357,160,-565,-472,485,-442,319,331,-572,720,-266,-903,-194,-818,619,136,691,-56,-559,602,-553,854,-90,-338,-813,866,783,788,-505,17,-220,-833,140,665,168,-756,-949,741,83,744,624,-891,-489,-4,387,-991,-268,14,-103,456,216,-530,-863,256,-840,165,-750,-355,502,481,-226,-2,897,870,-557,-646,642,141,-145,374,84,-533,-842,-716,127,-985,-279,914,275,-822,133,214,-110,985,666,-981,189,624,25,995,812,-722,721,-206,104,-299,-895,-677,-264,437,-846,-722,-841,523,830,-186,499,-307,360,-856,-704,-665,-503,323,-993,629,854,-661,-821,-892,209,110,636,263,270,896,-255,-518,314,-119,910,-602,143,-714,-819,542,826,367,749,-83,-481,-504,-737,328,-353,-628,780,-372,-928,-36,-154,682,163,-504,-601,-185,-870,20,-857,-79,-998,16,-434,-412,-766,417,157,883,511,375,395,-513,-327,-38,720,-287,754,-242,-541,720,24,-653,393,781,445,714,954,-102,-247,-497,587,-115,396,-276,954,503,-730,396,-988,929,-499,569,-114,911,-110,-641,8,-751,-225,-166,108,678,264,43,-552,655,821,28,395,-994,-909,-524,812,-953,787,-548,749,949,-953,299,595,734,-463,-470,219,356,461,284,33,-753,694,-527,905,-73,-129,908,-889,317,-392,259,78,-912,60,119,-128,781,865,-162,-877,58,95,59,433,-374,470,196,-337,-266,-243,-455,-184,359,354,49,-213,111,-430,-738,175,-316,-112,-563,225,-213,226,506,48,572,789,194,286,-683,-945,836,152,-840,39,346,970,675,-962,-113,993,-822,-363,641,840,578,-668,-780,454,602,662,-756,299,595,364,-309,-977,963,-141,380,-958,-992,-44,570,375,-475,-58,-309,-423,-518,-708,-287,-501,317,-166,47,-837,389,665,954,697]
+|18/12/2019 16:29:50|: INFO : [DATA STARTU |18/12/2019 16:29:50|]
+|18/12/2019 16:29:50|: INFO : [DATA ZAKONCZENA |17/12/2019 23:35:00|]
+|18/12/2019 16:29:50|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|18/12/2019 16:29:50|: INFO : [MUTATIONRETRIALS : |40|]
+|18/12/2019 16:29:50|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 16:29:55|: INFO : [Początkowy najlepszy osobnik Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|18/12/2019 16:29:55|: INFO : [Koniec ewolucji z powodu limitu czasu : 17/12/2019 23:35:00]
+|18/12/2019 16:29:55|: INFO : [Czas pracy w minutach : -1014.839558025]
+|18/12/2019 16:29:55|: INFO : [Najlepszy osobnik z populacji 0 Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|18/12/2019 16:29:55|: INFO : [Fenotyp : [Volume, -0.0672926447574335],[Opening, 0.982558139534884],[Min, -80.1666666666667],[Max, -3.9],[Closing, -1.5111821086262],[MACDEMA1, 26],[MACDEMA2, 0],[MACDEMASignal, 0],[RSI, 14],[BollingerPeriods, 513],[BollingerDeviation, 189]]
+|18/12/2019 16:29:55|: INFO : [Genotyp : 532,977,820,409,-72,-577,-885,994,-980,230,-580,43,-639,-338,-344,-481,6,780,-200,-473,313,189,1,115,-881,219,1,911,-120,177,26,-664,-5,14,513,-377,651,75,-295,610,484,-79,-600,-827,616,791,-454,-958,87,596,-939,437,-525,-533,334,947,-615,-974,311,709,596,829,319,-730,26,-904,697,269,-423,-967,252,931,794,438,-410,51,51,453,-57,339,440,-906,-801,-824,353,-841,-511,531,432,-862,-727,-472,764,713,709,-893,380,128,-371,444,-9,343,465,-406,621,-317,-464,284,876,658,761,-105,-64,698,58,501,630,-369,338,-408,-752,906,-285,-561,-700,-798,-834,-593,176,-668,455,57,34,424,335,121,530,-987,-445,-331,-219,-909,898,-998,91,377,-424,-220,378,-204,-524,-949,-93,131,7,-520,-715,357,160,-565,-472,485,-442,319,331,-572,720,-266,-903,-194,-818,619,136,691,-56,-559,602,-553,854,-90,-338,-813,866,783,788,-505,17,-220,-833,140,665,168,-756,-949,741,83,744,624,-891,-489,-4,387,-991,-268,14,-103,456,216,-530,-863,256,-840,165,-750,-355,502,481,-226,-2,897,870,-557,-646,642,141,-145,374,84,-533,-842,-716,127,-985,-279,914,275,-822,133,214,-110,985,666,-981,189,624,25,995,812,-722,721,-206,104,-299,-895,-677,-264,437,-846,-722,-841,523,830,-186,499,-307,360,-856,-704,-665,-503,323,-993,629,854,-661,-821,-892,209,110,636,263,270,896,-255,-518,314,-119,910,-602,143,-714,-819,542,826,367,749,-83,-481,-504,-737,328,-353,-628,780,-372,-928,-36,-154,682,163,-504,-601,-185,-870,20,-857,-79,-998,16,-434,-412,-766,417,157,883,511,375,395,-513,-327,-38,720,-287,754,-242,-541,720,24,-653,393,781,445,714,954,-102,-247,-497,587,-115,396,-276,954,503,-730,396,-988,929,-499,569,-114,911,-110,-641,8,-751,-225,-166,108,678,264,43,-552,655,821,28,395,-994,-909,-524,812,-953,787,-548,749,949,-953,299,595,734,-463,-470,219,356,461,284,33,-753,694,-527,905,-73,-129,908,-889,317,-392,259,78,-912,60,119,-128,781,865,-162,-877,58,95,59,433,-374,470,196,-337,-266,-243,-455,-184,359,354,49,-213,111,-430,-738,175,-316,-112,-563,225,-213,226,506,48,572,789,194,286,-683,-945,836,152,-840,39,346,970,675,-962,-113,993,-822,-363,641,840,578,-668,-780,454,602,662,-756,299,595,364,-309,-977,963,-141,380,-958,-992,-44,570,375,-475,-58,-309,-423,-518,-708,-287,-501,317,-166,47,-837,389,665,954,697]
+|18/12/2019 16:30:01|: INFO : [DATA STARTU |18/12/2019 16:30:01|]
+|18/12/2019 16:30:01|: INFO : [DATA ZAKONCZENA |18/12/2019 16:35:01|]
+|18/12/2019 16:30:01|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|18/12/2019 16:30:01|: INFO : [MUTATIONRETRIALS : |40|]
+|18/12/2019 16:30:01|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 16:30:04|: INFO : [Początkowy najlepszy osobnik Zarobil :72967.0915999999 oraz na testowych danych : -133632.768]
+|18/12/2019 17:01:39|: INFO : [DATA STARTU |18/12/2019 17:01:39|]
+|18/12/2019 17:01:39|: INFO : [DATA ZAKONCZENA |19/12/2019 09:41:39|]
+|18/12/2019 17:01:39|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|18/12/2019 17:01:39|: INFO : [MUTATIONRETRIALS : |40|]
+|18/12/2019 17:01:39|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 17:01:39|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]
+|18/12/2019 17:01:50|: INFO : [Populacja 0 Nowy osobnik Zarobil :5202.0228 oraz na testowych danych : 0]
+|18/12/2019 17:02:26|: INFO : [Populacja 1 Nowy osobnik Zarobil :5713.7094 oraz na testowych danych : 0]
+|18/12/2019 17:04:44|: INFO : [Populacja 11 Nowy osobnik Zarobil :5898.6 oraz na testowych danych : 0]
+|18/12/2019 17:14:44|: INFO : [Populacja 21 Nowy osobnik Zarobil :7340.028 oraz na testowych danych : 0]
+|18/12/2019 17:24:01|: INFO : [Populacja 24 Nowy osobnik Zarobil :9710.922 oraz na testowych danych : 0]
+|18/12/2019 19:00:24|: ERROR During parsing parameters Exception message : Error getting value from 'Fenotype' on 'AlgorytmEwolucyjny.Individual'.
+|18/12/2019 19:00:24|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 19:00:24|: ERROR Critical evolution error Exception message : Number encountered was not a finite quantity.
+|18/12/2019 19:02:23|: INFO : [DATA STARTU |18/12/2019 19:02:23|]
+|18/12/2019 19:02:23|: INFO : [DATA ZAKONCZENA |19/12/2019 11:42:22|]
+|18/12/2019 19:02:23|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|18/12/2019 19:02:23|: INFO : [MUTATIONRETRIALS : |40|]
+|18/12/2019 19:02:23|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|18/12/2019 19:02:27|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]
+|18/12/2019 19:02:49|: INFO : [Populacja 0 Nowy osobnik Zarobil :936.057199999999 oraz na testowych danych : 0]
+|18/12/2019 19:02:58|: INFO : [Populacja 1 Nowy osobnik Zarobil :1266.116 oraz na testowych danych : 0]
+|18/12/2019 19:12:25|: INFO : [Populacja 28 Nowy osobnik Zarobil :6361.714 oraz na testowych danych : 0]
+|18/12/2019 19:27:16|: INFO : [Populacja 82 Nowy osobnik Zarobil :9641.162 oraz na testowych danych : 0]
+|19/12/2019 03:29:05|: INFO : [DATA STARTU |19/12/2019 03:29:05|]
+|19/12/2019 03:29:05|: INFO : [DATA ZAKONCZENA |19/12/2019 20:09:05|]
+|19/12/2019 03:29:05|: INFO : [MUTATIONPROBABILITY : |0.4|]
+|19/12/2019 03:29:05|: INFO : [MUTATIONRETRIALS : |40|]
+|19/12/2019 03:29:05|: INFO : [Nr Problemu 0 Rozmiar tablicy : 500 ]
+|19/12/2019 03:29:05|: INFO : [Początkowy najlepszy osobnik Zarobil :0 oraz na testowych danych : 0]

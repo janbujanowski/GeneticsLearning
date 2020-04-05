@@ -5,3 +5,12 @@ C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.csproj.CoreCompileInputs.cach
 C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.exe
 C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.pdb
 C:\Repos\Genetyczne\obj\Release\AlgorytmEwolucyjny.csprojAssemblyReference.cache
+C:\REPOS\mgr\bin\Release\AlgorytmEwolucyjny.exe.config
+C:\REPOS\mgr\bin\Release\AlgorytmEwolucyjny.exe
+C:\REPOS\mgr\bin\Release\AlgorytmEwolucyjny.pdb
+C:\REPOS\mgr\bin\Release\Newtonsoft.Json.dll
+C:\REPOS\mgr\bin\Release\Newtonsoft.Json.xml
+C:\REPOS\mgr\obj\Release\AlgorytmEwolucyjny.csprojAssemblyReference.cache
+C:\REPOS\mgr\obj\Release\AlgorytmEwolucyjny.csproj.CopyComplete
+C:\REPOS\mgr\obj\Release\AlgorytmEwolucyjny.exe
+C:\REPOS\mgr\obj\Release\AlgorytmEwolucyjny.pdb
