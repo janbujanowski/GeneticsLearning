@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Neurox.Core
+namespace Neurox.Core.Networks
 {
     public class Neuron
     {

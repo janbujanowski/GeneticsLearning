@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Neurox.Core
+namespace Neurox.Core.Networks
 {
     public class NeuralNetwork
     {
