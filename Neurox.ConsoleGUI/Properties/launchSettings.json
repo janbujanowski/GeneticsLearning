@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Neurox.ConsoleGUI": {
+      "commandName": "Project",
+      "commandLineArgs": "\"20/12/2019 23:39:30\" 10 0.15 5 Tournament Basic 1000 1  0 60"
+    }
+  }
+}

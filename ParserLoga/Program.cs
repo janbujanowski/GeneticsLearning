@@ -1,4 +1,4 @@
-﻿using AlgorytmEwolucyjny;
+﻿//using Neurox.ConsoleGUI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +19,7 @@ namespace ParserLoga
             var workingDir = $"C:\\Users\\janbu\\OneDrive\\Studia\\Rok V sem III\\EksperymentGenetyczny\\Iteracja{iteracja}";
             //var workingDir = "C:\\Logi1";
             var lines = File.ReadAllLines(Path.Combine(workingDir, filename + ".txt"));
-            lines = lines.Add("SEPARATOR");
+            //lines = lines.Add("SEPARATOR");
             StringBuilder sb = new StringBuilder();
             StringBuilder sbCsv = new StringBuilder();
             StringBuilder sbCsvNajlepsi = new StringBuilder();

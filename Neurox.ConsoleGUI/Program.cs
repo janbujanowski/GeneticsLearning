@@ -6,7 +6,7 @@ namespace Neurox.ConsoleGUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            NeuroxEvolution evolution = new NeuroxEvolution(args);
         }
     }
 }
