@@ -7,23 +7,25 @@ namespace Neurox.ConsoleGUI
 {
     public class NeuroxEvolution
     {
-        public NeuroxEvolution(string[] args)
+        GeneticEnvironment _geneticParameters;
+        public NeuroxEvolution(GeneticEnvironment geneticParameters)
         {
+            _geneticParameters = geneticParameters;
             ILogger loggerInstance = new DirectFileLogger();
             MarketFunctions market = new MarketFunctions(loggerInstance);
             //RunTests();
-            GeneticEnvironment.INSTANCE.StartDate = DateTime.Now;
-            GeneticEnvironment.INSTANCE.ParseParameters(args);
+            _geneticParameters.StartDate = DateTime.Now;
+            
             StatsInfo[] heavensOne;
-            Individual[] newRandomPopulation = GetNewRandomPopulation(GeneticEnvironment.INSTANCE.NrProblemu);
-            LogInfo($"Nr Problemu {GeneticEnvironment.INSTANCE.NrProblemu} Rozmiar tablicy : {newRandomPopulation[0].genotype.Length} ");
+            Individual[] newRandomPopulation = GetNewRandomPopulation(_geneticParameters.NrProblemu);
+            LogInfo($"Nr Problemu {_geneticParameters.NrProblemu} Rozmiar tablicy : {newRandomPopulation[0].genotype.Length} ");
             Population pop = new Population()
             {
                 genotypes = newRandomPopulation
             };
             try
             {
-                heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), GeneticEnvironment.INSTANCE.StopDate, GeneticEnvironment.INSTANCE.SelectionMethod, GeneticEnvironment.INSTANCE.CrossoverMethod);
+                heavensOne = EvolvePopulationCriteriaUntilDateStop(loggerInstance, pop.GetCopy(), _geneticParameters.StopDate, _geneticParameters.SelectionMethod, _geneticParameters.CrossoverMethod);
                 var bestIndividualStats = heavensOne.Last();
                 LogInfo($"Najlepszy osobnik z populacji { bestIndividualStats.Population } { bestIndividualStats.Individual.ToString() }");
                 LogInfo($"Fenotyp : { string.Join(",", bestIndividualStats.Individual.Fenotype) }");
@@ -105,24 +107,24 @@ namespace Neurox.ConsoleGUI
             LogInfo(string.Join(",", lol2.genotype));
         }
         #endregion
-        private static StatsInfo[] EvolvePopulationCriteriaUntilDateStop(ILogger loggerInstance, Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
+        private StatsInfo[] EvolvePopulationCriteriaUntilDateStop(ILogger loggerInstance, Population pop, DateTime dateStop, SelectionMethods selectionMethod, CrossoverMethods crossover)
         {
             StatsInfo[] heavenPopulationDict;
-            if (GeneticEnvironment.INSTANCE.BestGenotype != null)
+            if (_geneticParameters.BestGenotype != null)
             {
-                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype }, Population = 0, Date = DateTime.Now } };
+                heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = new Individual() { genotype = _geneticParameters.BestGenotype }, Population = 0, Date = DateTime.Now } };
             }
             else
             {
                 heavenPopulationDict = new StatsInfo[1] { new StatsInfo() { Individual = pop.BestOne, Population = 0, Date = DateTime.Now } };
             }
-            pop.genotypes.Add(new Individual() { genotype = GeneticEnvironment.INSTANCE.BestGenotype });
+            pop.genotypes.Add(new Individual() { genotype = _geneticParameters.BestGenotype });
             var populationCount = 0;
             LogInfo($"Początkowy najlepszy osobnik {heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.ToString()}");
             while (DateTime.Now <= dateStop)
             {
                 pop = GetNextGeneration(pop, selectionMethod, crossover, heavenPopulationDict[heavenPopulationDict.Length - 1].Individual);
-                if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * GeneticEnvironment.INSTANCE.ModyfikatorWyniku < GeneticEnvironment.INSTANCE.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
+                if (heavenPopulationDict[heavenPopulationDict.Length - 1].Individual.SurvivalScore * _geneticParameters.ModyfikatorWyniku < _geneticParameters.ModyfikatorWyniku * pop.BestOne.SurvivalScore)
                 {
                     heavenPopulationDict = heavenPopulationDict.Add(new StatsInfo() { Individual = pop.BestOne, Population = populationCount, Date = DateTime.Now });
                     loggerInstance.LogInfo($"Populacja { populationCount } Nowy osobnik { pop.BestOne.ToString() }");
@@ -141,34 +143,34 @@ namespace Neurox.ConsoleGUI
                 //}
             }
             LogInfo("Koniec ewolucji z powodu limitu czasu : " + dateStop.ToString());
-            LogInfo($"Czas pracy w minutach : {(GeneticEnvironment.INSTANCE.StopDate - GeneticEnvironment.INSTANCE.StartDate).TotalMinutes}");
+            LogInfo($"Czas pracy w minutach : {(_geneticParameters.StopDate - _geneticParameters.StartDate).TotalMinutes}");
             return heavenPopulationDict;
         }
-        private static Individual[] GetNewRandomPopulation(int nrProblemu)
+        private Individual[] GetNewRandomPopulation(int nrProblemu)
         {
-            Individual[] population = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
+            Individual[] population = new Individual[_geneticParameters.POPULATIONSIZE];
 
-            for (int i = 0; i < GeneticEnvironment.INSTANCE.POPULATIONSIZE; i++)
+            for (int i = 0; i < _geneticParameters.POPULATIONSIZE; i++)
             {
                 population[i] = new Individual()
                 {
-                    genotype = GeneticEnvironment.INSTANCE.GetRandomParametersArray(nrProblemu)
+                    genotype = _geneticParameters.GetRandomParametersArray(nrProblemu)
                 };
             }
             return population;
         }
-        private static Population GetNextGeneration(Population population, SelectionMethods method, CrossoverMethods crossover, Individual currentHeaven)
+        private Population GetNextGeneration(Population population, SelectionMethods method, CrossoverMethods crossover, Individual currentHeaven)
         {
             Individual mum, dad;
             mum = population.GetParent(method);
             dad = population.GetParent(method);
-            var newGenotypes = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
-            for (int i = 0; i < GeneticEnvironment.INSTANCE.POPULATIONSIZE; i++)
+            var newGenotypes = new Individual[_geneticParameters.POPULATIONSIZE];
+            for (int i = 0; i < _geneticParameters.POPULATIONSIZE; i++)
             {
                 var child = GetRandomChild(mum, dad, crossover);
-                for (int j = 0; j < GeneticEnvironment.INSTANCE.MUTATIONRETRIALS; j++)//without x >4 times mutation often gets stuck in local maximums
+                for (int j = 0; j < _geneticParameters.MUTATIONRETRIALS; j++)//without x >4 times mutation often gets stuck in local maximums
                 {
-                    if (GeneticEnvironment.CUBE.NextDouble() < GeneticEnvironment.INSTANCE.MUTATIONPROBABILITY)
+                    if (GeneticEnvironment.CUBE.NextDouble() < _geneticParameters.MUTATIONPROBABILITY)
                     {
                         child = Mutate(child.genotype);
                     }
@@ -329,7 +331,7 @@ namespace Neurox.ConsoleGUI
         {
             get
             {
-                if (GeneticEnvironment.INSTANCE.ModyfikatorWyniku < 0)
+                if (GeneticDefaults.INSTANCE.ModyfikatorWyniku < 0)
                 {
                     return genotypes.OrderBy(p => p.SurvivalScore).ToArray()[0];
                 }
@@ -341,7 +343,7 @@ namespace Neurox.ConsoleGUI
         }
         public Population GetCopy()
         {
-            Individual[] copiedGenotypes = new Individual[GeneticEnvironment.INSTANCE.POPULATIONSIZE];
+            Individual[] copiedGenotypes = new Individual[GeneticDefaults.INSTANCE.POPULATIONSIZE];
             for (int i = 0; i < copiedGenotypes.Length; i++)
             {
                 copiedGenotypes[i] = new Individual() { genotype = genotypes[i].genotype };
@@ -445,7 +447,7 @@ namespace Neurox.ConsoleGUI
                 case SelectionMethods.RankedRoulette:
                     return population.GetRankedRouletteParent();
                 default:
-                    return population.GetParent(GeneticEnvironment.INSTANCE.SelectionMethod);
+                    return population.GetParent(GeneticDefaults.INSTANCE.SelectionMethod);
             }
         }
     }

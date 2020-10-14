@@ -6,7 +6,9 @@ namespace Neurox.ConsoleGUI
     {
         static void Main(string[] args)
         {
-            NeuroxEvolution evolution = new NeuroxEvolution(args);
+            GeneticEnvironment geneticParameters = GeneticEnvironment.INSTANCE;
+            geneticParameters.ParseParameters(args);
+            NeuroxEvolution evolution = new NeuroxEvolution(geneticParameters);
         }
     }
 }
