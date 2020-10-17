@@ -13,7 +13,6 @@ namespace Neurox.ConsoleGUI
     public class GeneticDefaults
     {
         public SelectionMethods SelectionMethod = SelectionMethods.Roulette;
-        public int POPULATIONSIZE = 20; // WTFFFFF TODO REWORK THIS PARAMS
         public double ModyfikatorWyniku = 1;
         private static GeneticDefaults _config;
         public static GeneticDefaults INSTANCE

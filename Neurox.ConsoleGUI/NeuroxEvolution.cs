@@ -343,7 +343,7 @@ namespace Neurox.ConsoleGUI
         }
         public Population GetCopy()
         {
-            Individual[] copiedGenotypes = new Individual[GeneticDefaults.INSTANCE.POPULATIONSIZE];
+            Individual[] copiedGenotypes = new Individual[genotypes.Length];
             for (int i = 0; i < copiedGenotypes.Length; i++)
             {
                 copiedGenotypes[i] = new Individual() { genotype = genotypes[i].genotype };
