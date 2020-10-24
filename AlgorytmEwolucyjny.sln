@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neurox.Core", "Neurox.Core\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neurox.ConsoleGUI", "Neurox.ConsoleGUI\Neurox.ConsoleGUI.csproj", "{E6115677-2388-4583-AD88-B44F859F33F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neurox.Web", "Neurox.Web\Neurox.Web.csproj", "{709865D4-35AC-4B38-B104-19C9E31D3F65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E6115677-2388-4583-AD88-B44F859F33F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6115677-2388-4583-AD88-B44F859F33F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6115677-2388-4583-AD88-B44F859F33F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709865D4-35AC-4B38-B104-19C9E31D3F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709865D4-35AC-4B38-B104-19C9E31D3F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709865D4-35AC-4B38-B104-19C9E31D3F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709865D4-35AC-4B38-B104-19C9E31D3F65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
