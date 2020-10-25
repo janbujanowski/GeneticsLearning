@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserLoga", "ParserLoga\ParserLoga.csproj", "{F8F31B54-EEB8-4A80-BA6A-26388FD0D809}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neurox.Core", "Neurox.Core\Neurox.Core.csproj", "{E6AC03B2-0CF8-42C3-8968-F14A1ADD0A8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neurox.ConsoleGUI", "Neurox.ConsoleGUI\Neurox.ConsoleGUI.csproj", "{E6115677-2388-4583-AD88-B44F859F33F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neurox.Web", "Neurox.Web\Neurox.Web.csproj", "{709865D4-35AC-4B38-B104-19C9E31D3F65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neurox.Web", "Neurox.Web\Neurox.Web.csproj", "{709865D4-35AC-4B38-B104-19C9E31D3F65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F8F31B54-EEB8-4A80-BA6A-26388FD0D809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8F31B54-EEB8-4A80-BA6A-26388FD0D809}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8F31B54-EEB8-4A80-BA6A-26388FD0D809}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8F31B54-EEB8-4A80-BA6A-26388FD0D809}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6AC03B2-0CF8-42C3-8968-F14A1ADD0A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6AC03B2-0CF8-42C3-8968-F14A1ADD0A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6AC03B2-0CF8-42C3-8968-F14A1ADD0A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
