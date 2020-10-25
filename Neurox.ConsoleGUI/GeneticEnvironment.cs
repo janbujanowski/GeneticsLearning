@@ -78,7 +78,13 @@ namespace Neurox.ConsoleGUI
             return INSTANCE.problemToResolve.Ocena(sciezka);
         }
 
-        internal void ParseParameters(string[] args)
+        public void ParseParameters(string argsAsSpaceSeparatedString)
+        {
+            var paramsAsArray = argsAsSpaceSeparatedString.Split(' ');
+            ParseParameters(paramsAsArray);
+        }
+
+        public void ParseParameters(string[] args)
         {
             try
             {

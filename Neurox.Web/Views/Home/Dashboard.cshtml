@@ -1,13 +1,43 @@
 ﻿@{
+    @model DashboardViewModel;
+    @using System.Text.Json;
+    @using Newtonsoft.Json;
+    @using Newtonsoft.Json.Serialization;
+    @using System.Web;
+    
     ViewData["Title"] = "Dashboard";
+    var serializationSettings = new JsonSerializerSettings()
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+        StringEscapeHandling = StringEscapeHandling.EscapeHtml
+    };
+
+    var data =
+        Html.Raw(
+             HttpUtility.JavaScriptStringEncode(
+                JsonConvert.SerializeObject(
+                    Model.VueData, Formatting.None, serializationSettings
+                ),
+             false)
+        );
 }
 
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
+
         <div id="app">
             <h2 class="display-4">{{ message }}</h2>
-            
+
         </div>
+        <h1 class="display-4">Test vue viewmodel binding</h1>
+        <main id="vue-app">
+            <header-component v-bind:menu-items="menu"></header-component>
+            <div>@Model.RazorMessage</div>
+            <div>{{message}}</div>
+        </main>
+
+        
+        
+        // place for the script from the next section here
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
 

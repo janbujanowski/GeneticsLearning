@@ -27,7 +27,8 @@ namespace Neurox.ConsoleGUI
 
         public string GetConfiguredFilePath(string configKeyDirectoryName, string configKeyFileName)
         {
-            return Path.Combine(config[configKeyDirectoryName], config[configKeyFileName]);
+            //TODO fix logs interface
+            return "thisisgonnahurt";// Path.Combine(config[configKeyDirectoryName], config[configKeyFileName]);
         }
     }
 }

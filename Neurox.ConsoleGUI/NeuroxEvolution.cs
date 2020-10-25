@@ -7,6 +7,7 @@ namespace Neurox.ConsoleGUI
 {
     public class NeuroxEvolution
     {
+        public StatsInfo BestOutcome { get; set; }
         GeneticEnvironment _geneticParameters;
         public NeuroxEvolution(GeneticEnvironment geneticParameters)
         {
@@ -33,9 +34,10 @@ namespace Neurox.ConsoleGUI
                 string csvFileContent = string.Empty;
                 var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Individual.TestedSurvivalScore, x.Date) + Environment.NewLine);
                 csvFileContent += string.Join("", lolek);
-                File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfiguredFilePath("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
+                BestOutcome = bestIndividualStats;
+                //File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfiguredFilePath("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
                 string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
-                File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfiguredFilePath("workingDirectory", "StartingIndividual"), jsonIndividual);
+                //File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfiguredFilePath("workingDirectory", "StartingIndividual"), jsonIndividual);
             }
             catch (Exception ex)
             {
