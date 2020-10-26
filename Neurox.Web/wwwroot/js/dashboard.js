@@ -9,13 +9,13 @@ var app = new Vue({
     }
 });
 
-new Vue({
-    el: '#vue-app',
-    data: function () {
-        // parse the serialized data
-        return JSON.parse('@data');
-    }
-});
+//new Vue({
+//    el: '#vue-app',
+//    data: function () {
+//        // parse the serialized data
+//        return data;
+//    }
+//});
 
 // header-component.js
 // in a real app you might use TypeScript or ECMAScript

@@ -1,3 +1,4 @@
+using Neurox.ConsoleGUI;
 using Neurox.Web.Attributes;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,12 @@ namespace Neurox.Web.Models
 {
     public class DashboardViewModel
     {
-        public string RequestId { get; set; }
-
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        [VueData("hiddenLayerWeights")]
+        public double[,] HiddenLayerWeights { get; set; }
+        [VueData("hiddenToOutputLayerWeights")]
+        public double[,] HiddenToOutputLayerWeights { get; set; }
+        [VueData("inputLayerModifiers")]
+        public Dictionary<string, double> InputLayerModifiers { get; set; }
 
         [VueData("message")]
         public string Message { get; set; } = "Hello from Vue!";

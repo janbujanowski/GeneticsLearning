@@ -4,7 +4,7 @@
     @using Newtonsoft.Json;
     @using Newtonsoft.Json.Serialization;
     @using System.Web;
-    
+
     ViewData["Title"] = "Dashboard";
     var serializationSettings = new JsonSerializerSettings()
     {
@@ -12,36 +12,39 @@
         StringEscapeHandling = StringEscapeHandling.EscapeHtml
     };
 
-    var data =
-        Html.Raw(
-             HttpUtility.JavaScriptStringEncode(
-                JsonConvert.SerializeObject(
-                    Model.VueData, Formatting.None, serializationSettings
-                ),
-             false)
-        );
+    
 }
 
-    <div class="text-center">
+<div class="text-center">
 
-        <div id="app">
-            <h2 class="display-4">{{ message }}</h2>
+    <div id="app">
+        <h2 class="display-2">{{ message }}</h2>
 
-        </div>
-        <h1 class="display-4">Test vue viewmodel binding</h1>
-        <main id="vue-app">
-            <header-component v-bind:menu-items="menu"></header-component>
-            <div>@Model.RazorMessage</div>
-            <div>{{message}}</div>
-        </main>
-
-        
-        
-        // place for the script from the next section here
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
+    
+    <main id="vue-app">
+        <header-component v-bind:menu-items="menu"></header-component>
+        <div>@Model.RazorMessage</div>
+        
+        <div>{{message}}</div>
+        <div>{{hiddenLayerWeights}}</div>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '#vue-app',
+            data: function () {
+                // parse the serialized data
+                return JSON.parse("@Html.Raw(HttpUtility.JavaScriptStringEncode(
+                JsonConvert.SerializeObject(Model.VueData, Formatting.None, serializationSettings),false))");
+            }
+        });
+    </script>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
 
 @section scripts {
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="~/js/dashboard.js" asp-append-version="true"></script>
+    <script src="~/js/header-component.js"></script>
 }

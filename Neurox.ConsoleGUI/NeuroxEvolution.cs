@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -35,6 +36,9 @@ namespace Neurox.ConsoleGUI
                 var lolek = heavensOne.SelectMany(x => string.Join(",", x.Population.ToString(), x.Individual.SurvivalScore, x.Individual.TestedSurvivalScore, x.Date) + Environment.NewLine);
                 csvFileContent += string.Join("", lolek);
                 BestOutcome = bestIndividualStats;
+                BestOutcome.InputLayerModifiers = bestIndividualStats.Individual.genotype.GetInputLayerModifiers();
+                BestOutcome.HiddenLayerWeights = bestIndividualStats.Individual.genotype.GetHiddenLayerWeights();
+                BestOutcome.HiddenToOutputLayerWeights = bestIndividualStats.Individual.genotype.GetHiddenToOutputLayerWeights();
                 //File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfiguredFilePath("workingDirectory", "pathToOutputCsvFile"), csvFileContent);
                 string jsonIndividual = JsonConvert.SerializeObject(bestIndividualStats.Individual, Formatting.Indented);
                 //File.WriteAllText(IoCFactory.Resolve<IConfigurationProvider>().GetConfiguredFilePath("workingDirectory", "StartingIndividual"), jsonIndividual);
@@ -354,12 +358,7 @@ namespace Neurox.ConsoleGUI
         }
     }
 
-    public class StatsInfo
-    {
-        public Individual Individual { get; set; }
-        public int Population { get; set; }
-        public DateTime Date { get; set; }
-    }
+    
     public enum SelectionMethods
     {
         Tournament,

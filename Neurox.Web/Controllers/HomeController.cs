@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Neurox.ConsoleGUI;
+using Neurox.Web.Attributes;
 using Neurox.Web.Models;
 
 namespace Neurox.Web.Controllers
@@ -32,9 +33,17 @@ namespace Neurox.Web.Controllers
         public IActionResult Dashboard()
         {
             GeneticEnvironment genParams = GeneticEnvironment.INSTANCE;
-            genParams.ParseParameters("\"20/12/2019 23:39:30\" 10 0.15 5 Tournament Basic 1000 1  0 60");
+            genParams.ParseParameters("\"20/12/2020 23:39:30\" 10 0.15 5 Tournament Basic 1000 1  0 60");
             NeuroxEvolution evolution = new NeuroxEvolution(genParams);
             DashboardViewModel viewModel = new DashboardViewModel();
+
+            viewModel.InputLayerModifiers = evolution.BestOutcome.InputLayerModifiers;
+            viewModel.HiddenLayerWeights = evolution.BestOutcome.HiddenLayerWeights;
+            viewModel.HiddenToOutputLayerWeights = evolution.BestOutcome.HiddenToOutputLayerWeights;
+
+            var parser = new VueParser(); 
+            viewModel.VueData = parser.ParseData(viewModel);
+
             return View(viewModel);
         }
 
