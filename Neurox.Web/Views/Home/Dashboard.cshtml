@@ -12,25 +12,28 @@
         StringEscapeHandling = StringEscapeHandling.EscapeHtml
     };
 
-    
-}
 
+}
+@section headerScripts {
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="~/js/header-component.js"></script>
+}
 <div class="text-center">
 
     <div id="app">
         <h2 class="display-2">{{ message }}</h2>
 
     </div>
-    
+
     <main id="vue-app">
-        <header-component v-bind:menu-items="menu"></header-component>
+        <header-component v-bind:menu-items="hiddenLayerWeights"></header-component>
         <div>@Model.RazorMessage</div>
-        
+
         <div>{{message}}</div>
         <div>{{hiddenLayerWeights}}</div>
 
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
     <script type="text/javascript">
         new Vue({
             el: '#vue-app',
@@ -46,5 +49,4 @@
 
 @section scripts {
     <script src="~/js/dashboard.js" asp-append-version="true"></script>
-    <script src="~/js/header-component.js"></script>
 }
